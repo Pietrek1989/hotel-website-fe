@@ -22,17 +22,23 @@ const CalendarComponent = () => {
     }
   };
 
+  const isStartDateSelected = (date: Date, selectedRange: any) => {
+    return date.getTime() === selectedRange?.start?.getTime();
+  };
+
+  const isDateInRange = (date: Date, selectedRange: any) => {
+    return (
+      date >= selectedRange?.start &&
+      date <= (selectedRange?.end ?? selectedRange?.start)
+    );
+  };
+
   const tileClassName = ({ date, view }: any) => {
     if (view !== "month") return;
+
     const isSelected =
-      selectedRange &&
-      ((selectedRange.start &&
-        !selectedRange.end &&
-        date.getTime() === selectedRange.start.getTime()) ||
-        (selectedRange.start &&
-          selectedRange.end &&
-          date >= selectedRange.start &&
-          date <= selectedRange.end));
+      isStartDateSelected(date, selectedRange) ||
+      isDateInRange(date, selectedRange);
 
     return isSelected ? "selected" : "";
   };
@@ -44,8 +50,8 @@ const CalendarComponent = () => {
       </div>
       {selectedRange && (
         <div>
-          <p>Start: {selectedRange.start?.toISOString().slice(0, 10)}</p>
-          <p>End: {selectedRange.end?.toISOString().slice(0, 10)}</p>
+          <p>Start: {selectedRange.start?.toDateString()}</p>
+          <p>End: {selectedRange.end?.toDateString()}</p>
         </div>
       )}
     </>
