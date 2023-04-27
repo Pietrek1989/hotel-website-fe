@@ -1,0 +1,46 @@
+:root {
+  --fc-border-color: black;
+  --fc-daygrid-event-dot-width: 5px;
+}
+.fc-highlight-skeleton {
+  background-color: red;
+  opacity: 0.3;
+}
+
+.selected-parent {
+  background-color: red;
+  color: white;
+  border-radius: 4px;
+}
+/* calendar-custom.css */
+/* .calendar-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: green;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+} */
+
+.fc-daygrid-day {
+  position: relative;
+}
+
+.fc-daygrid-day-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.selected {
+  background-color: rgb(24, 218, 69) !important;
+  border-radius: 50%;
+  padding: 0.1rem 0.4rem;
+  color: white;
+  font-weight: bold;
+}
+.react-calendar__tile--now {
+  background: #14a5bf !important;
+  color: white;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: blue !important;
+}
