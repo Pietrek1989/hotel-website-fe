@@ -1,18 +1,4 @@
-:root {
-  --fc-border-color: black;
-  --fc-daygrid-event-dot-width: 5px;
-}
-.fc-highlight-skeleton {
-  background-color: red;
-  opacity: 0.3;
-}
-
-.selected-parent {
-  background-color: red;
-  color: white;
-  border-radius: 4px;
-}
-/* calendar-custom.css */
+.calendar-custom.css
 /* .calendar-container {
   max-width: 600px;
   margin: 0 auto;
