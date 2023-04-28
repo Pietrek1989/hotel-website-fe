@@ -3,23 +3,25 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../styles/calendar.css";
 import { Offer } from "../types and interfaces";
+import { utcToZonedTime } from "date-fns-tz";
 
 const CalendarComponent: React.FC = () => {
+  const hotelTimeZone = "Europe/Berlin";
+
   const [selectedRange, setSelectedRange] = React.useState<any>(null);
   const [selectStep, setSelectStep] = React.useState(0);
-  const [disabledDates, setDisabledDates] = React.useState<
-    Record<string, boolean>
-  >({});
+  const [offers, setOffers] = React.useState<Offer[]>(() => []);
+
   const [availableOffers, setAvailableOffers] = React.useState<Offer[]>([]);
 
-  const fetchOffers = async (): Promise<Offer[]> => {
+  const fetchOffers = async (): Promise<void> => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BE_URL}/offers`);
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
       const data = await response.json();
-      return data.map((offer: any) => ({
+      const offersWithPriceFunction = data.map((offer: any) => ({
         ...offer,
         calculatePrice: (start: Date, end: Date) => {
           const numberOfNights =
@@ -29,89 +31,116 @@ const CalendarComponent: React.FC = () => {
           return numberOfNights * pricePerNight;
         },
       }));
+      setOffers(offersWithPriceFunction);
     } catch (error) {
       console.error("Failed to fetch offers:", error);
-      return [];
     }
   };
 
-  const getDisabledDates = (offers: Offer[]): Record<string, boolean> => {
-    const disabledDates: Record<string, boolean> = {};
+  const isOfferAvailable = (offer: Offer, start: Date, end: Date): boolean => {
+    const startDate = start.toISOString();
+    const endDate = end.toISOString();
 
-    offers.forEach((offer) => {
-      offer.reservations.forEach((reservation) => {
-        const { checkin, checkout } = reservation.content;
-        const startDate = new Date(checkin);
-        const endDate = new Date(checkout);
+    return !offer.reservations.some((reservation) => {
+      const reservationStart = new Date(
+        reservation.content.checkin
+      ).toISOString();
+      const reservationEnd = new Date(
+        reservation.content.checkout
+      ).toISOString();
 
-        for (
-          let date = startDate;
-          date <= endDate;
-          date.setDate(date.getDate() + 1)
-        ) {
-          const dateString = date.toISOString().slice(0, 10);
-          disabledDates[dateString] = true;
-        }
-      });
-    });
-
-    return disabledDates;
-  };
-
-  const filterOffersByDateRange = (
-    offers: Offer[],
-    start: Date,
-    end: Date
-  ): Offer[] => {
-    return offers.filter((offer) => {
-      return offer.reservations.every((reservation) => {
-        const checkin = new Date(reservation.content.checkin);
-        const checkout = new Date(reservation.content.checkout);
-
-        return (
-          (checkin < start && checkout < start) ||
-          (checkin > end && checkout > end)
-        );
-      });
+      return (
+        (startDate >= reservationStart && startDate < reservationEnd) ||
+        (endDate > reservationStart && endDate <= reservationEnd) ||
+        (startDate <= reservationStart && endDate >= reservationEnd)
+      );
     });
   };
   React.useEffect(() => {
-    const fetchData = async () => {
-      const offers = await fetchOffers();
-      const disabledDatesData = getDisabledDates(offers);
-      setDisabledDates(disabledDatesData);
-
-      if (selectedRange && selectedRange.start && selectedRange.end) {
-        const filteredOffers = filterOffersByDateRange(
-          offers,
-          selectedRange.start,
-          selectedRange.end
-        );
-        setAvailableOffers(filteredOffers);
-      } else {
+    fetchOffers();
+  }, []);
+  React.useEffect(() => {
+    const updateAvailableOffers = async () => {
+      if (!selectedRange || !selectedRange.start || !selectedRange.end) {
         setAvailableOffers([]);
+        return;
       }
+
+      const start = new Date(selectedRange.start);
+      const end = new Date(selectedRange.end);
+      start.setHours(0, 0, 0, 0);
+      end.setHours(0, 0, 0, 0);
+
+      const availableOffers = offers.filter((offer) =>
+        isOfferAvailable(offer, start, end)
+      );
+      console.log("Offers:", offers);
+      console.log("Selected Range Start:", selectedRange.start);
+      console.log("Selected Range End:", selectedRange.end);
+      console.log("Available Offers:", availableOffers);
+      setAvailableOffers(availableOffers);
     };
 
-    fetchData();
-  }, [selectedRange]);
+    updateAvailableOffers();
+  }, [selectedRange, offers]);
 
   const tileDisabled = ({ date, view }: any) => {
     if (view !== "month") return false;
 
-    const dateString = date.toISOString().slice(0, 10);
-    return disabledDates[dateString] === true;
+    const currentDate = date;
+    const todayDate = new Date();
+
+    if (currentDate < todayDate) {
+      return true;
+    }
+
+    const start = new Date(date);
+    const end = new Date(date);
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+    end.setDate(end.getDate() + 1);
+
+    // Check for available offers between the current date and the next day
+    const availableOffersForDate = offers.filter((offer) =>
+      isOfferAvailable(offer, start, end)
+    );
+
+    // If there are available offers for the current date, do not disable the tile
+    if (availableOffersForDate.length > 0) {
+      return false;
+    }
+
+    // Check if there are available offers for the previous day
+    const prevDay = new Date(date);
+    prevDay.setHours(0, 0, 0, 0);
+    prevDay.setDate(prevDay.getDate() - 1);
+    const prevDayEnd = new Date(date);
+    prevDayEnd.setHours(0, 0, 0, 0);
+
+    const availableOffersForPrevDay = offers.filter((offer) =>
+      isOfferAvailable(offer, prevDay, prevDayEnd)
+    );
+
+    // If there are available offers for the previous day, do not disable the tile
+    if (availableOffersForPrevDay.length > 0) {
+      return false;
+    }
+
+    // If there are no available offers for the current date or the previous day, disable the tile
+    return true;
   };
 
   const handleDateClick = (date: Date) => {
+    const dateInHotelTimeZone = utcToZonedTime(date, hotelTimeZone);
+
     if (selectStep === 0) {
-      setSelectedRange({ start: date, end: null });
+      setSelectedRange({ start: dateInHotelTimeZone, end: null });
       setSelectStep(1);
     } else {
-      if (date < selectedRange.start) {
-        setSelectedRange({ start: date, end: null });
+      if (dateInHotelTimeZone < selectedRange.start) {
+        setSelectedRange({ start: dateInHotelTimeZone, end: null });
       } else {
-        setSelectedRange({ ...selectedRange, end: date });
+        setSelectedRange({ ...selectedRange, end: dateInHotelTimeZone });
         setSelectStep(0);
       }
     }
