@@ -21,17 +21,6 @@ const CalendarComponent = () => {
     }
   };
 
-  const isStartDateSelected = (date: Date, selectedRange: any) => {
-    return date.getTime() === selectedRange?.start?.getTime();
-  };
-
-  const isDateInRange = (date: Date, selectedRange: any) => {
-    return (
-      date >= selectedRange?.start &&
-      date <= (selectedRange?.end ?? selectedRange?.start)
-    );
-  };
-
   const tileClassName = ({ date, view }: any) => {
     if (view !== "month") return;
 
