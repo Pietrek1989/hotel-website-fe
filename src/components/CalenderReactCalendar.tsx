@@ -12,13 +12,12 @@ const CalendarComponent = () => {
       setSelectedRange({ start: date, end: null });
       setSelectStep(1);
     } else {
-      const end = date;
-      const range = {
-        start: selectedRange.start,
-        end: end > selectedRange.start ? end : selectedRange.start,
-      };
-      setSelectedRange(range);
-      setSelectStep(0);
+      if (date < selectedRange.start) {
+        setSelectedRange({ start: date, end: null });
+      } else {
+        setSelectedRange({ ...selectedRange, end: date });
+        setSelectStep(0);
+      }
     }
   };
 
@@ -36,11 +35,29 @@ const CalendarComponent = () => {
   const tileClassName = ({ date, view }: any) => {
     if (view !== "month") return;
 
-    const isSelected =
-      isStartDateSelected(date, selectedRange) ||
-      isDateInRange(date, selectedRange);
+    if (!selectedRange) return "";
+
+    const { start, end } = selectedRange;
+
+    const isStartDate = start && isSameDate(date, start);
+    const isEndDate = end && isSameDate(date, end);
+    const isInDateRange = start && end && isDateInRange(date, start, end);
+
+    const isSelected = isStartDate || isEndDate || isInDateRange;
 
     return isSelected ? "selected" : "";
+  };
+
+  const isSameDate = (date1: Date, date2: Date) => {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  };
+
+  const isDateInRange = (date: Date, startDate: Date, endDate: Date) => {
+    return date >= startDate && date <= endDate;
   };
 
   return (
