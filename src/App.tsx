@@ -1,6 +1,6 @@
 import React from "react";
 import CalendarComponent from "./components/CalendarComponent";
-import CalendarReactComponent from "./components/CalenderReactCalendar";
+import CalendarReactComponent from "./components/Calendar/CalenderReactCalendar";
 
 function App() {
   return (
