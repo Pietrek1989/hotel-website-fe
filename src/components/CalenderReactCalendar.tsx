@@ -121,12 +121,40 @@ const CalendarComponent: React.FC = () => {
       isOfferAvailable(offer, prevDay, prevDayEnd)
     );
 
-    // If there are available offers for the previous day, do not disable the tile
-    if (availableOffersForPrevDay.length > 0) {
+    // If the user is selecting the end date and there are available offers for the previous day, do not disable the tile
+    if (selectStep === 1 && availableOffersForPrevDay.length > 0) {
       return false;
     }
 
-    // If there are no available offers for the current date or the previous day, disable the tile
+    // Disable tiles after the first booked out date when selecting the end date
+    if (selectStep === 1 && selectedRange.start) {
+      const firstBookedOutDate = offers
+        .map((offer) => {
+          const unavailableDates = offer.reservations
+            .map((reservation) => ({
+              start: new Date(reservation.content.checkin),
+              end: new Date(reservation.content.checkout),
+            }))
+            .filter(
+              (range) =>
+                range.start > selectedRange.start &&
+                range.end > selectedRange.start
+            )
+            .map((range) => range.start);
+
+          return Math.min(...unavailableDates.map((date) => date.getTime()));
+        })
+        .reduce((min, date) => Math.min(min, date), Infinity);
+
+      if (
+        !isNaN(firstBookedOutDate) &&
+        currentDate > new Date(firstBookedOutDate)
+      ) {
+        return true;
+      }
+    }
+
+    // If there are no available offers for the current date and the previous day, disable the tile
     return true;
   };
 
@@ -140,8 +168,26 @@ const CalendarComponent: React.FC = () => {
       if (dateInHotelTimeZone < selectedRange.start) {
         setSelectedRange({ start: dateInHotelTimeZone, end: null });
       } else {
-        setSelectedRange({ ...selectedRange, end: dateInHotelTimeZone });
-        setSelectStep(0);
+        // Check if the range contains any disabled tiles
+        const rangeContainsDisabledTile = (() => {
+          const tempRangeStart = new Date(selectedRange.start);
+          const tempRangeEnd = new Date(dateInHotelTimeZone);
+
+          while (tempRangeStart <= tempRangeEnd) {
+            if (tileDisabled({ date: tempRangeStart, view: "month" })) {
+              return true;
+            }
+            tempRangeStart.setDate(tempRangeStart.getDate() + 1);
+          }
+
+          return false;
+        })();
+
+        // Only update the selected range if it does not contain any disabled tiles
+        if (!rangeContainsDisabledTile) {
+          setSelectedRange({ ...selectedRange, end: dateInHotelTimeZone });
+          setSelectStep(0);
+        }
       }
     }
   };
