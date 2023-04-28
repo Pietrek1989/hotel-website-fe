@@ -7,34 +7,15 @@ const CalendarComponent = () => {
   const [selectedRange, setSelectedRange] = React.useState<any>(null);
   const [selectStep, setSelectStep] = React.useState(0);
 
-  const adjustDate = (date: Date) => {
-    const cetOffsetInHours = 1; // CET is UTC+1
-    const dstOffsetInHours = isDateInDST(date) ? 1 : 0; // Check if the date is in DST and apply an additional hour offset
-    const totalOffsetInMs = (cetOffsetInHours + dstOffsetInHours) * 3600000;
-    return new Date(date.getTime() + totalOffsetInMs);
-  };
-
-  const isDateInDST = (date: Date) => {
-    const january = new Date(date.getFullYear(), 0, 1);
-    const july = new Date(date.getFullYear(), 6, 1);
-    const stdTimezoneOffset = Math.max(
-      january.getTimezoneOffset(),
-      july.getTimezoneOffset()
-    );
-    return date.getTimezoneOffset() < stdTimezoneOffset;
-  };
-
   const handleDateClick = (date: Date) => {
-    const adjustedDate = adjustDate(date);
-
     if (selectStep === 0) {
-      setSelectedRange({ start: adjustedDate, end: null });
+      setSelectedRange({ start: date, end: null });
       setSelectStep(1);
     } else {
-      if (adjustedDate < selectedRange.start) {
-        setSelectedRange({ start: adjustedDate, end: null });
+      if (date < selectedRange.start) {
+        setSelectedRange({ start: date, end: null });
       } else {
-        setSelectedRange({ ...selectedRange, end: adjustedDate });
+        setSelectedRange({ ...selectedRange, end: date });
         setSelectStep(0);
       }
     }
@@ -42,16 +23,16 @@ const CalendarComponent = () => {
 
   const tileClassName = ({ date, view }: any) => {
     if (view !== "month") return;
-    const isSelected =
-      selectedRange &&
-      ((selectedRange.start &&
-        !selectedRange.end &&
-        isSameDate(date, selectedRange.start)) ||
-        (selectedRange.start &&
-          selectedRange.end &&
-          (isSameDate(date, selectedRange.start) ||
-            isSameDate(date, selectedRange.end) ||
-            isDateInRange(date, selectedRange.start, selectedRange.end))));
+
+    if (!selectedRange) return "";
+
+    const { start, end } = selectedRange;
+
+    const isStartDate = start && isSameDate(date, start);
+    const isEndDate = end && isSameDate(date, end);
+    const isInDateRange = start && end && isDateInRange(date, start, end);
+
+    const isSelected = isStartDate || isEndDate || isInDateRange;
 
     return isSelected ? "selected" : "";
   };
@@ -67,6 +48,7 @@ const CalendarComponent = () => {
   const isDateInRange = (date: Date, startDate: Date, endDate: Date) => {
     return date >= startDate && date <= endDate;
   };
+
   return (
     <>
       <div className="calendar-container">
