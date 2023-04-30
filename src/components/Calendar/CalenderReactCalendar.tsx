@@ -4,8 +4,7 @@ import "react-calendar/dist/Calendar.css";
 import "../../styles/calendar.css";
 import { Offer } from "../../types and interfaces";
 import { utcToZonedTime } from "date-fns-tz";
-import { fetchOffers } from "./fetchOffers";
-import { isOfferAvailable } from "./offerHelpers";
+import { isOfferAvailable, isDateInSeason, fetchOffers } from "./offerHelpers";
 import { isSameDate, isDateInRange } from "./calendarHelpers";
 
 const CalendarComponent: React.FC = () => {
@@ -13,7 +12,7 @@ const CalendarComponent: React.FC = () => {
 
   const [selectedRange, setSelectedRange] = React.useState<any>(null);
   const [selectStep, setSelectStep] = React.useState(0);
-  const [offers, setOffers] = React.useState<Offer[]>([]);
+  const [offers, setOffers] = React.useState<Offer[]>(() => []);
   const [availableOffers, setAvailableOffers] = React.useState<Offer[]>([]);
 
   // Fetch offers when the component is mounted
@@ -22,6 +21,7 @@ const CalendarComponent: React.FC = () => {
       const fetchedOffers: any = await fetchOffers();
       setOffers(fetchedOffers);
     };
+
     fetchAndSetOffers();
   }, []);
   // Update available offers when the selected date range or offers change
@@ -41,10 +41,6 @@ const CalendarComponent: React.FC = () => {
       const availableOffers = offers.filter((offer) =>
         isOfferAvailable(offer, start, end)
       );
-      console.log("Offers:", offers);
-      console.log("Selected Range Start:", selectedRange.start);
-      console.log("Selected Range End:", selectedRange.end);
-      console.log("Available Offers:", availableOffers);
       setAvailableOffers(availableOffers);
     };
 
@@ -176,8 +172,8 @@ const CalendarComponent: React.FC = () => {
       </div>
       {selectedRange && (
         <div>
-          <p>Start: {selectedRange.start?.toDateString()}</p>
-          <p>End: {selectedRange.end?.toDateString()}</p>
+          <p>Check In: {selectedRange.start?.toDateString()}</p>
+          <p>Check Out: {selectedRange.end?.toDateString()}</p>
         </div>
       )}
       <div>
@@ -186,14 +182,30 @@ const CalendarComponent: React.FC = () => {
           <p>No offers available for the selected date range.</p>
         ) : (
           <ul>
-            {availableOffers.map((offer) => (
-              <li key={offer._id}>
-                {offer.name} - Price: $
-                {selectedRange.start && selectedRange.end
-                  ? offer.calculatePrice(selectedRange.start, selectedRange.end)
-                  : "N/A"}
-              </li>
-            ))}
+            {availableOffers.map((offer) => {
+              const startDate = selectedRange.start;
+              const endDate = selectedRange.end;
+
+              // Calculate the price based on season and off-season rates
+              let price = 0;
+              if (startDate && endDate) {
+                const currentDate = new Date(startDate);
+                while (currentDate < endDate) {
+                  if (isDateInSeason(currentDate)) {
+                    price += offer.priceSeason;
+                  } else {
+                    price += offer.priceOffSeason;
+                  }
+                  currentDate.setDate(currentDate.getDate() + 1);
+                }
+              }
+
+              return (
+                <li key={offer._id}>
+                  {offer.name} - Price: ${price}
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
