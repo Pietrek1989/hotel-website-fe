@@ -4,8 +4,12 @@ import "react-calendar/dist/Calendar.css";
 import "../../styles/calendar.css";
 import { Offer } from "../../types and interfaces";
 import { utcToZonedTime } from "date-fns-tz";
-import { isOfferAvailable, fetchOffers } from "./offerHelpers";
-import { isSameDate, isDateInRange } from "./calendarHelpers";
+import { isOfferAvailable, fetchOffers } from "./helperFunctions/offerHelpers";
+import {
+  isSameDate,
+  isDateInRange,
+  isDateSelectable,
+} from "./helperFunctions/calendarHelpers";
 import Offers from "./Offers";
 import TotalPrice from "./TotalPrice";
 
@@ -17,7 +21,6 @@ const CalendarComponent: React.FC = () => {
   const [offers, setOffers] = React.useState<Offer[]>([]);
   const [availableOffers, setAvailableOffers] = React.useState<Offer[]>([]);
 
-  // Fetch offers when the component is mounted
   React.useEffect(() => {
     const fetchAndSetOffers = async () => {
       const fetchedOffers: any = await fetchOffers();
@@ -26,8 +29,7 @@ const CalendarComponent: React.FC = () => {
 
     fetchAndSetOffers();
   }, []);
-  // Update available offers when the selected date range or offers change
-  // Update available offers based on selected date range
+
   React.useEffect(() => {
     const updateAvailableOffers = async () => {
       if (!selectedRange || !selectedRange.start || !selectedRange.end) {
@@ -49,39 +51,6 @@ const CalendarComponent: React.FC = () => {
     updateAvailableOffers();
   }, [selectedRange, offers]);
 
-  const isDateSelectable = (date: Date, selectingEnd: boolean) => {
-    const start = new Date(date);
-    const end = new Date(date);
-    start.setHours(0, 0, 0, 0);
-    end.setHours(0, 0, 0, 0);
-    end.setDate(end.getDate() + 1);
-
-    const availableOffersForDate = offers.filter((offer) =>
-      isOfferAvailable(offer, start, end)
-    );
-
-    if (availableOffersForDate.length > 0) {
-      return true;
-    }
-
-    if (selectingEnd && selectedRange.start) {
-      const prevDay = new Date(date);
-      prevDay.setHours(0, 0, 0, 0);
-      prevDay.setDate(prevDay.getDate() - 1);
-      const prevDayEnd = new Date(date);
-      prevDayEnd.setHours(0, 0, 0, 0);
-
-      const availableOffersForPrevDay = offers.filter((offer) =>
-        isOfferAvailable(offer, prevDay, prevDayEnd)
-      );
-
-      if (availableOffersForPrevDay.length > 0) {
-        return true;
-      }
-    }
-
-    return false;
-  };
   const getFirstBookedOutDate = (startDate: Date) => {
     const firstBookedOutDate = offers
       .map((offer) => {
@@ -110,7 +79,12 @@ const CalendarComponent: React.FC = () => {
       return true;
     }
 
-    const selectable = isDateSelectable(date, selectStep === 1);
+    const selectable = isDateSelectable(
+      date,
+      selectStep === 1,
+      selectedRange,
+      offers
+    );
 
     if (selectStep === 1 && selectedRange.start) {
       const firstBookedOutDate = getFirstBookedOutDate(selectedRange.start);
@@ -126,7 +100,7 @@ const CalendarComponent: React.FC = () => {
   // Update the selected date range based on the clicked date
 
   const handleDateClick = (date: Date) => {
-    if (!isDateSelectable(date, selectStep === 1)) {
+    if (!isDateSelectable(date, selectStep === 1, selectedRange, offers)) {
       return;
     }
 
@@ -165,27 +139,27 @@ const CalendarComponent: React.FC = () => {
 
   return (
     <>
-      <div className="calendar-container">
-        <Calendar
-          onClickDay={handleDateClick}
-          tileClassName={tileClassName}
-          tileDisabled={tileDisabled}
-        />
-        <TotalPrice />
-      </div>
-      {selectedRange && (
-        <div>
-          <p>Check In: {selectedRange.start?.toDateString()}</p>
-          <p>Check Out: {selectedRange.end?.toDateString()}</p>
+      <section className="calendar-container container md:mx-auto flex flex-wrap">
+        <div className="flex flex-col basis-3/4">
+          <Calendar
+            onClickDay={handleDateClick}
+            tileClassName={tileClassName}
+            tileDisabled={tileDisabled}
+            className={"self-center my-10"}
+          />
+
+          <div>
+            <Offers
+              availableOffers={availableOffers}
+              selectedRange={selectedRange}
+            />
+          </div>
         </div>
-      )}
-      <div>
-        <h2>Available Offers</h2>
-        <Offers
-          availableOffers={availableOffers}
-          selectedRange={selectedRange}
-        />
-      </div>
+
+        <div className="basis-1/4">
+          <TotalPrice selectedRange={selectedRange} />
+        </div>
+      </section>
     </>
   );
 };

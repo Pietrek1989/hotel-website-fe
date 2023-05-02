@@ -1,27 +1,14 @@
-.calendar-custom.css
-/* .calendar-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1rem;
-  background-color: green;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
-} */
-
-.fc-daygrid-day {
-  position: relative;
+.react-calendar {
+  width: 90%;
 }
-
-.fc-daygrid-day-top {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .selected {
   background-color: rgb(24, 218, 69) !important;
-  border-radius: 50%;
-  padding: 0.1rem 0.4rem;
   color: white;
   font-weight: bold;
+  border-color: black !important;
+}
+.react-calendar__tile:disabled {
+  background-color: #a89d9d;
 }
 .react-calendar__tile--now {
   background: #14a5bf !important;
@@ -29,4 +16,19 @@
 }
 .react-calendar__month-view__days__day--weekend {
   color: blue !important;
+}
+
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+  font-size: 1.3em;
+  /* padding-block: 1em; */
+  border: solid rgba(0, 0, 0, 0.285) !important;
+}
+
+@media screen and (max-width: 830px) {
+  .react-calendar button {
+    font-size: 1em;
+  }
 }

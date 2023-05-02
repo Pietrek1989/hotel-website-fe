@@ -1,4 +1,4 @@
-import { Offer } from "../../types and interfaces";
+import { Offer } from "../../../types and interfaces";
 // Check if an offer is available for the given date range
 // Check if any reservations overlap with the given date range
 

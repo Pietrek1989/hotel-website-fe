@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Offer } from "../../types and interfaces";
 import { useDispatch } from "react-redux";
-import { updateOfferPrice, updateTotalPrice } from "../../redux/actions";
-import { isDateInSeason } from "./offerHelpers";
+import { updateTotalPrice } from "../../redux/actions";
+import { isDateInSeason } from "./helperFunctions/offerHelpers";
 
 interface OfferCardProps {
   offer: Offer;
@@ -35,7 +35,7 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, selectedRange }) => {
 
   return (
     <div
-      className="bg-white shadow-md rounded-md p-4 w-full"
+      className="bg-white shadow-md rounded-md p-4 w-full "
       onClick={handleOfferSelect}
     >
       <div className="flex items-center justify-between mb-4">

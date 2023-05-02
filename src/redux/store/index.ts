@@ -3,7 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import localStorage from "redux-persist/lib/storage";
 import totalPriceReducer from "../reducers/totalPriceReducer";
-import offerReducer from "../reducers/offerReducer";
+
 const persistConfig = {
   storage: localStorage,
   key: "root", // this brings the whole redux store into persistency
@@ -15,7 +15,6 @@ const persistConfig = {
 };
 const combinedReducer = combineReducers({
   totalPrice: totalPriceReducer,
-  offerReducer: offerReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);
