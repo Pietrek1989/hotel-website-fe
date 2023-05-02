@@ -4,15 +4,17 @@ import "react-calendar/dist/Calendar.css";
 import "../../styles/calendar.css";
 import { Offer } from "../../types and interfaces";
 import { utcToZonedTime } from "date-fns-tz";
-import { isOfferAvailable, isDateInSeason, fetchOffers } from "./offerHelpers";
+import { isOfferAvailable, fetchOffers } from "./offerHelpers";
 import { isSameDate, isDateInRange } from "./calendarHelpers";
+import Offers from "./Offers";
+import TotalPrice from "./TotalPrice";
 
 const CalendarComponent: React.FC = () => {
   const hotelTimeZone = "Europe/Berlin";
 
   const [selectedRange, setSelectedRange] = React.useState<any>(null);
   const [selectStep, setSelectStep] = React.useState(0);
-  const [offers, setOffers] = React.useState<Offer[]>(() => []);
+  const [offers, setOffers] = React.useState<Offer[]>([]);
   const [availableOffers, setAvailableOffers] = React.useState<Offer[]>([]);
 
   // Fetch offers when the component is mounted
@@ -169,6 +171,7 @@ const CalendarComponent: React.FC = () => {
           tileClassName={tileClassName}
           tileDisabled={tileDisabled}
         />
+        <TotalPrice />
       </div>
       {selectedRange && (
         <div>
@@ -178,36 +181,10 @@ const CalendarComponent: React.FC = () => {
       )}
       <div>
         <h2>Available Offers</h2>
-        {availableOffers.length === 0 ? (
-          <p>No offers available for the selected date range.</p>
-        ) : (
-          <ul>
-            {availableOffers.map((offer) => {
-              const startDate = selectedRange.start;
-              const endDate = selectedRange.end;
-
-              // Calculate the price based on season and off-season rates
-              let price = 0;
-              if (startDate && endDate) {
-                const currentDate = new Date(startDate);
-                while (currentDate < endDate) {
-                  if (isDateInSeason(currentDate)) {
-                    price += offer.priceSeason;
-                  } else {
-                    price += offer.priceOffSeason;
-                  }
-                  currentDate.setDate(currentDate.getDate() + 1);
-                }
-              }
-
-              return (
-                <li key={offer._id}>
-                  {offer.name} - Price: ${price}
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        <Offers
+          availableOffers={availableOffers}
+          selectedRange={selectedRange}
+        />
       </div>
     </>
   );

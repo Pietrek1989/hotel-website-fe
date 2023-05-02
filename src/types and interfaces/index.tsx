@@ -6,7 +6,9 @@ export interface ReservationContent {
 export interface Reservation {
   content: ReservationContent;
 }
-
+export interface OfferState {
+  offers: Offer[];
+}
 export interface Offer {
   _id: string;
   name: string;
@@ -15,4 +17,5 @@ export interface Offer {
   image: string;
   reservations: Reservation[];
   calculatePrice: (start: Date, end: Date) => number;
+  selected?: boolean; // new property
 }
