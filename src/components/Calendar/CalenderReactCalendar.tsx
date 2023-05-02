@@ -12,9 +12,12 @@ import {
 } from "./helperFunctions/calendarHelpers";
 import Offers from "./Offers";
 import TotalPrice from "./TotalPrice";
+import { updateTotalPrice } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const CalendarComponent: React.FC = () => {
   const hotelTimeZone = "Europe/Berlin";
+  const dispatch = useDispatch();
 
   const [selectedRange, setSelectedRange] = React.useState<any>(null);
   const [selectStep, setSelectStep] = React.useState(0);
@@ -47,6 +50,7 @@ const CalendarComponent: React.FC = () => {
       );
       setAvailableOffers(availableOffers);
     };
+    dispatch(updateTotalPrice(0));
 
     updateAvailableOffers();
   }, [selectedRange, offers]);
