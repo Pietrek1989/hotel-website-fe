@@ -44,27 +44,30 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, selectedRange }) => {
   };
 
   return (
-    <div
-      className="bg-white shadow-md rounded-md p-4 w-full  my-5"
-      onClick={handleOfferSelect}
-    >
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-bold text-lg">{offer.name}</h2>
+    <>
+      <div
+        className="bg-white shadow-md p-4 w-full "
+        onClick={handleOfferSelect}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-bold text-lg">{offer.name}</h2>
 
-        <p className="text-gray-500">€{priceForNight.toFixed(2)}/night</p>
-      </div>
+          <p className="text-gray-500">
+            <em>€{priceForNight.toFixed(2)}/night</em>
+          </p>
+        </div>
 
-      <img
-        src={offer.image}
-        alt={offer.name}
-        className="w-full h-48 object-cover"
-      />
+        <img
+          src={offer.image}
+          alt={offer.name}
+          className="w-full h-48 object-cover"
+        />
 
-      <div>
-        <button onClick={handleeDetails} className="flex mt-2">
-          <div>
-            <span>
-              {/* <svg
+        <div>
+          <button onClick={handleeDetails} className="flex mt-2">
+            <div>
+              <span>
+                {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -78,26 +81,28 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, selectedRange }) => {
               d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
             />
           </svg> */}
-              <MdExpandMore />
-            </span>
-          </div>
-          <span>Room details</span>
-        </button>
-        <motion.div
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          {isSelected &&
-            offer.details?.map((desc, index) => (
-              <span key={index} className="text-gray-500 text-sm mt-2">
-                <strong>
-                  {""} • {desc}
-                </strong>
+                <MdExpandMore />
               </span>
-            ))}
-        </motion.div>
+            </div>
+            <span>Room details</span>
+          </button>
+          <motion.div
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {isSelected &&
+              offer.details?.map((desc, index) => (
+                <span key={index} className="text-gray-500 text-sm mt-2">
+                  <strong>
+                    {""} • {desc}
+                  </strong>
+                </span>
+              ))}
+          </motion.div>
+        </div>
       </div>
-    </div>
+      <hr />
+    </>
   );
 };
 

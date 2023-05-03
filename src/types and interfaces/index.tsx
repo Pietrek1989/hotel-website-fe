@@ -20,3 +20,17 @@ export interface Offer {
   calculatePrice: (start: Date, end: Date) => number;
   selected?: boolean; // new property
 }
+export interface ReservationSave {
+  _id: string;
+  user: string;
+  content: {
+    cost: number;
+    checkin: Date;
+    checkout: Date;
+    paid: boolean;
+    canceled: boolean;
+    offer: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}

@@ -33,9 +33,11 @@ const Offers: React.FC<OffersProps> = ({ availableOffers, selectedRange }) => {
 
   return (
     <>
-      <h2 className="font-bold text-2xl mb-4 text-center">Available Offers</h2>
+      <h2 className="font-bold text-2xl mb-4 text-center mt-5">
+        Available Offers:
+      </h2>
 
-      <div className="flex flex-col">{offerCards}</div>
+      <div className="flex flex-col rounded-lg shadow-lg ">{offerCards}</div>
     </>
   );
 };

@@ -1,5 +1,9 @@
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { saveReservation } from "./helperFunctions/offerHelpers";
+
 interface OffersProps {
   selectedRange: {
     start: Date | null;
@@ -11,6 +15,23 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
   const selectedOffer = useSelector(
     (state: any) => state.selectedOffer.selectedOffer
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleReservation = () => {
+    if (selectedRange.start && selectedRange.end) {
+      saveReservation(
+        totalPrice,
+        selectedRange.start,
+        selectedRange.end,
+        selectedOffer._id
+      );
+    }
+  };
 
   return (
     <div className="bg-white shadow-md rounded-md p-4 mt-4 price-container flex flex-col sm:text-lg md:text-sm lg:text-lg">
@@ -45,9 +66,10 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="bg-lightgreen p-2 rounded-md text-white hover:bg-selected mb-5"
+          onClick={handleOpenModal}
         >
           {" "}
-          BOOK
+          Reserve
         </motion.button>
       </div>
       {/* <img
@@ -67,6 +89,70 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
         alt="logo"
         className=" bg-blue"
       /> */}
+      <div
+        className={`fixed z-10 inset-0 overflow-y-auto ${
+          isModalOpen ? "" : "hidden"
+        }`}
+      >
+        <div
+          className={`fixed z-10 inset-0 overflow-y-auto ${
+            isModalOpen ? "" : "hidden"
+          }`}
+        >
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div
+              className="fixed inset-0 transition-opacity"
+              aria-hidden="true"
+              onClick={handleCloseModal}
+            >
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <div className="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <AiOutlineCheckCircle
+                      className="h-6 w-6 text-green-600"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3
+                      className="text-lg leading-6 font-medium text-gray-900"
+                      id="modal-headline"
+                    >
+                      Confirm Booking
+                    </h3>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
+                        Are you sure you want to book this room?
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={handleCloseModal}
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-300 text-base font-medium text-white hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  Cancel
+                </motion.button>
+                <motion.button
+                  onClick={handleReservation}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm bg-lightgreen hover:bg-selected"
+                >
+                  Confirm
+                </motion.button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

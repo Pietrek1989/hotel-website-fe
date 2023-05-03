@@ -1,4 +1,8 @@
-import { Offer } from "../../../types and interfaces";
+import {
+  Offer,
+  Reservation,
+  ReservationSave,
+} from "../../../types and interfaces";
 // Check if an offer is available for the given date range
 // Check if any reservations overlap with the given date range
 
@@ -67,5 +71,45 @@ export const fetchOffers = async (): Promise<Offer[]> => {
   } catch (error) {
     console.error("Failed to fetch offers:", error);
     return [];
+  }
+};
+
+export const saveReservation = async (
+  cost: number,
+  checkin: Date,
+  checkout: Date,
+  offerId: string
+): Promise<ReservationSave> => {
+  try {
+    // const token = getToken(); // get bearer token from authentication module
+    const response = await fetch(
+      `${process.env.REACT_APP_BE_URL}/reservations`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // include bearer token in the authorization header
+        },
+        body: JSON.stringify({
+          user: "user_id_here", // set user ID here
+          content: {
+            cost,
+            checkin,
+            checkout,
+            paid: false,
+            canceled: false,
+            offer: offerId,
+          },
+        }),
+      }
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to save reservation.");
+    }
+    return data.reservation as ReservationSave;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };
