@@ -7,6 +7,13 @@
   font-weight: bold;
   border-color: black !important;
 }
+.selected.check-in {
+  background-color: lightgreen !important;
+}
+
+.selected.check-out {
+  background-color: lightcoral !important;
+}
 .react-calendar__tile:disabled {
   background-color: #aba5a574;
 }
@@ -27,8 +34,15 @@
   border: solid rgba(0, 0, 0, 0.285) !important;
 }
 
+.price-container {
+  position: fixed;
+  right: 2rem;
+}
 @media screen and (max-width: 830px) {
   .react-calendar button {
     font-size: 1em;
+  }
+  .price-container {
+    position: initial;
   }
 }

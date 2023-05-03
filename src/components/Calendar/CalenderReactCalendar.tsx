@@ -137,14 +137,30 @@ const CalendarComponent: React.FC = () => {
     const isInDateRange = start && end && isDateInRange(date, start, end);
 
     const isSelected = isStartDate || isEndDate || isInDateRange;
+    const isCheckIn = isStartDate && !isEndDate;
+    const isCheckOut = isEndDate && !isStartDate;
 
-    return isSelected ? "selected" : "";
+    let className = "";
+
+    if (isSelected) {
+      className = "selected";
+    }
+
+    if (isCheckIn) {
+      className += " check-in";
+    }
+
+    if (isCheckOut) {
+      className += " check-out";
+    }
+
+    return className;
   };
 
   return (
     <>
-      <section className="calendar-container container md:mx-auto flex flex-wrap">
-        <div className="flex flex-col basis-3/4">
+      <section className="calendar-container container md:mx-auto flex flex-wrap justify-center">
+        <div className="flex flex-col justify-center md:basis-3/4 sm:basis-4/4">
           <Calendar
             onClickDay={handleDateClick}
             tileClassName={tileClassName}
@@ -160,7 +176,7 @@ const CalendarComponent: React.FC = () => {
           </div>
         </div>
 
-        <div className="basis-1/4">
+        <div className="md:basis-1/4 sm:basis-4/4 w-full  ">
           <TotalPrice selectedRange={selectedRange} />
         </div>
       </section>

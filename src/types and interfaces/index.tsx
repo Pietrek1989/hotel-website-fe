@@ -16,6 +16,7 @@ export interface Offer {
   priceOffSeason: number;
   image: string;
   reservations: Reservation[];
+  details: string[];
   calculatePrice: (start: Date, end: Date) => number;
   selected?: boolean; // new property
 }
