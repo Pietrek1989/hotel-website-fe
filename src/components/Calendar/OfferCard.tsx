@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Offer } from "../../types and interfaces";
 import { useDispatch } from "react-redux";
-import { updateTotalPrice } from "../../redux/actions";
+import { updateSelectedOffer, updateTotalPrice } from "../../redux/actions";
 import { isDateInSeason } from "./helperFunctions/offerHelpers";
 import { MdExpandMore } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -34,6 +34,7 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, selectedRange }) => {
       86400000;
     const totalPrice = priceForNight * numDays;
     dispatch(updateTotalPrice(totalPrice));
+    dispatch(updateSelectedOffer(offer));
   };
   const handleeDetails = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>

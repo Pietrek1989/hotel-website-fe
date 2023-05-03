@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import localStorage from "redux-persist/lib/storage";
 import totalPriceReducer from "../reducers/totalPriceReducer";
+import selectedOfferReducer from "../reducers/selectedOfferReducer";
 
 const persistConfig = {
   storage: localStorage,
@@ -15,6 +16,7 @@ const persistConfig = {
 };
 const combinedReducer = combineReducers({
   totalPrice: totalPriceReducer,
+  selectedOffer: selectedOfferReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);

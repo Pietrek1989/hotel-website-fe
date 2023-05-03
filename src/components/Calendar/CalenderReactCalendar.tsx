@@ -160,13 +160,35 @@ const CalendarComponent: React.FC = () => {
   return (
     <>
       <section className="calendar-container container md:mx-auto flex flex-wrap justify-center">
-        <div className="flex flex-col justify-center md:basis-3/4 sm:basis-4/4">
+        <div className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 ">
           <Calendar
             onClickDay={handleDateClick}
             tileClassName={tileClassName}
             tileDisabled={tileDisabled}
-            className={"self-center my-10"}
+            className={"self-center mt-10"}
           />
+          <div className="flex md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-lightgreen"></div>
+              <span className="ml-1"> Check In</span>
+            </div>
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-lightcoral"></div>
+              <span className="ml-1"> Check Out</span>
+            </div>
+            <div className="flex items-center px-1 ">
+              <div className="history-calendar bg-selected"></div>
+              <span className="ml-1">Between</span>
+            </div>
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-disabled"></div>
+              <span className="ml-1"> Booked Out</span>
+            </div>
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-currentDay"></div>
+              <span className="ml-1"> Today</span>
+            </div>
+          </div>
 
           <div>
             <Offers
@@ -176,7 +198,7 @@ const CalendarComponent: React.FC = () => {
           </div>
         </div>
 
-        <div className="md:basis-1/4 sm:basis-4/4 w-full  ">
+        <div className="md:basis-1/4 sm:basis-3/4 w-full  ">
           <TotalPrice selectedRange={selectedRange} />
         </div>
       </section>

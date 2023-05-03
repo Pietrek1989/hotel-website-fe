@@ -12,7 +12,7 @@
 }
 
 .selected.check-out {
-  background-color: lightcoral !important;
+  background-color: #f08080 !important;
 }
 .react-calendar__tile:disabled {
   background-color: #aba5a574;
@@ -31,18 +31,40 @@
   outline: none;
   font-size: 1.3em;
   /* padding-block: 1em; */
-  border: solid rgba(0, 0, 0, 0.285) !important;
+  border: solid 1px rgba(0, 0, 0, 0.285) !important;
 }
 
 .price-container {
   position: fixed;
   right: 2rem;
 }
-@media screen and (max-width: 830px) {
+
+.history-calendar {
+  width: 2rem;
+  height: 2rem;
+}
+.history-calendar-container {
+  width: 90%;
+  border: solid 1px rgba(0, 0, 0, 0.285) !important;
+}
+
+@media screen and (max-width: 850px) {
+  .price-container {
+    right: 0;
+  }
+}
+@media screen and (max-width: 770px) {
   .react-calendar button {
     font-size: 1em;
   }
   .price-container {
     position: initial;
+  }
+  .history-calendar {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .history-calendar + span {
+    font-size: 1rem;
   }
 }
