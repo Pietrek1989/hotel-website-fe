@@ -68,3 +68,12 @@
     font-size: 1rem;
   }
 }
+
+.StripeCheckout,
+.StripeCheckout span {
+  background: lightgreen !important;
+}
+.StripeCheckout:hover,
+.StripeCheckout span:hover {
+  background: rgb(24, 218, 69) !important;
+}

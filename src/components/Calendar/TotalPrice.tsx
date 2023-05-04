@@ -1,8 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { saveReservation } from "./helperFunctions/offerHelpers";
+import {
+  saveReservation,
+  sendPayment,
+} from "./helperFunctions/reservationHelpers";
+import { useNavigate } from "react-router-dom";
+import { updateNewReservation } from "../../redux/actions";
+import StripeCheckout from "react-stripe-checkout";
+import PayButton from "./PayButton";
 
 interface OffersProps {
   selectedRange: {
@@ -11,10 +18,16 @@ interface OffersProps {
   };
 }
 const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const totalPrice = useSelector((state: any) => state.totalPrice.totalPrice);
   const selectedOffer = useSelector(
     (state: any) => state.selectedOffer.selectedOffer
   );
+  const newReservation = useSelector(
+    (state: any) => state.newReservation.newReservation
+  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -22,16 +35,25 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  const handleReservation = () => {
+  const handleReservation = (token: any) => {
     if (selectedRange.start && selectedRange.end) {
       saveReservation(
         totalPrice,
         selectedRange.start,
         selectedRange.end,
-        selectedOffer._id
+        selectedOffer._id,
+        dispatch,
+        token
       );
+
+      console.log(token);
+
+      // navigate("/checkout");
     }
   };
+  // function onToken(token: any) {
+  //   console.log(token);
+  // }
 
   return (
     <div className="bg-white shadow-md rounded-md p-4 mt-4 price-container flex flex-col sm:text-lg md:text-sm lg:text-lg">
@@ -141,12 +163,15 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
                   Cancel
                 </motion.button>
                 <motion.button
-                  onClick={handleReservation}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm bg-lightgreen hover:bg-selected"
                 >
-                  Confirm
+                  <StripeCheckout
+                    amount={totalPrice * 100}
+                    token={handleReservation}
+                    currency="EUR"
+                    stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!}
+                  />{" "}
                 </motion.button>
               </div>
             </div>

@@ -22,7 +22,11 @@ export interface Offer {
 }
 export interface ReservationSave {
   _id: string;
-  user: string;
+  user: {
+    name: string;
+    surname: string;
+    email: string;
+  };
   content: {
     cost: number;
     checkin: Date;
