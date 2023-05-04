@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Offer } from "../../types and interfaces";
 import { isDateInSeason } from "./helperFunctions/offerHelpers";
 import OfferCard from "./OfferCard";
@@ -12,6 +12,8 @@ interface OffersProps {
 }
 
 const Offers: React.FC<OffersProps> = ({ availableOffers, selectedRange }) => {
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
+
   const { start, end } = selectedRange ?? {};
   const offerCards = availableOffers.map((offer) => {
     let price = 0;
@@ -27,17 +29,20 @@ const Offers: React.FC<OffersProps> = ({ availableOffers, selectedRange }) => {
         offer={offer}
         price={price}
         selectedRange={selectedRange}
+        // selectedOffer={selectedOffer}
+        // setSelectedOffer={setSelectedOffer}
       />
     );
   });
 
   return (
     <>
-      <h2 className="font-bold text-2xl mb-4 text-center mt-5">
+      <h2 className="font-bold text-2xl  text-center mt-5 bg-white py-2">
         Available Offers:
       </h2>
+      <hr />
 
-      <div className="flex flex-col rounded-lg shadow-lg ">{offerCards}</div>
+      <div className="flex flex-col rounded-lg shadow-lg">{offerCards}</div>
     </>
   );
 };

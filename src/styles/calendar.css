@@ -1,24 +1,32 @@
+:root {
+  --color-selected: rgb(24, 218, 69);
+  --color-checkin: lightgreen;
+  --color-checkout: #f08080;
+  --color-now: #14a5bf;
+  --color-disabled: #aba5a574;
+}
+
 .react-calendar {
   width: 90%;
 }
 .selected {
-  background-color: rgb(24, 218, 69) !important;
+  background-color: var(--color-selected) !important;
   color: white;
   font-weight: bold;
   border-color: black !important;
 }
 .selected.check-in {
-  background-color: lightgreen !important;
+  background-color: var(--color-checkin) !important;
 }
 
 .selected.check-out {
-  background-color: #f08080 !important;
+  background-color: var(--color-checkout) !important;
 }
 .react-calendar__tile:disabled {
-  background-color: #aba5a574;
+  background-color: var(--color-disabled);
 }
 .react-calendar__tile--now {
-  background: #14a5bf !important;
+  background: var(color-now) !important;
   color: white;
 }
 .react-calendar__month-view__days__day--weekend {
@@ -69,11 +77,19 @@
   }
 }
 
+.check svg {
+  color: var(--color-checkin);
+  font-size: 3em;
+}
 .StripeCheckout,
 .StripeCheckout span {
-  background: lightgreen !important;
+  background: var(--color-checkin) !important;
 }
 .StripeCheckout:hover,
 .StripeCheckout span:hover {
-  background: rgb(24, 218, 69) !important;
+  background: var(--color-selected) !important;
 }
+
+/* .shadow-md {
+  border: solid;
+} */

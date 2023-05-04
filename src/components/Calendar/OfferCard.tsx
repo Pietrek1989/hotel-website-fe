@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import { Offer } from "../../types and interfaces";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateSelectedOffer, updateTotalPrice } from "../../redux/actions";
 import { isDateInSeason } from "./helperFunctions/offerHelpers";
-import { MdExpandMore } from "react-icons/md";
+import { MdExpandMore, MdCheckCircle } from "react-icons/md";
 import { motion } from "framer-motion";
 
 interface OfferCardProps {
@@ -16,10 +16,17 @@ interface OfferCardProps {
   };
 }
 
-const OfferCard: React.FC<OfferCardProps> = ({ offer, selectedRange }) => {
+const OfferCard: React.FC<OfferCardProps> = ({
+  offer,
+  selectedRange,
+  // selectedOffer,
+  // setSelectedOffer,
+}) => {
   const [priceForNight, setPriceForNight] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
-
+  const selectedOffer = useSelector(
+    (state: any) => state.selectedOffer.selectedOffer
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     const pricePerNight = isDateInSeason(selectedRange.start!)
@@ -42,13 +49,15 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, selectedRange }) => {
     event.stopPropagation();
     setIsSelected(!isSelected);
   };
+  const isCurrentOfferSelected =
+    selectedOffer && selectedOffer._id === offer._id;
+  const offerCardStyle = isCurrentOfferSelected
+    ? "bg-white shadow-md p-4  w-full rounded-sm border-solid border-4 scale-105 cursor-pointer"
+    : "bg-white shadow-md p-4  w-full rounded-sm cursor-pointer";
 
   return (
     <>
-      <div
-        className="bg-white shadow-md p-4 w-full "
-        onClick={handleOfferSelect}
-      >
+      <div className={offerCardStyle} onClick={handleOfferSelect}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-bold text-lg">{offer.name}</h2>
 
@@ -56,12 +65,19 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, selectedRange }) => {
             <em>€{priceForNight.toFixed(2)}/night</em>
           </p>
         </div>
-
-        <img
-          src={offer.image}
-          alt={offer.name}
-          className="w-full h-48 object-cover"
-        />
+        <div className="relative">
+          {" "}
+          <img
+            src={offer.image}
+            alt={offer.name}
+            className="w-full h-48 object-cover"
+          />{" "}
+          {isCurrentOfferSelected && (
+            <span className="text-green-500 ml-2 absolute top-0 right-0 check ">
+              <MdCheckCircle />
+            </span>
+          )}
+        </div>
 
         <div>
           <button onClick={handleeDetails} className="flex mt-2">

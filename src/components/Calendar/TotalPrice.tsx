@@ -75,7 +75,12 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
           <br />
         </div>
       )}
-      <p className="text-gray-500">Selected: {selectedOffer.name}</p>
+      <p className="text-gray-500 mb-2">Selected: {selectedOffer.name}</p>
+      <img
+        src={selectedOffer.image}
+        alt="small room"
+        className=" w-24 mx-auto"
+      />
       <br />
 
       <p className="text-gray-500">
