@@ -4,10 +4,22 @@
   --color-checkout: #f08080;
   --color-now: #14a5bf;
   --color-disabled: #aba5a574;
+  --color-gold-text: #8f7a40;
+  --color-grey-calendar: #e6e6e6;
 }
-
+/* .calendar-container {
+  background-image: url("/public/bg/gold-83754.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  height: 100%;
+} */
 .react-calendar {
-  width: 90%;
+  width: 91.666667%;
+}
+.react-calendar__tile--now {
+  color: white !important;
+  background-color: var(--color-now) !important;
 }
 .selected {
   background-color: var(--color-selected) !important;

@@ -11,9 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
   color: #8f7a40;
-  background-image: url("/public/bg/gold-83754.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 code {

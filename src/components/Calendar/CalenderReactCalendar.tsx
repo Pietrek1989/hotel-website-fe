@@ -14,6 +14,8 @@ import Offers from "./Offers";
 import TotalPrice from "./TotalPrice";
 import { updateTotalPrice } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { slideFromRightVariant, slideFromTopVariant } from "../../utils";
 
 const CalendarComponent: React.FC = () => {
   const hotelTimeZone = "Europe/Berlin";
@@ -160,14 +162,20 @@ const CalendarComponent: React.FC = () => {
   return (
     <>
       <section className="calendar-container container md:mx-auto flex flex-wrap justify-center">
-        <div className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 ">
+        <motion.div
+          className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 "
+          variants={slideFromTopVariant}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           <Calendar
             onClickDay={handleDateClick}
             tileClassName={tileClassName}
             tileDisabled={tileDisabled}
             className={"self-center mt-10"}
           />
-          <div className="flex md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
+          <div className="flex w-11/12 md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
             <div className="flex items-center  px-1 ">
               <div className="history-calendar bg-lightgreen"></div>
               <span className="ml-1"> Check In</span>
@@ -190,17 +198,23 @@ const CalendarComponent: React.FC = () => {
             </div>
           </div>
 
-          <div>
+          <div className="w-11/12 mx-auto">
             <Offers
               availableOffers={availableOffers}
               selectedRange={selectedRange}
             />
           </div>
-        </div>
+        </motion.div>
 
-        <div className="md:basis-1/4 sm:basis-3/4 w-full  ">
+        <motion.div
+          variants={slideFromRightVariant}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className="md:basis-1/4 sm:basis-3/4 w-full  "
+        >
           <TotalPrice selectedRange={selectedRange} />
-        </div>
+        </motion.div>
       </section>
     </>
   );

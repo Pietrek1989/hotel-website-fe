@@ -15,7 +15,7 @@ const Offers: React.FC<OffersProps> = ({ availableOffers, selectedRange }) => {
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
   const { start, end } = selectedRange ?? {};
-  const offerCards = availableOffers.map((offer) => {
+  const offerCards = availableOffers.map((offer, index) => {
     let price = 0;
     if (start && end) {
       const numDays = (end.getTime() - start.getTime()) / 86400000; // 1 day = 86400000 ms
@@ -29,6 +29,8 @@ const Offers: React.FC<OffersProps> = ({ availableOffers, selectedRange }) => {
         offer={offer}
         price={price}
         selectedRange={selectedRange}
+        index={index}
+
         // selectedOffer={selectedOffer}
         // setSelectedOffer={setSelectedOffer}
       />
