@@ -33,11 +33,6 @@ export const slideFromTopVariantWithOpacity = {
   visible: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -100 },
 };
-export const slideFromTopVariant = {
-  hidden: { y: -100 },
-  visible: { y: 0 },
-  exit: { y: -100 },
-};
 
 export const slideFromRightVariantWithOpacity = {
   hidden: { opacity: 0, x: 100 },
@@ -45,8 +40,26 @@ export const slideFromRightVariantWithOpacity = {
   exit: { opacity: 0, x: 100 },
 };
 
-export const slideFromRightVariant = {
-  hidden: { x: 100 },
-  visible: { x: 0 },
-  exit: { x: 100 },
+export const welcomeVariants = {
+  hidden: { opacity: 0 },
+  visible: (i: number) => ({
+    opacity: 1,
+    transition: { delay: 0.05 * i },
+  }),
+};
+export const heroHausvariants = {
+  hidden: { opacity: 0 },
+  visible: (i: number) => ({
+    opacity: 1,
+    transition: { delay: 1 },
+  }),
+};
+
+export const logoVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    rotate: 360,
+    transition: { delay: 1.5, duration: 1 },
+  },
 };

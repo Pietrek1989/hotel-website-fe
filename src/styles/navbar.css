@@ -1,0 +1,6 @@
+.swiper-pagination,
+.swiper-pagination-clickable,
+.swiper-pagination-bullets,
+.swiper-pagination-horizontal span {
+  background-color: var(--color-now) !important;
+}

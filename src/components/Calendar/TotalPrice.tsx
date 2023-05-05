@@ -101,7 +101,7 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
       /> */}
       <div className="mx-auto">
         <img
-          src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background (1).png")}
+          src={require("../../assets/8eeead46-0f0b-41be-8244-10fe9feeb56e.png")}
           alt="logo"
           className=" w-40 md:w-20"
         />
@@ -129,7 +129,7 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
             >
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
-            <div className="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full mt-10 confirmation-window">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -159,7 +159,7 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={handleCloseModal}
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-300 text-base font-medium text-white hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="mx-3 inline-flex justify-center rounded-md border border-transparent shadow-sm px-3 py-1 bg-gray-300 text-base font-medium text-white hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Cancel
                 </motion.button>

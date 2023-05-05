@@ -5,6 +5,11 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "swiper/swiper-bundle.min.css";
 import "../../styles/hero.css";
+import {
+  heroHausvariants,
+  logoVariants,
+  welcomeVariants,
+} from "../../utils/motion";
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -22,23 +27,6 @@ const HeroSection = () => {
   //     setLoading(false);
   //   }
   // };
-
-  const welcomeVariants = {
-    hidden: { opacity: 0 },
-    visible: (i: number) => ({
-      opacity: 1,
-      transition: { delay: 0.05 * i },
-    }),
-  };
-
-  const logoVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      rotate: 360,
-      transition: { delay: 1.5, duration: 1 },
-    },
-  };
 
   return (
     <div className="relative hero-container h-screen">
@@ -69,39 +57,72 @@ const HeroSection = () => {
         ))}
       </Swiper>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-40"></div>
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
-        <div className="space-x-1 pointer-events-auto">
-          {Array.from("Welcome to").map((char, i) => (
-            <motion.span
-              key={i}
-              initial="hidden"
-              animate="visible"
-              custom={i}
-              variants={welcomeVariants}
-              className="text-4xl font-bold text-white text-shadow-md"
-            >
-              {char}
-            </motion.span>
-          ))}
-        </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-40">
+        {" "}
         <motion.img
           initial="hidden"
           animate="visible"
           variants={logoVariants}
-          src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background (1).png")}
+          src={require("../../assets/8eeead46-0f0b-41be-8244-10fe9feeb56e.png")}
           alt="Logo"
           className="mx-auto mt-4 pointer-events-auto h-60 w-60 text-shadow-md logo-shadow"
         />
-        <p className="text-2xl mt-4 text-white text-shadow-md pointer-events-auto">
-          Slogan
-        </p>
-        <button
-          onClick={handleBooking}
-          className="bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 hover:bg-blue-800 pointer-events-auto"
-        >
-          Book
-        </button>
+      </div>
+
+      <div className="absolute inset-0  z-10 pointer-events-none">
+        <div className=" absolute left-0 right-0 top-[150px]">
+          <motion.img
+            initial="hidden"
+            animate="visible"
+            variants={logoVariants}
+            src={require("../../assets/8eeead46-0f0b-41be-8244-10fe9feeb56e.png")}
+            alt="Logo"
+            className="mx-auto mt-4 pointer-events-auto h-60 w-60 text-shadow-md logo-shadow justify-center"
+          />
+        </div>
+        <div className=" sm:ml-0 flex flex-col md:ml-20 mt-96 items-center md:items-start">
+          <div className="space-x-1 mt-24 pointer-events-auto">
+            {Array.from("Welcome to").map((char, i) => (
+              <motion.span
+                key={i}
+                initial="hidden"
+                animate="visible"
+                custom={i}
+                variants={welcomeVariants}
+                className="text-2xl  md:text-4xl font-bold text-white text-shadow-md"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </div>
+
+          <h1 className="space-x-1 mt-4 pointer-events-auto">
+            {Array.from("Haus Rheingold Hotel").map((char, i) => (
+              <motion.span
+                key={i}
+                initial="hidden"
+                animate="visible"
+                custom={i}
+                variants={heroHausvariants}
+                className="text-2xl  md:text-4xl font-bold text-white text-shadow-md"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </h1>
+          <p className="drop-shadow-md font-semibold">
+            Book your stay at very popular Alpine destination Alpbach!
+          </p>
+
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={handleBooking}
+            className="book-button hover:bg-currentDayDarker text-white font-bold  rounded pointer-events-auto sm:ml-0 md:ml-24 "
+          >
+            Book now
+          </motion.button>
+        </div>
       </div>
     </div>
   );

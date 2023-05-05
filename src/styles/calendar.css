@@ -1,12 +1,3 @@
-:root {
-  --color-selected: rgb(24, 218, 69);
-  --color-checkin: lightgreen;
-  --color-checkout: #f08080;
-  --color-now: #14a5bf;
-  --color-disabled: #aba5a574;
-  --color-gold-text: #8f7a40;
-  --color-grey-calendar: #e6e6e6;
-}
 .bg-container {
   height: 15vw;
   background-image: url("../assets/layered-peaks-haikei.png");
@@ -56,7 +47,7 @@
   outline: none;
   font-size: 1.3em;
   /* padding-block: 1em; */
-  border: solid 1px rgba(0, 0, 0, 0.285) !important;
+  /* border: solid 1px rgba(0, 0, 0, 0.285) !important; */
 }
 
 .price-container {
@@ -110,3 +101,6 @@
 /* .shadow-md {
   border: solid;
 } */
+.confirmation-window {
+  margin-top: 5em !important;
+}

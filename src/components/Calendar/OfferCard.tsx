@@ -6,7 +6,8 @@ import { updateSelectedOffer, updateTotalPrice } from "../../redux/actions";
 import { isDateInSeason } from "./helperFunctions/offerHelpers";
 import { MdExpandMore, MdCheckCircle } from "react-icons/md";
 import { motion } from "framer-motion";
-import { slideInVariants } from "../../utils";
+import { slideInVariants } from "../../utils/motion";
+import { AnimatePresence } from "framer-motion";
 
 interface OfferCardProps {
   offer: Offer;

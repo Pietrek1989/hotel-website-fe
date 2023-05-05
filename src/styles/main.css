@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 @import "swiper/swiper-bundle.min.css";
-
+:root {
+  --color-selected: rgb(24, 218, 69);
+  --color-checkin: lightgreen;
+  --color-checkout: #f08080;
+  --color-now: #14a5bf;
+  --color-disabled: #aba5a574;
+  --color-gold-text: #8f7a40;
+  --color-grey-calendar: #e6e6e6;
+  --color-bg: #a7bed3;
+  --swiper-theme-color: #14a5bf !important;
+}
 html,
 body {
   margin: 0;

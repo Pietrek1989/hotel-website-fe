@@ -9,3 +9,48 @@
 .logo-shadow {
   filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.5));
 }
+
+.book-button {
+  font-family: inherit;
+  display: inline-block;
+  width: 6em;
+  height: 2.6em;
+  line-height: 2.5em;
+  overflow: hidden;
+  margin-top: 1rem;
+  font-size: 17px;
+  z-index: 1;
+  color: var(--color-now);
+  border: 2px solid var(--color-now);
+  border-radius: 6px;
+  position: relative;
+}
+
+.book-button::before {
+  position: absolute;
+  content: "";
+  background: var(--color-now);
+  width: 150px;
+  height: 200px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.book-button:hover {
+  color: white;
+}
+
+.book-button:before {
+  top: 100%;
+  left: 100%;
+  transition: 0.3s all;
+}
+
+button:hover::before {
+  top: -30px;
+  left: -30px;
+}
+
+/* .swiper-pagination-bullet {
+  color: var(--color-now);
+} */
