@@ -15,7 +15,7 @@ import TotalPrice from "./TotalPrice";
 import { updateTotalPrice } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import { slideFromRightVariant, slideFromTopVariant } from "../../utils";
+import { slideFromTopVariantWithOpacity } from "../../utils";
 
 const CalendarComponent: React.FC = () => {
   const hotelTimeZone = "Europe/Berlin";
@@ -161,61 +161,62 @@ const CalendarComponent: React.FC = () => {
 
   return (
     <>
-      <section className="calendar-container container md:mx-auto flex flex-wrap justify-center">
-        <motion.div
-          className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 "
-          variants={slideFromTopVariant}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <Calendar
-            onClickDay={handleDateClick}
-            tileClassName={tileClassName}
-            tileDisabled={tileDisabled}
-            className={"self-center mt-10"}
-          />
-          <div className="flex w-11/12 md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
-            <div className="flex items-center  px-1 ">
-              <div className="history-calendar bg-lightgreen"></div>
-              <span className="ml-1"> Check In</span>
-            </div>
-            <div className="flex items-center  px-1 ">
-              <div className="history-calendar bg-lightcoral"></div>
-              <span className="ml-1"> Check Out</span>
-            </div>
-            <div className="flex items-center px-1 ">
-              <div className="history-calendar bg-selected"></div>
-              <span className="ml-1">Between</span>
-            </div>
-            <div className="flex items-center  px-1 ">
-              <div className="history-calendar bg-disabled"></div>
-              <span className="ml-1"> Booked Out</span>
-            </div>
-            <div className="flex items-center  px-1 ">
-              <div className="history-calendar bg-currentDay"></div>
-              <span className="ml-1"> Today</span>
-            </div>
-          </div>
-
-          <div className="w-11/12 mx-auto">
-            <Offers
-              availableOffers={availableOffers}
-              selectedRange={selectedRange}
+      <div className="bg-container bg-bg ">
+        <section className="calendar-container container md:mx-auto flex flex-wrap justify-center">
+          <motion.div
+            className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 "
+            variants={slideFromTopVariantWithOpacity}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <Calendar
+              onClickDay={handleDateClick}
+              tileClassName={tileClassName}
+              tileDisabled={tileDisabled}
+              className={"self-center mt-10"}
             />
-          </div>
-        </motion.div>
+            <div className="flex w-11/12 md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
+              <div className="flex items-center  px-1 ">
+                <div className="history-calendar bg-lightgreen"></div>
+                <span className="ml-1"> Check In</span>
+              </div>
+              <div className="flex items-center  px-1 ">
+                <div className="history-calendar bg-lightcoral"></div>
+                <span className="ml-1"> Check Out</span>
+              </div>
+              <div className="flex items-center px-1 ">
+                <div className="history-calendar bg-selected"></div>
+                <span className="ml-1">Between</span>
+              </div>
+              <div className="flex items-center  px-1 ">
+                <div className="history-calendar bg-disabled"></div>
+                <span className="ml-1"> Booked Out</span>
+              </div>
+              <div className="flex items-center  px-1 ">
+                <div className="history-calendar bg-currentDay"></div>
+                <span className="ml-1"> Today</span>
+              </div>
+            </div>
 
-        <motion.div
-          variants={slideFromRightVariant}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          className="md:basis-1/4 sm:basis-3/4 w-full  "
-        >
-          <TotalPrice selectedRange={selectedRange} />
-        </motion.div>
-      </section>
+            <div className="w-11/12 mx-auto">
+              <Offers
+                availableOffers={availableOffers}
+                selectedRange={selectedRange}
+              />
+            </div>
+          </motion.div>
+          <motion.div
+            // variants={slideFromRightVariantWithOpacity}
+            // initial="hidden"
+            // animate="visible"
+            exit="exit"
+            className="md:basis-1/4 sm:basis-3/4 w-full  h-full bg-gray-100"
+          >
+            <TotalPrice selectedRange={selectedRange} />
+          </motion.div>
+        </section>
+      </div>
     </>
   );
 };

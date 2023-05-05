@@ -2,6 +2,7 @@ import React from "react";
 import CalendarReactComponent from "./components/Calendar/CalenderReactCalendar";
 import "./styles/main.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HeroSection from "./components/mainPage/HeroSection";
 // import Checkout from "./components/Calendar/Checkout/Checkout";
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<CalendarReactComponent />} />
+          <Route path="/" element={<HeroSection />} />
+          <Route path="/book" element={<CalendarReactComponent />} />
           {/* <Route path="/checkout" element={<Checkout />} /> */}
         </Routes>
       </BrowserRouter>

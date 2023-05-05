@@ -7,6 +7,11 @@
   --color-gold-text: #8f7a40;
   --color-grey-calendar: #e6e6e6;
 }
+.bg-container {
+  height: 15vw;
+  background-image: url("../assets/layered-peaks-haikei.png");
+  background-size: contain;
+}
 /* .calendar-container {
   background-image: url("/public/bg/gold-83754.jpg");
   background-repeat: no-repeat;

@@ -2,14 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import {
-  saveReservation,
-  sendPayment,
-} from "./helperFunctions/reservationHelpers";
+import { saveReservation } from "./helperFunctions/reservationHelpers";
 import { useNavigate } from "react-router-dom";
-import { updateNewReservation } from "../../redux/actions";
 import StripeCheckout from "react-stripe-checkout";
-import PayButton from "./PayButton";
 
 interface OffersProps {
   selectedRange: {
@@ -24,9 +19,9 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
   const selectedOffer = useSelector(
     (state: any) => state.selectedOffer.selectedOffer
   );
-  const newReservation = useSelector(
-    (state: any) => state.newReservation.newReservation
-  );
+  // const newReservation = useSelector(
+  //   (state: any) => state.newReservation.newReservation
+  // );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
@@ -154,6 +149,7 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
                       <p className="text-sm text-gray-500">
                         Are you sure you want to book this room?
                       </p>
+                      <p>CHARGE: {totalPrice}€</p>
                     </div>
                   </div>
                 </div>

@@ -1,7 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "swiper/swiper-bundle.min.css";
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: "Carrois Gothic", "Oswald", BlinkMacSystemFont, "Segoe UI",
@@ -11,6 +17,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
   color: #8f7a40;
+  /* background-image: url("/public/bg/blurry-gradient-haikei.png"); */
+  /* background-repeat: no-repeat;
+  background-size: cover; */
+  /* background: rgb(232, 207, 138);
+  background: linear-gradient(
+    180deg,
+    rgba(232, 207, 138, 1) 1%,
+    rgba(193, 204, 169, 1) 10%,
+    rgba(167, 190, 211, 1) 33%,
+    rgba(167, 190, 211, 1) 56%,
+    rgba(193, 204, 169, 1) 84%,
+    rgba(232, 207, 138, 1) 98%
+  ); */
 }
 
 code {

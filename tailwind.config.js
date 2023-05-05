@@ -21,7 +21,9 @@ module.exports = {
       emerald: colors.emerald,
       indigo: colors.indigo,
       yellow: colors.yellow,
+      bg: "#a7bed3",
     },
   },
   // plugins: [require("daisyui")],
-};
+}; /* background: #35393c; */ /* background: gold; background: #a7bed3; */
+/* background: #397367;  #87ADC2*/
