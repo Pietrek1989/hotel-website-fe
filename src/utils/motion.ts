@@ -1,21 +1,4 @@
 import { useAnimation, useMotionValue, useTransform } from "framer-motion";
-export const textVariant = (delay: any) => {
-  return {
-    hidden: {
-      y: -50,
-      opacity: 0,
-    },
-    show: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        duration: 1.25,
-        delay: delay,
-      },
-    },
-  };
-};
 
 export const slideInVariants = {
   hidden: { opacity: 0, x: -100 },
@@ -34,12 +17,16 @@ export const slideFromTopVariantWithOpacity = {
   exit: { opacity: 0, y: -100 },
 };
 
+export const slideFromLeftVariantWithOpacity = {
+  hidden: { opacity: 0, x: -100 },
+  visible: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -100 },
+};
 export const slideFromRightVariantWithOpacity = {
   hidden: { opacity: 0, x: 100 },
   visible: { opacity: 1, x: 0 },
   exit: { opacity: 0, x: 100 },
 };
-
 export const welcomeVariants = {
   hidden: { opacity: 0 },
   visible: (i: number) => ({
@@ -62,4 +49,20 @@ export const logoVariants = {
     rotate: 360,
     transition: { delay: 1.5, duration: 1 },
   },
+  hover: {
+    rotate: [0, 360],
+    transition: { duration: 1 },
+  },
+};
+
+export const staggerContainer = (staggerChildren: any, delayChildren: any) => {
+  return {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: staggerChildren,
+        delayChildren: delayChildren,
+      },
+    },
+  };
 };

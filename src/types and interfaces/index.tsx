@@ -38,3 +38,7 @@ export interface ReservationSave {
   createdAt: Date;
   updatedAt: Date;
 }
+export interface ImageState {
+  gallery: string[];
+  hero: string[];
+}

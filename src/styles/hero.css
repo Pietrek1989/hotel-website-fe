@@ -20,8 +20,8 @@
   margin-top: 1rem;
   font-size: 17px;
   z-index: 1;
-  color: var(--color-now);
-  border: 2px solid var(--color-now);
+  color: #ffe677;
+  border: 2px solid #ffe677;
   border-radius: 6px;
   position: relative;
 }
@@ -29,7 +29,7 @@
 .book-button::before {
   position: absolute;
   content: "";
-  background: var(--color-now);
+  background: #ffe677;
   width: 150px;
   height: 200px;
   z-index: -1;
@@ -37,7 +37,7 @@
 }
 
 .book-button:hover {
-  color: white;
+  color: black;
 }
 
 .book-button:before {

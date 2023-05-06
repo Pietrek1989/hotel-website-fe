@@ -41,7 +41,7 @@ const Nav = () => {
         <motion.nav
           className="fixed top-0 right-0 h-screen p-4 space-y-4 overflow-y-auto flex flex-col justify-center items-center"
           style={{
-            backgroundColor: "#14a5bf",
+            backgroundColor: "#a7bed3",
           }}
           initial="closed"
           animate={

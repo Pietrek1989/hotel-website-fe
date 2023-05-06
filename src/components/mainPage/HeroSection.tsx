@@ -40,7 +40,7 @@ const HeroSection = () => {
         className="h-full"
       >
         {[
-          "20190225_122659_lohfph",
+          "20210112_144917_rufjdi",
           "20210116_143257_cvdzz4",
           "56b6ea22-8c8d-4a3c-9c93-c9630157e96d_zwv8c4",
         ].map((image, index) => (
@@ -48,7 +48,7 @@ const HeroSection = () => {
             <div
               className="w-full h-full bg-cover bg-center relative"
               style={{
-                backgroundImage: `url(https://res.cloudinary.com/dvagn6szo/image/upload/v1683111699/hotel-Rheingold/tinified/${image}.jpg)`,
+                backgroundImage: `url(https://res.cloudinary.com/dvagn6szo/image/upload/v1683111699/hotel-Rheingold/tinified/${image})`,
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80"></div>
@@ -63,6 +63,7 @@ const HeroSection = () => {
           initial="hidden"
           animate="visible"
           variants={logoVariants}
+          whileHover="hover"
           src={require("../../assets/8eeead46-0f0b-41be-8244-10fe9feeb56e.png")}
           alt="Logo"
           className="mx-auto mt-4 pointer-events-auto h-60 w-60 text-shadow-md logo-shadow"
@@ -118,7 +119,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleBooking}
-            className="book-button hover:bg-currentDayDarker text-white font-bold  rounded pointer-events-auto sm:ml-0 md:ml-24 "
+            className="book-button text-white font-bold  rounded pointer-events-auto sm:ml-0 md:ml-24 "
           >
             Book now
           </motion.button>

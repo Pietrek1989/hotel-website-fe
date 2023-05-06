@@ -1,0 +1,57 @@
+import { motion } from "framer-motion";
+import "../../styles/discover.css";
+import { SectionWrapperLeft } from "../sectionAnimation";
+
+const Discover = () => {
+  const imageVariants = {
+    hover: {
+      scale: 1.1,
+      zIndex: 10,
+      boxShadow: "0px 0px 30px rgba(0, 0, 0, 0.3)",
+      transition: { duration: 0.3 },
+    },
+  };
+
+  return (
+    <div className="container flex mt-40 mb-10 discover-container">
+      <div className="basis-1/3 mr-8">
+        <h2 className="text-currentDay text-4xl mb-10">
+          <em>Discover Alpbach</em>
+        </h2>
+        <p>
+          Located in the hear of Pristine Alps.
+          <br /> Staying with us you can Immerse yourself in the breathtaking
+          beauty of the alpine mountains, where adventure, relaxation, and
+          culinary delights await. <br />
+          <br />
+          Explore scenic hiking trails during the summer, or glide down
+          glistening slopes in the winter. Indulge in exquisite local cuisine
+          crafted from fresh, locally sourced ingredients.
+          <br />
+          <br />
+          Experience the enchanting allure of nature in this unforgettable
+          destination that promises memories to last a lifetime.
+        </p>
+      </div>
+      <div className="basis-2/3 relative">
+        <motion.img
+          variants={imageVariants}
+          whileHover="hover"
+          src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683360095/hotel-Rheingold/gallery/20200826_140506_lboyai.jpg"
+          alt="Summer galtenberg peak"
+          className="absolute -top-20 left-60 w-50 h-2/3 object-cover"
+        />
+        <motion.img
+          variants={imageVariants}
+          whileHover="hover"
+          src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683366475/hotel-Rheingold/gallery/cropped_hz5gus.png"
+          alt="Winter ski "
+          className="absolute bottom-0 left-0 w-1/2 h-full object-cover"
+        />
+      </div>
+    </div>
+  );
+};
+
+// export default Discover;
+export default SectionWrapperLeft(Discover, "");
