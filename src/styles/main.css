@@ -10,7 +10,9 @@
   --color-disabled: #aba5a574;
   --color-gold-text: #8f7a40;
   --color-grey-calendar: #e6e6e6;
-  --color-bg: #a7bed3;
+  /* --color-bg: #a7bed3; */
+  --color-bg: #efebe5;
+
   --swiper-theme-color: #14a5bf !important;
 }
 html,

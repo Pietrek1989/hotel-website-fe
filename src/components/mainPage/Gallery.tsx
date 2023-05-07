@@ -4,6 +4,8 @@ import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
 import Modal from "react-modal";
 import { ImageState } from "../../types and interfaces";
+import { fetchImages } from "./helperFunctions";
+import "../../styles/galery.css";
 
 const Gallery = () => {
   SwiperCore.use([Navigation]);
@@ -11,16 +13,20 @@ const Gallery = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   useEffect(() => {
-    // Fetch images from your API
-    fetchImages();
+    (async () => {
+      const fetchedImages = await fetchImages();
+      setImages(fetchedImages);
+    })();
+    console.log("in comp", images);
   }, []);
 
-  const fetchImages = async () => {
-    // Replace with your API call
-    const response = await fetch("your-api-url");
-    const data = await response.json();
-    setImages(data);
-  };
+  useEffect(() => {
+    if (modalIsOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [modalIsOpen]);
 
   const openModal = (index: number) => {
     setSelectedImageIndex(index);
@@ -42,24 +48,37 @@ const Gallery = () => {
       prevIndex === 0 ? images.gallery.length - 1 : prevIndex - 1
     );
   };
-
+  // Inside the Gallery component
+  // Inside the Gallery component
   return (
-    <div>
-      <Swiper navigation>
+    <div className="my-10" id="gallery">
+      <Swiper
+        navigation
+        slidesPerView={10}
+        spaceBetween={5}
+
+        // Adjust the number of small icons displayed in a single line
+        // Adjust the space between small icons
+      >
         {images.gallery.map((image, index) => (
           <SwiperSlide key={index}>
             <img
+              className="small-icon " // Apply the CSS class to the img element
               src={image}
-              alt={`galerry number ${index}`}
-              onClick={() => openModal(index)}
+              alt={`gallery number ${index}`}
+              onClick={() => openModal(index)} // Make sure the onClick event is here
             />
           </SwiperSlide>
         ))}
       </Swiper>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <img src={images.gallery[selectedImageIndex]} alt="Selected" />
-        <button onClick={prevImage}>Previous</button>
-        <button onClick={nextImage}>Next</button>
+        <button className="arrow-btn" onClick={prevImage}>
+          Previous
+        </button>
+        <button className="arrow-btn" onClick={nextImage}>
+          Next
+        </button>
         <button onClick={closeModal}>Close</button>
       </Modal>
     </div>

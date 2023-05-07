@@ -14,11 +14,11 @@ const Discover = () => {
 
   return (
     <div className="container flex mt-40 mb-10 discover-container">
-      <div className="basis-1/3 mr-8">
+      <div className="basis-3/3 md:basis-1/3 mr-8">
         <h2 className="text-currentDay text-4xl mb-10">
           <em>Discover Alpbach</em>
         </h2>
-        <p>
+        <p className="pr-10">
           Located in the hear of Pristine Alps.
           <br /> Staying with us you can Immerse yourself in the breathtaking
           beauty of the alpine mountains, where adventure, relaxation, and
@@ -33,20 +33,20 @@ const Discover = () => {
           destination that promises memories to last a lifetime.
         </p>
       </div>
-      <div className="basis-2/3 relative">
+      <div className="basis-2/3 relative  hidden md:block">
         <motion.img
           variants={imageVariants}
           whileHover="hover"
           src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683360095/hotel-Rheingold/gallery/20200826_140506_lboyai.jpg"
           alt="Summer galtenberg peak"
-          className="absolute -top-20 left-60 w-50 h-2/3 object-cover"
+          className=" absolute -top-20  md:left-20 lg:left-50 xl:left-60 w-50 md:h-3/6 lg:h-3/5 xl:h-2/3 object-cover"
         />
         <motion.img
           variants={imageVariants}
           whileHover="hover"
           src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683366475/hotel-Rheingold/gallery/cropped_hz5gus.png"
           alt="Winter ski "
-          className="absolute bottom-0 left-0 w-1/2 h-full object-cover"
+          className="absolute bottom-0 left-0 w-2/5 md:h-3/4 lg:h-full object-cover"
         />
       </div>
     </div>

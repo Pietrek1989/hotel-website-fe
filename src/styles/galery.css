@@ -1,0 +1,44 @@
+.small-icon {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: var(--color-gold-text);
+  z-index: 1000;
+}
+
+.ReactModal__Content {
+  position: absolute;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-bg) !important;
+  z-index: 1001;
+  display: flex;
+  height: 80vh;
+  width: 80vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden !important; /* Prevent scrolling */
+}
+
+.ReactModal__Content img {
+  /* width: 100%; */
+  height: 90%;
+  width: 90%;
+  object-fit: contain;
+  aspect-ratio: 2 / 1;
+}
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
