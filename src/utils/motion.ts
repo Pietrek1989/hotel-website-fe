@@ -47,7 +47,7 @@ export const logoVariants = {
   visible: {
     opacity: 1,
     rotate: 360,
-    transition: { delay: 1.5, duration: 1 },
+    transition: { delay: 0.5, duration: 1 },
   },
   hover: {
     rotate: [0, 360],

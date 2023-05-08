@@ -6,6 +6,13 @@ import Modal from "react-modal";
 import { ImageState } from "../../types and interfaces";
 import { fetchImages } from "./helperFunctions";
 import "../../styles/galery.css";
+import { BsFillCaretRightFill, BsFillCaretLeftFill } from 'react-icons/bs';
+import {CgClose} from 'react-icons/cg'
+import { motion, AnimatePresence } from "framer-motion";
+import CustomModal from "./CustomModal";
+
+
+
 
 const Gallery = () => {
   SwiperCore.use([Navigation]);
@@ -71,17 +78,28 @@ const Gallery = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <CustomModal
+    isOpen={modalIsOpen}
+    onRequestClose={closeModal}
+    className="relative gallery-modal"
+  >
         <img src={images.gallery[selectedImageIndex]} alt="Selected" />
-        <button className="arrow-btn" onClick={prevImage}>
-          Previous
-        </button>
-        <button className="arrow-btn" onClick={nextImage}>
-          Next
-        </button>
-        <button onClick={closeModal}>Close</button>
-      </Modal>
-    </div>
+               <motion.button
+          whileHover={{ scale: 1.3 }}
+          whileTap={{ scale: 0.9 }} className="absolute arrow-btn top-50 left-0" onClick={prevImage}>
+        <BsFillCaretLeftFill />
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.3 }}
+          whileTap={{ scale: 0.9 }}className="absolute arrow-btn top-50 right-0" onClick={nextImage}>
+        <BsFillCaretRightFill />
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.3 }}
+          whileTap={{ scale: 0.9 }}onClick={closeModal} className="absolute arrow-btn top-5 right-5"><CgClose /></motion.button>
+      </CustomModal>
+
+</div>
   );
 };
 

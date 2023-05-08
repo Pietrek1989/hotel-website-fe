@@ -15,10 +15,9 @@
 
   --swiper-theme-color: #14a5bf !important;
 }
-html,
-body {
-  margin: 0;
-  padding: 0;
+html, body {
+  height: 100%;
+  margin: 0px;
 }
 body {
   margin: 0;

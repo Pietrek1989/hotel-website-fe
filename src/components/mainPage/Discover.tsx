@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import "../../styles/discover.css";
 import { SectionWrapperLeft } from "../sectionAnimation";
+import { logoVariants } from "../../utils/motion";
 
 const Discover = () => {
   const imageVariants = {
@@ -13,12 +14,15 @@ const Discover = () => {
   };
 
   return (
-    <div className="container flex mt-40 mb-10 discover-container">
+    <>
+
+
+    <div className="container flex sm:mt-10 md:mt-40 mb-10 discover-container text-center md:text-start" id="discovery">
       <div className="basis-3/3 md:basis-1/3 mr-8">
         <h2 className="text-currentDay text-4xl mb-10">
           <em>Discover Alpbach</em>
         </h2>
-        <p className="pr-10">
+        <p className="md:pr-10">
           Located in the hear of Pristine Alps.
           <br /> Staying with us you can Immerse yourself in the breathtaking
           beauty of the alpine mountains, where adventure, relaxation, and
@@ -50,6 +54,7 @@ const Discover = () => {
         />
       </div>
     </div>
+    </>
   );
 };
 

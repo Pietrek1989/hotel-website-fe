@@ -1,6 +1,7 @@
-import HeroSection from "../mainPage/HeroSection";
 import Discover from "./Discover";
 import Gallery from "./Gallery";
+import HeroSection from "./HeroSection";
+import Testimonials from "./testimonials";
 
 const MainLAyout = () => {
   return (
@@ -8,6 +9,7 @@ const MainLAyout = () => {
       <HeroSection />
       <Discover />
       <Gallery />
+      <Testimonials />
     </>
   );
 };
