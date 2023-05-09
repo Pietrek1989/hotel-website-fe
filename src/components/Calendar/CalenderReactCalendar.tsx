@@ -16,6 +16,7 @@ import { updateTotalPrice } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { slideFromTopVariantWithOpacity } from "../../utils/motion";
+import Footer from "../mainPage/Footer";
 
 const CalendarComponent: React.FC = () => {
   const hotelTimeZone = "Europe/Berlin";
@@ -160,9 +161,10 @@ const CalendarComponent: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="bg-container bg-bg pt-20">
-        <section className="calendar-container container md:mx-auto flex flex-wrap justify-center">
+
+      <div className="bg-container bg-bg py-20">
+        <section className="calendar-container container md:mx-auto flex flex-wrap justify-center mb-20"
+>
           <motion.div
             className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 "
             variants={slideFromTopVariantWithOpacity}
@@ -216,8 +218,9 @@ const CalendarComponent: React.FC = () => {
             <TotalPrice selectedRange={selectedRange} />
           </motion.div>
         </section>
+        <Footer />
+
       </div>
-    </>
   );
 };
 

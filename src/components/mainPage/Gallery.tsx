@@ -10,6 +10,7 @@ import { BsFillCaretRightFill, BsFillCaretLeftFill } from 'react-icons/bs';
 import {CgClose} from 'react-icons/cg'
 import { motion, AnimatePresence } from "framer-motion";
 import CustomModal from "./CustomModal";
+import { SectionWrapperRight } from "../sectionAnimation";
 
 
 
@@ -58,22 +59,21 @@ const Gallery = () => {
   // Inside the Gallery component
   // Inside the Gallery component
   return (
-    <div className="my-10" id="gallery">
+    <div className="my-10" id="gallery container max-w-7xl ">
       <Swiper
         navigation
         slidesPerView={10}
         spaceBetween={5}
 
-        // Adjust the number of small icons displayed in a single line
-        // Adjust the space between small icons
+ className="swiper-gallery"
       >
         {images.gallery.map((image, index) => (
           <SwiperSlide key={index}>
             <img
-              className="small-icon " // Apply the CSS class to the img element
+              className="small-icon " 
               src={image}
               alt={`gallery number ${index}`}
-              onClick={() => openModal(index)} // Make sure the onClick event is here
+              onClick={() => openModal(index)} 
             />
           </SwiperSlide>
         ))}
@@ -82,6 +82,8 @@ const Gallery = () => {
     isOpen={modalIsOpen}
     onRequestClose={closeModal}
     className="relative gallery-modal"
+    onNext={nextImage}
+    onPrev={prevImage}
   >
         <img src={images.gallery[selectedImageIndex]} alt="Selected" />
                <motion.button
@@ -103,4 +105,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default SectionWrapperRight(Gallery, "");

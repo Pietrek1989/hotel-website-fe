@@ -12,7 +12,7 @@ export const SectionWrapperLeft = (Component: any, idName: any) =>
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.25 }}
-        className={`container max-w-7xl mx-auto relative z-0`}
+        className={`mx-auto relative z-0`}
       >
         <span className="hash-span" id={idName}>
           &nbsp;

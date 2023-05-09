@@ -42,3 +42,23 @@ export interface ImageState {
   gallery: string[];
   hero: string[];
 }
+
+export interface FormValues {
+  email: string;
+  password: string;
+}
+
+export interface User {
+	_id: string;
+	name: string;
+  surname: string;
+	email: string;
+
+}
+
+export interface FormValuesRegister {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+}

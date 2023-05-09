@@ -3,6 +3,7 @@ import Swiper, { Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 import "../../styles/testimonials.css"
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
+import { SectionWrapperLeft } from '../sectionAnimation';
 
 // Add the Swiper modules you want to use
 Swiper.use([Navigation]);
@@ -114,4 +115,4 @@ const Testimonials: React.FC = () => {
   );
             }  
 
-export default Testimonials;
+export default SectionWrapperLeft(Testimonials, "");

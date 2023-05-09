@@ -15,10 +15,24 @@
 
   --swiper-theme-color: #14a5bf !important;
 }
-html, body {
+html,
+body {
   height: 100%;
-  margin: 0px;
+  width:100%;
+/* overflow-x: hidden; */
 }
+@media screen and (max-width: 768px) {
+  html,
+body {
+
+overflow-x: hidden;
+} 
+}
+
+
+
+
+ 
 body {
   margin: 0;
   font-family: "Carrois Gothic", "Oswald", BlinkMacSystemFont, "Segoe UI",

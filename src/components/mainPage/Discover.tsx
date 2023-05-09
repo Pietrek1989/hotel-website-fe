@@ -16,8 +16,8 @@ const Discover = () => {
   return (
     <>
 
-
-    <div className="container flex sm:mt-10 md:mt-40 mb-10 discover-container text-center md:text-start" id="discovery">
+<div className="container max-w-7xl mx-auto relative z-0">
+    <div className="container max-w-7xl  flex sm:mt-10 md:mt-40 mb-10 discover-container text-center md:text-start   " id="discovery">
       <div className="basis-3/3 md:basis-1/3 mr-8">
         <h2 className="text-currentDay text-4xl mb-10">
           <em>Discover Alpbach</em>
@@ -48,11 +48,12 @@ const Discover = () => {
         <motion.img
           variants={imageVariants}
           whileHover="hover"
-          src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683366475/hotel-Rheingold/gallery/cropped_hz5gus.png"
+          src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683366475/hotel-Rheingold/tinified/cropped_hz5gus.png"
           alt="Winter ski "
           className="absolute bottom-0 left-0 w-2/5 md:h-3/4 lg:h-full object-cover"
         />
       </div>
+    </div>
     </div>
     </>
   );

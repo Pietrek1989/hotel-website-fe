@@ -8,6 +8,8 @@ import  "../../styles/hero.css"
 import { heroHausvariants, welcomeVariants } from '../../utils/motion';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
+import { useLayoutEffect } from 'react';
+
 
 
 
@@ -22,23 +24,43 @@ const HeroSection: React.FC = () => {
     // Check if the scroll position is less than a specific value (e.g., 100)
     if (scrollPosition < 100) {
       // If the scroll position is less than the specified value, scroll down
-      gsap.to(window, { duration: 0.5, scrollTo: { y: window.innerHeight / 5 } });
+      gsap.to(window, { duration: 0.5, scrollTo: { y: window.innerHeight / 3 } });
     } else {
       // If the scroll position is greater than the specified value, navigate
       navigate("/book");
     }
   };
   
-  const scrollDown = () => {
-    gsap.to(window, { duration: 0.5, scrollTo: { y: window.innerHeight / 4 } });
+
+  const endTrigger = () => {
+    return (
+      document.documentElement.scrollHeight -
+      window.innerHeight -
+      (window.innerWidth <= 480 ? 0.5 * window.innerHeight : 0)
+    );
   };
   
-  const endTrigger = () => {
-    return document.documentElement.scrollHeight - window.innerHeight;
-  };
+
   const arrowRef = React.useRef(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
+const applyResponsiveStyles = () => {
+  const screenHeight = window.innerHeight;
+  const scaleFactor = screenHeight < 500 ? 1.5 : 1;
+
+  // Set the scale of the elements
+  gsap.set('.logo', { scale: scaleFactor });
+  gsap.set('.sky', { scale: scaleFactor });
+  gsap.set('.cloud1', { scale: scaleFactor });
+  gsap.set('.cloud2', { scale: scaleFactor });
+  gsap.set('.cloud3', { scale: scaleFactor });
+  gsap.set('.mountBg', { scale: scaleFactor });
+  gsap.set('.mountMg', { scale: scaleFactor });
+  gsap.set('.mountFg', { scale: scaleFactor });
+
+  // Adjust the height of the scrollDist based on the scaleFactor
+  gsap.set('.scrollDist', { height: 200 * scaleFactor + 'vh' });
+};
 
 
 
@@ -78,37 +100,60 @@ const HeroSection: React.FC = () => {
           yoyo: true,
           ease: 'sine.inOut',
         });
+        return () => {
+          // Reset the styles and animations when the component is unmounted
+          gsap.set('.main', { clearProps: 'all' });
+          gsap.set('.scrollDist', { clearProps: 'all' });
+          gsap.set('.logo', { clearProps: 'all' });
+      
+          // Remove any existing scroll triggers
+          ScrollTrigger.getAll().forEach((st) => st.kill());
+        };
 
 
+      }, []);
+      useLayoutEffect(() => {
+        const originalOverflowX = document.body.style.overflowX;
+        document.body.style.overflowX = 'hidden';
+      
+        return () => {
+          document.body.style.overflowX = originalOverflowX;
+        };
       }, []);
       useEffect(() => {
         const handleScroll = () => {
           const currentScrollPosition = window.scrollY;
           const scrollUp = currentScrollPosition < lastScrollPosition;
-    
+          const lowerThreshold = 700; // Adjust this value to control when the component becomes hidden
+        
           if (heroSectionRef.current) {
-            if (scrollUp || currentScrollPosition < 500) {
+            if (scrollUp || currentScrollPosition < lowerThreshold) {
               heroSectionRef.current.style.opacity = '1';
               heroSectionRef.current.style.pointerEvents = 'auto';
+              heroSectionRef.current.style.transform = 'translateY(0)';
             } else {
               heroSectionRef.current.style.opacity = '0';
               heroSectionRef.current.style.pointerEvents = 'none';
+              heroSectionRef.current.style.transform = 'translateY(-100%)';
             }
           }
-    
+        
           setLastScrollPosition(currentScrollPosition);
         };
+        
+        
     
         window.addEventListener('scroll', handleScroll);
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
       },[])
+  
 
 
     return (
 
-      <div ref={heroSectionRef} className="h-screen w-full transition-opacity duration-300">
+      <div ref={heroSectionRef} className=" h-screen md:h-screen w-full transition-opacity duration-300">
       <div className="scrollDist absolute"></div>
 
       <div className="main absolute w-full">
@@ -133,11 +178,11 @@ const HeroSection: React.FC = () => {
           <image className="cloud1" xlinkHref="https://assets.codepen.io/721952/cloud1.png" width="1200" height="800" />
           <image className="cloud3" xlinkHref="https://assets.codepen.io/721952/cloud3.png" width="1200" height="800" />
 
-          <foreignObject x="550" y="350" width="500" height="500">
+          <foreignObject x="550" y="420" width="500" height="500">
             
           <rect fill="#fff" width="100%" height="100%" />
 
-          <div ref={arrowRef} onClick={scrollDown} className="w-20 h-20">
+          <div className="w-20 h-20">
   <AiOutlineArrowDown className="w-full h-full" />
 </div>
 
@@ -145,8 +190,8 @@ const HeroSection: React.FC = () => {
 
           <g mask="url(#m)">
             <rect fill="#fff" width="100%" height="100%" />
-            <foreignObject x="290" y="200" width="600" height="500">
-            <div className="space-x-1  poiter-events-auto flex flex-col items-center welcome">
+            <foreignObject x="290" y="300" width="600" height="500">
+            <div className="space-x-1  poiter-events-auto flex flex-col items-center welcome mt-52 md:mt-0">
               <div>
             {Array.from("Welcome to").map((char, i) => (
               <motion.span
@@ -191,7 +236,7 @@ const HeroSection: React.FC = () => {
               </div>
             </foreignObject>
           </g>
-=
+
         </svg>
       </div>
 

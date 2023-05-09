@@ -5,16 +5,18 @@ import localStorage from "redux-persist/lib/storage";
 import totalPriceReducer from "../reducers/totalPriceReducer";
 import selectedOfferReducer from "../reducers/selectedOfferReducer";
 import newReservationReducer from "../reducers/newReservationReducer";
+import thunk from "redux-thunk"; 
 
 const persistConfig = {
   storage: localStorage,
-  key: "root", // this brings the whole redux store into persistency
+  key: "root",
   transforms: [
     encryptTransform({
       secretKey: process.env.REACT_APP_SECRET_KEY!,
     }),
   ],
 };
+
 const combinedReducer = combineReducers({
   totalPrice: totalPriceReducer,
   selectedOffer: selectedOfferReducer,
@@ -25,11 +27,10 @@ const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
       serializableCheck: false,
-    });
+    }).concat(thunk); 
   },
 });
 
