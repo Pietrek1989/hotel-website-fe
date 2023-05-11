@@ -28,6 +28,8 @@ module.exports = {
       bgTra: "#efebe599",
       logo: "#FFE677",
       mainText: "#8f7a40",
+      red: "red",
+      
     },
   },
   // plugins: [require("daisyui")],

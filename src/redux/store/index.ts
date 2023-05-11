@@ -6,6 +6,10 @@ import totalPriceReducer from "../reducers/totalPriceReducer";
 import selectedOfferReducer from "../reducers/selectedOfferReducer";
 import newReservationReducer from "../reducers/newReservationReducer";
 import thunk from "redux-thunk"; 
+import weatherReducer from "../reducers/weatherReducer";
+import userDataReducer from "../reducers/userReducer";
+import skiConditionsReducer from "../reducers/skiConditionReducer";
+import paymentResultReducer from "../reducers/paymentResultReducer";
 
 const persistConfig = {
   storage: localStorage,
@@ -21,6 +25,10 @@ const combinedReducer = combineReducers({
   totalPrice: totalPriceReducer,
   selectedOffer: selectedOfferReducer,
   newReservation: newReservationReducer,
+  user: userDataReducer,
+  weather: weatherReducer,
+  skiConditions: skiConditionsReducer,
+  paymentResult: paymentResultReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);

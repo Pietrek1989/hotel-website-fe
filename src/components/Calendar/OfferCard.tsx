@@ -54,8 +54,8 @@ const OfferCard: React.FC<OfferCardProps> = ({
   const isCurrentOfferSelected =
     selectedOffer && selectedOffer._id === offer._id;
   const offerCardStyle = isCurrentOfferSelected
-    ? "bg-white shadow-md p-4  w-full rounded-sm border-solid border-4 scale-105 cursor-pointer"
-    : "bg-white shadow-md p-4  w-full rounded-sm cursor-pointer";
+    ? "flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700border-solid border-4 scale-105  cursor-pointer my-5"
+    : "flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 cursor-pointer";
 
   return (
     <>
@@ -66,69 +66,42 @@ const OfferCard: React.FC<OfferCardProps> = ({
         animate="visible"
         custom={index}
       >
-        <div className={offerCardStyle} onClick={handleOfferSelect}>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-bold text-lg">{offer.name}</h2>
-
-            <p className="text-gray-500">
+<div className={offerCardStyle}  onClick={handleOfferSelect}>
+    <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"               src={offer.image}
+              alt={offer.name} />
+    <div className="flex flex-col justify-between p-4 leading-normal">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{offer.name}</h5>
+        <p className="text-gray-500">
               <em>€{priceForNight.toFixed(2)}/night</em>
             </p>
-          </div>
-          <div className="relative">
-            {" "}
-            <img
-              src={offer.image}
-              alt={offer.name}
-              className="w-full h-48 object-cover"
-            />{" "}
-            {isCurrentOfferSelected && (
-              <span className="text-green-500 ml-2 absolute top-0 right-0 check ">
-                <MdCheckCircle />
-              </span>
-            )}
-          </div>
-
-          <div>
-            <button onClick={handleeDetails} className="flex mt-2">
+        <button onClick={handleeDetails} className="flex mt-2">
               <div>
                 <span>
-                  {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-            />
-          </svg> */}
                   <MdExpandMore />
                 </span>
               </div>
               <span>Room details</span>
             </button>
-            <motion.div
-              initial={{ opacity: 0, y: -40 }}
-              animate={
-                isSelected ? { opacity: 1, y: 0 } : { opacity: 0, y: -40 }
-              }
-            >
-              {isSelected &&
+
+    </div>
+    {isCurrentOfferSelected && (
+              <span className="text-green-500 ml-2 absolute top-0 right-0 check ">
+                <MdCheckCircle />
+              </span>
+            )}
+
+</div>
+<div className={offerCardStyle}>
+  <div>
+    {isSelected &&
                 offer.details?.map((desc, index) => (
-                  <span key={index} className="text-gray-500 text-sm mt-2">
-                    <strong>
-                      {""} • {desc}
-                    </strong>
-                  </span>
-                ))}
-            </motion.div>
-          </div>
-        </div>
-        <hr />
+                  <p className=" text-gray-500 p-2 dark:text-gray-400">
+                  {""} • {desc}
+                </p>
+                                ))}
+                                </div>
+                                </div>
+
       </motion.div>
     </>
   );

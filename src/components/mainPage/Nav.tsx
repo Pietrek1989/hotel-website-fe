@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { getUserData } from "../../redux/actions";
 import type { AppDispatch } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
+import "../../styles/navbar.css"
+import NavWeatherComponent2 from "./NavWeatherComponent2";
+import { fetchSkiConditions, fetchWeather, fetchWeather5 } from "./helperFunctions";
 
 
 const Nav = () => {
@@ -38,6 +41,9 @@ const Nav = () => {
     if (localStorage.getItem("accessToken")) {
       fetchData(); 
     }
+    fetchWeather(dispatch);
+    fetchWeather5(dispatch);
+    fetchSkiConditions(dispatch)
    
   }, []);
   const variants = {
@@ -63,18 +69,21 @@ const handleLogOut = () => {
             />
           </Link>
           <div className="flex items-center space-x-4">
-            <Link to="/book" className="hidden md:block text-mainText">
+          <Link to="/weather" className="hidden md:block text-mainText font-bold">
               BOOK
             </Link>
-            { isLogged ? <Link to="/userBoard" className="hidden md:block text-mainText">
+            <Link to="/book" className="hidden md:block text-mainText font-bold">
+              BOOK
+            </Link>
+            { isLogged ? <Link to="/userBoard" className="hidden md:block text-mainText font-bold">
               ACCOUNT
             </Link> :
-            <Link to="/login" className="hidden md:block text-mainText">
+            <Link to="/login" className="hidden md:block text-mainText font-bold">
               LOGIN
             </Link> }
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-mainText focus:outline-none"
+              className="text-mainText font-bold focus:outline-none"
             >
               {/* Replace with your desired icon */}
               {isOpen ? "✖" : "☰"}
@@ -82,7 +91,7 @@ const handleLogOut = () => {
           </div>
         </div>
         <motion.nav
-          className="fixed top-0 right-0 h-screen p-4 space-y-4 overflow-y-auto flex flex-col justify-center items-center"
+          className="fixed top-0 right-0 h-screen p-4 space-y-4 overflow-y-auto flex flex-col justify-center items-center nav-modal"
           style={{
             backgroundColor: "#efebe5",
           }}
@@ -107,24 +116,25 @@ const handleLogOut = () => {
           )}
           {/* Replace with your menu items */}
           {isLogged ? 
-          <Link to="/login" className="block text-mainText">
+          <Link to="/login" className="block text-mainText font-bold">
             LOG OUT 
           </Link> : 
-                    <Link to="/login" onClick={handleLogOut} className="block text-mainText">
+                    <Link to="/login" onClick={handleLogOut} className="block text-mainText font-bold">
                     LOG IN 
                   </Link>
 }
-          <Link to="/book" className="block text-mainText">
+          <Link to="/book" className="block text-mainText font-bold">
             BOOK
           </Link>
 
-          <Link to="/additional-option-1" className="block text-mainText">
+          <Link to="/additional-option-1" className="block text-mainText font-bold">
             BLOG
           </Link>
-          <Link to="/additional-option-2" className="block text-mainText">
-            WEATHER
-          </Link>
-          {/* Add more options if needed */}
+
+         <Link to="/weather" className="block">
+            <NavWeatherComponent2 />
+            <p className="text-center text-black">CLICK FOR MORE</p> 
+          </Link> 
         </motion.nav>
       </nav>
     </header>

@@ -4,3 +4,12 @@
 .swiper-pagination-horizontal span {
   background-color: var(--color-now) !important;
 }
+.nav-modal {
+  -webkit-box-shadow: -6px 1px 15px -11px #000000; 
+  box-shadow: -6px 1px 15px -11px #000000;
+}
+/* weather card */
+
+/* nr2 */
+
+

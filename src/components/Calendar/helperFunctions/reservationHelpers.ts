@@ -1,12 +1,9 @@
 import { Dispatch } from "redux";
 
 import {
-  Offer,
-  Reservation,
   ReservationSave,
 } from "../../../types and interfaces";
-import { updateNewReservation } from "../../../redux/actions";
-import { useSelector } from "react-redux";
+import { updateNewReservation, updatePaymentResult } from "../../../redux/actions";
 
 export const saveReservation = async (
   cost: number,
@@ -14,7 +11,7 @@ export const saveReservation = async (
   checkout: Date,
   offerId: string,
   dispatch: Dispatch,
-  token: any
+  token: any,
 ): Promise<String> => {
   try {
     const response = await fetch(
@@ -23,7 +20,7 @@ export const saveReservation = async (
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDUzNzdiYmI0ODA1YTYzZGUzNGI3MjEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTY4MzE5MjIxOSwiZXhwIjoxNjgzMjc4NjE5fQ._-Wgnm78A7uDP50qL36IDl--x5gGysrmX7bkFW_w2Ok`,
+          Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify({
           content: {
@@ -44,7 +41,7 @@ export const saveReservation = async (
     const reservation = await response.json();
     console.log(reservation);
     dispatch(updateNewReservation(reservation));
-    sendPayment(reservation, token);
+    sendPayment(reservation, token, dispatch);
     return reservation;
   } catch (error) {
     console.error(error);
@@ -54,7 +51,8 @@ export const saveReservation = async (
 
 export const sendPayment = async (
   reservation: ReservationSave,
-  token: any
+  token: any,
+  dispatch: any,
 ): Promise<String> => {
   try {
     const newReservation = { ...reservation, token };
@@ -66,7 +64,7 @@ export const sendPayment = async (
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDUzNzdiYmI0ODA1YTYzZGUzNGI3MjEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTY4MzE5MjIxOSwiZXhwIjoxNjgzMjc4NjE5fQ._-Wgnm78A7uDP50qL36IDl--x5gGysrmX7bkFW_w2Ok`, // include bearer token in the authorization header
+          Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`, // include bearer token in the authorization header
         },
         body: JSON.stringify(newReservation),
       }
@@ -74,8 +72,12 @@ export const sendPayment = async (
     const data = await response.json();
     console.log(data);
     if (!response.ok) {
+      dispatch(updatePaymentResult("Payment failed"));
+
       throw new Error(data.message || "Failed to pay for reservation.");
     }
+    dispatch(updatePaymentResult("Payment successful"));
+
     return data;
   } catch (error) {
     console.error(error);

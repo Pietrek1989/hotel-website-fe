@@ -30,10 +30,12 @@
   margin-top: 0.5rem;
   font-size: 20px;
   z-index: 1;
-  color: #ffe677;
+  color: black ;
   border: 2px solid #ffe677;
   border-radius: 6px;
   position: relative;
+  
+
 }
 
 .book-button::before {
@@ -44,6 +46,7 @@
   height: 170px;
   z-index: -1;
   border-radius: 50%;
+  
 }
 
 .book-button:hover {
@@ -123,3 +126,7 @@ button:hover::before {
   /* Add more styles to adjust other elements for smaller screens */
 }   
 
+
+.swiper-pagination, .swiper-pagination-clickable, .swiper-pagination-bullets, .swiper-pagination-horizontal span {
+  background-color: none;
+}

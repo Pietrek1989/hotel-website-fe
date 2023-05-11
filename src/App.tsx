@@ -6,6 +6,7 @@ import Nav from "./components/mainPage/Nav";
 import MainLAyout from "./components/mainPage/MainLayout";
 import Login from "./components/Account/Login";
 import Register from "./components/Account/Register";
+import WeatherPage from "./components/weather/WeatherPage";
 // import Checkout from "./components/Calendar/Checkout/Checkout";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/book" element={<CalendarReactComponent />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/weather" element={<WeatherPage />} />
           </Routes>
       </BrowserRouter>
     </div>

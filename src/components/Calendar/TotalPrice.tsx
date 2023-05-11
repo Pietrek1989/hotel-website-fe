@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { saveReservation } from "./helperFunctions/reservationHelpers";
-import { useNavigate } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
+import React, { useState, useEffect } from "react";
+import { updatePaymentResult } from "../../redux/actions";
+import { BsExclamationCircle } from "react-icons/bs";
+import PaymentResult from "./PaymentResult";
+
 
 interface OffersProps {
   selectedRange: {
@@ -13,16 +16,17 @@ interface OffersProps {
   };
 }
 const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const paymentResult = useSelector((state: any) => state.paymentResult.paymentResult);
   const totalPrice = useSelector((state: any) => state.totalPrice.totalPrice);
   const selectedOffer = useSelector(
     (state: any) => state.selectedOffer.selectedOffer
   );
-  // const newReservation = useSelector(
-  //   (state: any) => state.newReservation.newReservation
-  // );
 
+  useEffect(() => {
+    dispatch(updatePaymentResult(""));
+
+  }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -40,15 +44,10 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
         dispatch,
         token
       );
-
-      console.log(token);
-
-      // navigate("/checkout");
     }
   };
-  // function onToken(token: any) {
-  //   console.log(token);
-  // }
+
+
 
   return (
     <div className="bg-white shadow-md rounded-md p-4 mt-4 price-container flex flex-col sm:text-lg md:text-sm lg:text-lg">
@@ -171,11 +170,16 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
                     amount={totalPrice * 100}
                     token={handleReservation}
                     currency="EUR"
-                    stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!}
+                    stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!}     
                   />{" "}
                 </motion.button>
+ 
+
               </div>
+              <PaymentResult />
+
             </div>
+
           </div>
         </div>
       </div>

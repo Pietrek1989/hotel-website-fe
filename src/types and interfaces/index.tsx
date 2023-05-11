@@ -62,3 +62,102 @@ export interface FormValuesRegister {
   email: string;
   password: string;
 }
+
+export type WeatherNow = {
+
+  weather: Array<{
+      main: string;
+      description: string;
+      icon: string;
+  }>;
+  main: {
+      temp: number;
+      feels_like: number;
+      temp_min: number;
+      temp_max: number;
+      pressure: number;
+      humidity: number;
+  };
+  visibility: number;
+  wind: {
+      speed: number;
+      deg: number;
+      gust: number;
+  };
+  sys: {
+      type: number;
+      country: string;
+      sunrise: number;
+      sunset: number;
+  };
+  name: string;
+};
+
+
+export type WeatherData = {
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  weather: Array<{
+    main: string;
+    description: string;
+    icon: string;
+  }>;
+  wind: {
+    speed: number;
+    deg: number;
+    gust: number;
+  };
+  visibility: number;
+  sys: {
+    pod: string;
+  };
+  dt_txt: string;
+};
+
+
+export type WeatherHourly = {
+  list: Array<WeatherData>;
+  city: {
+    name: string;
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+};
+
+
+export type SkiConditions = {
+  items: Array<{
+    operatingStatus: string;
+    primarySurfaceCondition: string;
+
+    snowLast48Hours: string;
+    snowComments: string;
+    avgBaseDepthMin: string;
+    avgBaseDepthMax: string;
+    weatherToday_Condition: string | null;
+    weatherTomorrow_Condition: string | null;
+    weatherDayAfterTomorrow_Condition: string | null;
+    weatherDay4_Condition: string | null;
+    weatherDay5_Condition: string | null;
+    weatherToday_WindDirection: string | null;
+    weatherTomorrow_WindDirection: string | null;
+    weatherDayAfterTomorrow_WindDirection: string | null;
+    weatherDay4_WindDirection: string | null;
+    weatherDay5_WindDirection: string | null;
+    SnoCountryResortLink: string;
+  }>;
+};
+
+export interface PaymentResult {
+  success: boolean;
+  reservation: Reservation;
+  
+  
+}
