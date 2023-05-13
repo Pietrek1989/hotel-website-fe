@@ -131,6 +131,7 @@ export type WeatherHourly = {
   };
 };
 
+export type WeatherListChunk = Array<WeatherData>;
 
 export type SkiConditions = {
   items: Array<{

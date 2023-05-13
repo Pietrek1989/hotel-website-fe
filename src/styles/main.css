@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import "swiper/swiper-bundle.min.css";
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
 :root {
   --color-selected: rgb(24, 218, 69);
   --color-checkin: lightgreen;
@@ -10,29 +12,22 @@
   --color-disabled: #aba5a574;
   --color-gold-text: #8f7a40;
   --color-grey-calendar: #e6e6e6;
-  /* --color-bg: #a7bed3; */
+  --color-bgEx: #a7bed3;
   --color-bg: #efebe5;
-
   --swiper-theme-color: #14a5bf !important;
 }
 html,
 body {
   height: 100%;
-  width:100%;
-/* overflow-x: hidden; */
+  width: 100%;
 }
 @media screen and (max-width: 768px) {
   html,
-body {
-
-overflow-x: hidden;
-} 
+  body {
+    overflow-x: hidden;
+  }
 }
 
-
-
-
- 
 body {
   margin: 0;
   font-family: "Carrois Gothic", "Oswald", BlinkMacSystemFont, "Segoe UI",
@@ -42,22 +37,72 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
   color: #8f7a40;
-  /* background-image: url("/public/bg/blurry-gradient-haikei.png"); */
-  /* background-repeat: no-repeat;
-  background-size: cover; */
-  /* background: rgb(232, 207, 138);
-  background: linear-gradient(
-    180deg,
-    rgba(232, 207, 138, 1) 1%,
-    rgba(193, 204, 169, 1) 10%,
-    rgba(167, 190, 211, 1) 33%,
-    rgba(167, 190, 211, 1) 56%,
-    rgba(193, 204, 169, 1) 84%,
-    rgba(232, 207, 138, 1) 98%
-  ); */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#main {
+  color: white;
+}
+body::-webkit-scrollbar {
+  width: 11px;
+  background-color: var(--color-bgEx);
+  border-radius: 6px;
+}
+body {
+  scrollbar-width: thin;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-bg);
+  border-radius: 6px;
+  border: 3px solid;
+}
+
+.sidebar {
+  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+}
+
+.nav-item,
+.navbar {
+  z-index: 10000;
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar {
+    z-index: 10000000;
+  }
+}
+
+.e-dlg-center-center,
+.e-quick-popup-wrapper.e-device {
+  z-index: 1000000 !important;
+}
+
+/* color-picker style  */
+
+#preview {
+  background: transparent
+    url("https://ej2.syncfusion.com/react/demos/src/color-picker/images/pen.png")
+    no-repeat;
+  display: inline-block;
+  height: 80px;
+  margin: 10px 0;
+  min-width: 300px;
+  max-width: 600px;
+  background-color: #008000;
+}
+
+.e-input-group:not(.e-float-icon-left),
+.e-input-group.e-success:not(.e-float-icon-left),
+.e-input-group.e-warning:not(.e-float-icon-left),
+.e-input-group.e-error:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper.e-success:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper.e-warning:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left) {
+  border: none;
 }

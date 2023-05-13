@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { updatePaymentResult } from "../../redux/actions";
 import { BsExclamationCircle } from "react-icons/bs";
 import PaymentResult from "./PaymentResult";
-
+import { slideFromRightVariantWithOpacity } from "../../utils/motion";
 
 interface OffersProps {
   selectedRange: {
@@ -17,7 +17,7 @@ interface OffersProps {
 }
 const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
   const dispatch = useDispatch();
-  const paymentResult = useSelector((state: any) => state.paymentResult.paymentResult);
+
   const totalPrice = useSelector((state: any) => state.totalPrice.totalPrice);
   const selectedOffer = useSelector(
     (state: any) => state.selectedOffer.selectedOffer
@@ -25,7 +25,6 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
 
   useEffect(() => {
     dispatch(updatePaymentResult(""));
-
   }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => {
@@ -47,16 +46,19 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
     }
   };
 
-
-
   return (
-    <div className="bg-white shadow-md rounded-md p-4 mt-4 price-container flex flex-col sm:text-lg md:text-sm lg:text-lg">
+    <motion.div
+      variants={slideFromRightVariantWithOpacity}
+      initial="hidden"
+      animate="visible"
+      className="bg-white shadow-md rounded-md p-4 mt-4 price-container flex flex-col sm:text-lg md:text-sm lg:text-lg totalPrice-container"
+    >
       <p className="font-bold text-lg text-cennter mb-5">
         Booking information:
       </p>
 
       {selectedRange && (
-        <div>
+        <div className="text-charcoal">
           <p>Check In: {selectedRange.start?.toDateString()}</p>
           <p>
             <em>After 15:00</em>
@@ -69,7 +71,7 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
           <br />
         </div>
       )}
-      <p className="text-gray-500 mb-2">Selected: {selectedOffer.name}</p>
+      <p className=" mb-2 text-gray-500">Selected: {selectedOffer.name}</p>
       <img
         src={selectedOffer.image}
         alt="small room"
@@ -86,7 +88,7 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="bg-lightgreen p-2 rounded-md text-white hover:bg-selected mb-5"
+          className="bg-selected p-2 rounded-md text-white hover:bg-green mb-5"
           onClick={handleOpenModal}
         >
           {" "}
@@ -170,20 +172,16 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
                     amount={totalPrice * 100}
                     token={handleReservation}
                     currency="EUR"
-                    stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!}     
+                    stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!}
                   />{" "}
                 </motion.button>
- 
-
               </div>
               <PaymentResult />
-
             </div>
-
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

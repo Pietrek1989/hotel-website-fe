@@ -1,21 +1,31 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getUserData } from "../../redux/actions";
 import type { AppDispatch } from "../../redux/hooks";
-import { useDispatch } from "react-redux";
-import "../../styles/navbar.css"
+import { useDispatch, useSelector } from "react-redux";
+import "../../styles/navbar.css";
 import NavWeatherComponent2 from "./NavWeatherComponent2";
-import { fetchSkiConditions, fetchWeather, fetchWeather5 } from "./helperFunctions";
-
+import {
+  fetchSkiConditions,
+  fetchWeather,
+  fetchWeather5,
+} from "./helperFunctions";
+import {
+  BsCalendar2Check,
+  BsJournalText,
+  BsFillEnvelopeOpenFill,
+} from "react-icons/bs";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
 
 const Nav = () => {
   const [isLogged, setIsLogged] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-
+  const weatherNow = useSelector((state: any) => state.weather.weatherNow);
 
   const fetchData = async () => {
     await dispatch(getUserData());
@@ -34,32 +44,30 @@ const Nav = () => {
     if (localStorage.getItem("accessToken")) {
       setIsLogged(true);
     }
-
   }, []);
 
-  useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      fetchData(); 
-    }
-    fetchWeather(dispatch);
-    fetchWeather5(dispatch);
-    fetchSkiConditions(dispatch)
-   
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("accessToken")) {
+  //     fetchData();
+  //   }
+  //   fetchWeather(dispatch);
+  //   fetchWeather5(dispatch);
+  //   fetchSkiConditions(dispatch);
+  // }, []);
   const variants = {
     openLarge: { opacity: 1, width: "20%", borderRadius: "0%", x: 0 },
     openSmall: { opacity: 1, width: "100%", borderRadius: "0%", x: 0 },
     closed: { opacity: 0, width: "100%", borderRadius: "50%", x: "100%" },
   };
-const handleLogOut = () => {
-  localStorage.setItem("accessToken", "");
-  localStorage.setItem("refreshToken", "");
-  navigate("/");
-}
+  const handleLogOut = () => {
+    localStorage.setItem("accessToken", "");
+    localStorage.setItem("refreshToken", "");
+    navigate("/");
+  };
 
   return (
     <header className="fixed top-0 w-full z-50 bg-bgTra">
-      <nav className=" container mx-auto px-6 py-4">
+      <nav className=" container mx-auto px-6 pt-4 pb-1">
         <div className="flex items-center justify-between">
           <Link to="/" className="text-gray-800 text-xl font-bold">
             <img
@@ -69,18 +77,41 @@ const handleLogOut = () => {
             />
           </Link>
           <div className="flex items-center space-x-4">
-          <Link to="/weather" className="hidden md:block text-mainText font-bold">
+            <Link
+              to="/weather"
+              className="  text-mainText font-bold flex items-center"
+            >
+              ALPBACH{" "}
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherNow.weather[0].icon}.png`}
+                alt="weather icon"
+              />{" "}
+              {parseInt(weatherNow.main.temp)}°
+            </Link>
+            <Link
+              to="/book"
+              className="hidden md:block text-mainText font-bold"
+              id={location.pathname === "/book" ? "active" : " "}
+            >
               BOOK
             </Link>
-            <Link to="/book" className="hidden md:block text-mainText font-bold">
-              BOOK
-            </Link>
-            { isLogged ? <Link to="/userBoard" className="hidden md:block text-mainText font-bold">
-              ACCOUNT
-            </Link> :
-            <Link to="/login" className="hidden md:block text-mainText font-bold">
-              LOGIN
-            </Link> }
+            {isLogged ? (
+              <Link
+                to="/account"
+                className="hidden md:block text-mainText font-bold"
+                id={location.pathname === "/account" ? "active" : " "}
+              >
+                ACCOUNT
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="hidden md:block text-mainText font-bold"
+                id={location.pathname === "/login" ? "active" : " "}
+              >
+                LOGIN
+              </Link>
+            )}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-mainText font-bold focus:outline-none"
@@ -111,30 +142,70 @@ const handleLogOut = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="text-mainText focus:outline-none absolute top-4 right-4"
             >
-              {/* Replace with your desired close icon */}✖
+              {" "}
+              x
             </button>
           )}
-          {/* Replace with your menu items */}
-          {isLogged ? 
-          <Link to="/login" className="block text-mainText font-bold">
-            LOG OUT 
-          </Link> : 
-                    <Link to="/login" onClick={handleLogOut} className="block text-mainText font-bold">
-                    LOG IN 
-                  </Link>
-}
-          <Link to="/book" className="block text-mainText font-bold">
-            BOOK
+
+          <Link
+            to="/book"
+            className=" text-mainText font-bold flex nav-link-flex-container gap-2 "
+            id={location.pathname === "/book" ? "active" : " "}
+          >
+            <span>
+              <BsCalendar2Check />
+            </span>{" "}
+            <span>BOOK</span>
           </Link>
 
-          <Link to="/additional-option-1" className="block text-mainText font-bold">
-            BLOG
+          <Link
+            to="/blog"
+            className="flex nav-link-flex-container gap-2  text-mainText font-bold"
+            id={location.pathname === "/blog" ? "active" : " "}
+          >
+            <span>
+              <BsJournalText />
+            </span>
+            <span>BLOG</span>
+          </Link>
+          <Link
+            to="/blog"
+            className="flex nav-link-flex-container gap-2  text-mainText font-bold"
+            id={location.pathname === "/contact" ? "active" : " "}
+          >
+            <span>
+              <BsFillEnvelopeOpenFill />
+            </span>
+            <span>CONTACT</span>
           </Link>
 
-         <Link to="/weather" className="block">
+          {isLogged ? (
+            <Link
+              to="/login"
+              className="flex nav-link-flex-container gap-2 text-mainText font-bold"
+            >
+              <span>
+                <BiLogOut />
+              </span>
+              <span> LOG OUT </span>
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              onClick={handleLogOut}
+              className="flex nav-link-flex-container gap-2  text-mainText font-bold"
+            >
+              <span>
+                <BiLogIn />
+              </span>
+              <span>LOG IN </span>
+            </Link>
+          )}
+
+          <Link to="/weather" className=" nav-link-flex-container">
             <NavWeatherComponent2 />
-            <p className="text-center text-black">CLICK FOR MORE</p> 
-          </Link> 
+            <p className="text-center text-black">CLICK FOR MORE</p>
+          </Link>
         </motion.nav>
       </nav>
     </header>

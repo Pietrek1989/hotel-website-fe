@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { gsap, TweenMax } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import  "../../styles/hero.css"
 import { heroHausvariants, welcomeVariants } from '../../utils/motion';
@@ -16,6 +16,9 @@ import { useLayoutEffect } from 'react';
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const HeroSection: React.FC = () => {
+  const controls = useAnimation();
+
+
   const navigate = useNavigate();
   const handleBooking = () => {
     // Get the current scroll position of the window
@@ -44,23 +47,7 @@ const HeroSection: React.FC = () => {
   const arrowRef = React.useRef(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
-const applyResponsiveStyles = () => {
-  const screenHeight = window.innerHeight;
-  const scaleFactor = screenHeight < 500 ? 1.5 : 1;
 
-  // Set the scale of the elements
-  gsap.set('.logo', { scale: scaleFactor });
-  gsap.set('.sky', { scale: scaleFactor });
-  gsap.set('.cloud1', { scale: scaleFactor });
-  gsap.set('.cloud2', { scale: scaleFactor });
-  gsap.set('.cloud3', { scale: scaleFactor });
-  gsap.set('.mountBg', { scale: scaleFactor });
-  gsap.set('.mountMg', { scale: scaleFactor });
-  gsap.set('.mountFg', { scale: scaleFactor });
-
-  // Adjust the height of the scrollDist based on the scaleFactor
-  gsap.set('.scrollDist', { height: 200 * scaleFactor + 'vh' });
-};
 
 
 
@@ -149,7 +136,12 @@ const applyResponsiveStyles = () => {
         };
       },[])
   
-
+      useEffect(() => {
+        controls.start(i => ({
+          y: [-10, 10, -10],
+          transition: { delay: i * 0.2, repeat: Infinity, duration: 1 }
+        }));
+      }, [controls]);
 
     return (
 
@@ -179,14 +171,13 @@ const applyResponsiveStyles = () => {
           <image className="cloud3" xlinkHref="https://assets.codepen.io/721952/cloud3.png" width="1200" height="800" />
 
           <foreignObject x="550" y="420" width="500" height="500">
-            
-          <rect fill="#fff" width="100%" height="100%" />
-
-          <div className="w-20 h-20">
-  <AiOutlineArrowDown className="w-full h-full" />
-</div>
-
-          </foreignObject>
+      <rect fill="#fff" width="100%" height="100%" />
+      <div className="w-20 h-20">
+        <motion.div animate={controls}>
+          <AiOutlineArrowDown className="w-full h-full" />
+        </motion.div>
+      </div>
+    </foreignObject>
 
           <g mask="url(#m)">
             <rect fill="#fff" width="100%" height="100%" />
