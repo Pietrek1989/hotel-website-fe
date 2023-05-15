@@ -73,7 +73,7 @@ const Nav = () => {
             <img
               src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background.png")}
               alt="Logo"
-              className="h-8"
+              className="h-8 hover:scale-110"
             />
           </Link>
           <div className="flex items-center space-x-4">
@@ -169,7 +169,7 @@ const Nav = () => {
             <span>BLOG</span>
           </Link>
           <Link
-            to="/blog"
+            to="/contact"
             className="flex nav-link-flex-container gap-2  text-mainText font-bold"
             id={location.pathname === "/contact" ? "active" : " "}
           >

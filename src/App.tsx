@@ -8,6 +8,7 @@ import Login from "./components/Account/Login";
 import Register from "./components/Account/Register";
 import ContactPage from "./components/Contact/ContactPage";
 import WeatherMain from "./components/weather/MainWeather";
+import AdminMainLayout from "./components/Admin/AdminMainLayout";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/weather" element={<WeatherMain />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/admin/*" element={<AdminMainLayout />} />
         </Routes>
       </BrowserRouter>
     </div>

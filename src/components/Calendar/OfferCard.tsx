@@ -53,9 +53,9 @@ const OfferCard: React.FC<OfferCardProps> = ({
   };
   const isCurrentOfferSelected =
     selectedOffer && selectedOffer._id === offer._id;
-  const offerCardStyle = isCurrentOfferSelected
-    ? "flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700border-solid border-4 scale-105  cursor-pointer "
-    : "flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 cursor-pointer";
+  const offerCardStyle = `flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 cursor-pointer  ${
+    isCurrentOfferSelected ? "scale-105 shadow-lg" : ""
+  }`;
 
   return (
     <>
