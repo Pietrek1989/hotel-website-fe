@@ -5,7 +5,6 @@ import AdminSectionEcommerce from "./sections/AdminSectionEcommerce";
 import AdminSectionReservation from "./sections/AdminSectionReservation";
 import AdminSectionCustomer from "./sections/AdminSectionCustomer";
 import AdminSectionKanban from "./sections/AdminSectionKanban";
-import AdminSectionEditor from "./sections/AdminSectionEditor";
 import AdminSectionCalendar from "./sections/AdminSectionCalendar";
 import AdminSectionLine from "./sections/Charts/AdminSectionLine";
 import AdminSectionArea from "./sections/Charts/AdminSectionArea";
@@ -18,11 +17,15 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import "../../styles/admin.css";
+import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { FiSettings } from "react-icons/fi";
+import DarkMode from "./DarkMode";
 
 const AdminMainLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [isActive, setIsActive] = useState(true);
+  const [themeSettings, setThemeSettings] = useState(false);
+  const [currentMode, setCurrentMode] = useState("Light");
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,17 +40,27 @@ const AdminMainLayout = () => {
     };
   }, []);
 
-  const handleCloseSideBar = () => {
-    setIsActive(false);
-  };
-
+  useEffect(() => {
+    const currentThemeMode = localStorage.getItem("themeMode");
+    if (currentThemeMode) {
+      setCurrentMode(currentThemeMode);
+    }
+  }, []);
   return (
-    <div>
+    <div className={currentMode === "Dark" ? "dark" : ""}>
       <div className="flex relative dark:bg-main-dark-bg">
-        <div
-          className="fixed right-4 bottom-4"
-          style={{ zIndex: "1000" }}
-        ></div>
+        <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
+          <TooltipComponent content="Settings">
+            <button
+              type="button"
+              onClick={() => setThemeSettings(true)}
+              style={{ background: "blue", borderRadius: "50%" }}
+              className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
+            >
+              <FiSettings />
+            </button>
+          </TooltipComponent>
+        </div>
         <motion.div
           className={`fixed sidebar dark:bg-secondary-dark-bg bg-white ${
             isMobile ? "w-full" : "w-72"
@@ -60,7 +73,7 @@ const AdminMainLayout = () => {
         </motion.div>
         <button
           onClick={() => setIsActive(!isActive)}
-          className="absolute top-20 left-4 z-50 items-center gap-3 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
+          className="absolute top-40 left-4 z-50 items-center gap-3 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
         >
           {isActive ? "" : <AiOutlineMenu />}
         </button>
@@ -72,9 +85,17 @@ const AdminMainLayout = () => {
           }
         >
           <div>
+            {themeSettings && (
+              <DarkMode
+                setThemeSettings={setThemeSettings}
+                setCurrentMode={setCurrentMode}
+                currentMode={currentMode}
+              />
+            )}
+
             <Routes>
               {/* dashboard  */}
-              <Route path="/admin" element={<AdminSectionEcommerce />} />
+              <Route path="/" element={<AdminSectionEcommerce />} />
               <Route path="/ecommerce" element={<AdminSectionEcommerce />} />
 
               {/* pages  */}
@@ -86,7 +107,6 @@ const AdminMainLayout = () => {
 
               {/* apps  */}
               <Route path="/kanban" element={<AdminSectionKanban />} />
-              <Route path="/editor" element={<AdminSectionEditor />} />
               <Route path="/calendar" element={<AdminSectionCalendar />} />
 
               {/* charts  */}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { links } from "./data/adminData";
+import { links } from "./data/adminData.js";
 import { MdOutlineCancel } from "react-icons/md";
 
 interface SidebarProps {

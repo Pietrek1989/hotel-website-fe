@@ -38,6 +38,7 @@ export interface ReservationSave {
   createdAt: Date;
   updatedAt: Date;
 }
+
 export interface ImageState {
   gallery: string[];
   hero: string[];
@@ -49,11 +50,10 @@ export interface FormValues {
 }
 
 export interface User {
-	_id: string;
-	name: string;
+  _id: string;
+  name: string;
   surname: string;
-	email: string;
-
+  email: string;
 }
 
 export interface FormValuesRegister {
@@ -64,35 +64,33 @@ export interface FormValuesRegister {
 }
 
 export type WeatherNow = {
-
   weather: Array<{
-      main: string;
-      description: string;
-      icon: string;
+    main: string;
+    description: string;
+    icon: string;
   }>;
   main: {
-      temp: number;
-      feels_like: number;
-      temp_min: number;
-      temp_max: number;
-      pressure: number;
-      humidity: number;
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
   };
   visibility: number;
   wind: {
-      speed: number;
-      deg: number;
-      gust: number;
+    speed: number;
+    deg: number;
+    gust: number;
   };
   sys: {
-      type: number;
-      country: string;
-      sunrise: number;
-      sunset: number;
+    type: number;
+    country: string;
+    sunrise: number;
+    sunset: number;
   };
   name: string;
 };
-
 
 export type WeatherData = {
   main: {
@@ -119,7 +117,6 @@ export type WeatherData = {
   };
   dt_txt: string;
 };
-
 
 export type WeatherHourly = {
   list: Array<WeatherData>;
@@ -159,6 +156,4 @@ export type SkiConditions = {
 export interface PaymentResult {
   success: boolean;
   reservation: Reservation;
-  
-  
 }

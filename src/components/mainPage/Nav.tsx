@@ -30,21 +30,62 @@ const Nav = () => {
   const fetchData = async () => {
     await dispatch(getUserData());
   };
+  const urlParams = new URLSearchParams(window.location.search);
+  const accessToken = urlParams.get("accessToken");
+  const refreshToken = urlParams.get("refreshToken");
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get("accessToken");
     const refreshToken = urlParams.get("refreshToken");
+    console.log(refreshToken, accessToken);
     if (accessToken && refreshToken) {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       window.history.replaceState({}, document.title, window.location.pathname);
       fetchData();
-    }
-    if (localStorage.getItem("accessToken")) {
       setIsLogged(true);
     }
+  }, [accessToken, refreshToken]);
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
   }, []);
+
+  const handleLogOut = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      if (accessToken && refreshToken) {
+        const response = await fetch(
+          `${process.env.REACT_APP_BE_URL}/users/session`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          setIsLogged(false);
+          navigate("/");
+        } else {
+          throw new Error("Logout failed");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // useEffect(() => {
   //   if (localStorage.getItem("accessToken")) {
@@ -58,11 +99,6 @@ const Nav = () => {
     openLarge: { opacity: 1, width: "20%", borderRadius: "0%", x: 0 },
     openSmall: { opacity: 1, width: "100%", borderRadius: "0%", x: 0 },
     closed: { opacity: 0, width: "100%", borderRadius: "50%", x: "100%" },
-  };
-  const handleLogOut = () => {
-    localStorage.setItem("accessToken", "");
-    localStorage.setItem("refreshToken", "");
-    navigate("/");
   };
 
   return (
@@ -182,6 +218,7 @@ const Nav = () => {
           {isLogged ? (
             <Link
               to="/login"
+              onClick={handleLogOut}
               className="flex nav-link-flex-container gap-2 text-mainText font-bold"
             >
               <span>
@@ -192,7 +229,6 @@ const Nav = () => {
           ) : (
             <Link
               to="/login"
-              onClick={handleLogOut}
               className="flex nav-link-flex-container gap-2  text-mainText font-bold"
             >
               <span>

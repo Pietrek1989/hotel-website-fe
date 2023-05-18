@@ -2,3 +2,8 @@
   background-color: var(--color-now);
   color: white;
 }
+
+.bg-admin-hero-pattern {
+  background-image: url("../assets/Startup\ managers\ presenting\ and\ analyzing\ sales\ growth\ chart.jpg");
+  alt: "Image by pch.vector on Freepik";
+}

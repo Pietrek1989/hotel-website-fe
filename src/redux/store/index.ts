@@ -5,11 +5,17 @@ import localStorage from "redux-persist/lib/storage";
 import totalPriceReducer from "../reducers/totalPriceReducer";
 import selectedOfferReducer from "../reducers/selectedOfferReducer";
 import newReservationReducer from "../reducers/newReservationReducer";
-import thunk from "redux-thunk"; 
+import thunk from "redux-thunk";
 import weatherReducer from "../reducers/weatherReducer";
 import userDataReducer from "../reducers/userReducer";
 import skiConditionsReducer from "../reducers/skiConditionReducer";
 import paymentResultReducer from "../reducers/paymentResultReducer";
+import allUsersReducer from "../reducers/allUsersReducer";
+import thisMonthEarningsReducer from "../reducers/thisMonthEarningsReducer";
+import allReservationsReducer from "../reducers/allReservationsReducer";
+import thisMonthReservationsReducer from "../reducers/thisMonthReservationsReducer";
+import allEarningsReducer from "../reducers/allEarningsReducer";
+import allInfoReservationsReducer from "../reducers/allInfoReservationsReducer";
 
 const persistConfig = {
   storage: localStorage,
@@ -29,6 +35,12 @@ const combinedReducer = combineReducers({
   weather: weatherReducer,
   skiConditions: skiConditionsReducer,
   paymentResult: paymentResultReducer,
+  allUsers: allUsersReducer,
+  thisMonthEarnings: thisMonthEarningsReducer,
+  allReservations: allReservationsReducer,
+  thisMonthReservations: thisMonthReservationsReducer,
+  allEarnings: allEarningsReducer,
+  allInfoReservations: allInfoReservationsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);
@@ -38,7 +50,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(thunk); 
+    }).concat(thunk);
   },
 });
 

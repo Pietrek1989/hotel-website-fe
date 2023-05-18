@@ -1,4 +1,11 @@
-import { Offer, ReservationSave, User, WeatherHourly, WeatherNow, SkiConditions } from "../../types and interfaces";
+import {
+  Offer,
+  ReservationSave,
+  User,
+  WeatherHourly,
+  WeatherNow,
+  SkiConditions,
+} from "../../types and interfaces";
 
 export const UPDATE_TOTAL_PRICE = "UPDATE_TOTAL_PRICE";
 export const UPDATE_SELECTED_OFFER = "UPDATE_SELECTED_OFFER";
@@ -11,8 +18,12 @@ export const GET_WEATHER_NOW = "GET_WEATHER_NOW";
 export const GET_WEATHER_5DAYS = "GET_WEATHER_5DAYS";
 export const GET_SKI_CONDITION = "GET_SKI_CONDITION";
 export const UPDATE_PAYMENT_RESULT = "UPDATE_PAYMENT_RESULT";
-
-
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const GET_ALL_RESERVATIONS = " GET_ALL_RESERVATIONS";
+export const GET_THIS_MONTH_RESERVATIONS = "GET_THIS_MONTH_RESERVATIONS";
+export const GET_THIS_MONTH_EARNINGS = "GET_THIS_MONTH_EARNINGS";
+export const GET_ALL_EARNINGS = "GET_THIS_MONTH_EARNINGS";
+export const GET_ALL_INFO_RESERVATIONS = "GET_ALL_INFO_RESERVATIONS";
 
 export const updateTotalPrice = (price: number) => {
   return {
@@ -34,10 +45,6 @@ export const updateNewReservation = (reservation: ReservationSave) => {
   };
 };
 
-
-
-
-
 export const getUserDataRequest = () => ({
   type: GET_USER_DATA_REQUEST,
 });
@@ -51,7 +58,6 @@ export const getUserDataFailure = (error: Error) => ({
   type: GET_USER_DATA_FAILURE,
   payload: error,
 });
-
 
 export const getUserData = () => async (dispatch: any) => {
   dispatch(getUserDataRequest());
@@ -96,8 +102,6 @@ export const getUserData = () => async (dispatch: any) => {
   }
 };
 
-
-
 export const refreshAccessToken = () => async () => {
   const refreshToken = localStorage.getItem("refreshToken");
   console.log("refresh in func", refreshToken);
@@ -127,7 +131,6 @@ export const refreshAccessToken = () => async () => {
   }
 };
 
-
 export const getWeatherNow = (weather: WeatherNow) => {
   return {
     type: "GET_WEATHER_NOW",
@@ -142,15 +145,12 @@ export const getWeather5Days = (weather: WeatherHourly) => {
   };
 };
 
-
 export const getSkiConditions = (conditions: SkiConditions) => {
   return {
     type: "GET_SKI_CONDITION",
     payload: conditions,
   };
 };
-
-
 
 export const updatePaymentResult = (result: string) => {
   return {
@@ -159,4 +159,42 @@ export const updatePaymentResult = (result: string) => {
   };
 };
 
+export const getAllUsers = (users: User[]) => {
+  return {
+    type: GET_ALL_USERS,
+    payload: users,
+  };
+};
+export const getAllReservationsCount = (reservationsCount: number) => {
+  return {
+    type: GET_ALL_RESERVATIONS,
+    payload: reservationsCount,
+  };
+};
 
+export const getThisMonthReservationsCount = (reservations: number) => {
+  return {
+    type: GET_THIS_MONTH_RESERVATIONS,
+    payload: reservations,
+  };
+};
+
+export const getThisMonthEearnings = (earnings: Number) => {
+  return {
+    type: GET_THIS_MONTH_EARNINGS,
+    payload: earnings,
+  };
+};
+
+export const getAllEarnings = (earnings: Number) => {
+  return {
+    type: GET_ALL_EARNINGS,
+    payload: earnings,
+  };
+};
+export const getAllInfoReservations = (reservations: ReservationSave[]) => {
+  return {
+    type: GET_ALL_INFO_RESERVATIONS,
+    payload: reservations,
+  };
+};

@@ -1,7 +1,10 @@
 import { useDispatch } from "react-redux";
 import { ImageState } from "../../../types and interfaces";
-import { getSkiConditions, getWeather5Days, getWeatherNow } from "../../../redux/actions";
-
+import {
+  getSkiConditions,
+  getWeather5Days,
+  getWeatherNow,
+} from "../../../redux/actions";
 
 export const fetchImages = async (): Promise<ImageState> => {
   try {
@@ -19,11 +22,7 @@ export const fetchImages = async (): Promise<ImageState> => {
   }
 };
 
-
-
-
-export const fetchWeather = async (dispatch : any) => {
-
+export const fetchWeather = async (dispatch: any) => {
   try {
     let response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=Inneralpbach&APPID=ed25fec635fe1f440571593fc2ef46e5&units=metric`
@@ -39,7 +38,7 @@ export const fetchWeather = async (dispatch : any) => {
   }
 };
 
-export const fetchWeather5 = async ( dispatch : any) => {
+export const fetchWeather5 = async (dispatch: any) => {
   try {
     let response = await fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=Inneralpbach&appid=ed25fec635fe1f440571593fc2ef46e5&units=metric`
@@ -58,9 +57,7 @@ export const fetchWeather5 = async ( dispatch : any) => {
   }
 };
 
-
-export const fetchSkiConditions = async (dispatch : any) => {
-
+export const fetchSkiConditions = async (dispatch: any) => {
   try {
     let response = await fetch(
       `http://feeds.snocountry.net/getSnowReport.php?apiKey=SnoCountry.example&ids=8000211`
@@ -75,3 +72,18 @@ export const fetchSkiConditions = async (dispatch : any) => {
     console.log(error);
   }
 };
+
+// export const logOutFunction = async (accessToken : string) => {
+
+//   try {
+//     const response = await fetch(`${process.env.REACT_APP_BE_URL}session`, {
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": `Bearer ${accessToken}`,
+//       },
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

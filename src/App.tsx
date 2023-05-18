@@ -9,6 +9,7 @@ import Register from "./components/Account/Register";
 import ContactPage from "./components/Contact/ContactPage";
 import WeatherMain from "./components/weather/MainWeather";
 import AdminMainLayout from "./components/Admin/AdminMainLayout";
+import AccountDashboard from "./components/Account/AccountDashboard";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/book" element={<CalendarReactComponent />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/account/*" element={<AccountDashboard />} />
           <Route path="/weather" element={<WeatherMain />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin/*" element={<AdminMainLayout />} />
