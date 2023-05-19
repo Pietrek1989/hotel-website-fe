@@ -27,7 +27,7 @@ module.exports = {
       blue: "#14a5bf",
       // bg: "#a7bed3",
       bg: "#EFEBE5",
-      bgTra: "#efebe599",
+      bgTra: "#efebe5de",
       logo: "#FFE677",
       mainText: "#8f7a40",
       red: "#e14f34",

@@ -12,7 +12,6 @@ import axios from "axios";
 
 import { customersGrid } from "../data/adminData";
 import AdminHeader from "../AdminHeader";
-import { Tooltip } from "@syncfusion/ej2-react-popups";
 
 const AdminSectionCustomers = () => {
   const toolbarOptions = ["Search"];

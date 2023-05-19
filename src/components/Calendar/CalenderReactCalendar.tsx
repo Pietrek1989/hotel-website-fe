@@ -23,8 +23,6 @@ const CalendarComponent: React.FC = () => {
   const hotelTimeZone = "Europe/Berlin";
   const dispatch = useDispatch();
 
-
-
   const [selectedRange, setSelectedRange] = React.useState<any>(null);
   const [selectStep, setSelectStep] = React.useState(0);
   const [offers, setOffers] = React.useState<Offer[]>([]);
@@ -96,13 +94,6 @@ const CalendarComponent: React.FC = () => {
       offers
     );
 
-    if (selectStep === 1 && selectedRange.start) {
-      const firstBookedOutDate = getFirstBookedOutDate(selectedRange.start);
-      if (firstBookedOutDate && date >= firstBookedOutDate) {
-        return true;
-      }
-    }
-
     return !selectable;
   };
 
@@ -164,66 +155,63 @@ const CalendarComponent: React.FC = () => {
   };
 
   return (
+    <div className="bg-container bg-bg py-20">
+      <section className="calendar-container container md:mx-auto flex flex-wrap justify-center mb-20">
+        <motion.div
+          className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 "
+          variants={slideFromTopVariantWithOpacity}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <Calendar
+            onClickDay={handleDateClick}
+            tileClassName={tileClassName}
+            tileDisabled={tileDisabled}
+            className={"self-center mt-10"}
+          />
+          <div className="flex w-11/12 md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-lightgreen"></div>
+              <span className="ml-1"> Check In</span>
+            </div>
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-lightcoral"></div>
+              <span className="ml-1"> Check Out</span>
+            </div>
+            <div className="flex items-center px-1 ">
+              <div className="history-calendar bg-selected"></div>
+              <span className="ml-1">Between</span>
+            </div>
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-disabled"></div>
+              <span className="ml-1"> Booked Out</span>
+            </div>
+            <div className="flex items-center  px-1 ">
+              <div className="history-calendar bg-currentDay"></div>
+              <span className="ml-1"> Today</span>
+            </div>
+          </div>
 
-      <div className="bg-container bg-bg py-20">
-        <section className="calendar-container container md:mx-auto flex flex-wrap justify-center mb-20"
->
-          <motion.div
-            className="flex flex-col justify-center sm:basis-4/4 md:basis-3/4 "
-            variants={slideFromTopVariantWithOpacity}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <Calendar
-              onClickDay={handleDateClick}
-              tileClassName={tileClassName}
-              tileDisabled={tileDisabled}
-              className={"self-center mt-10"}
+          <div className="w-11/12 mx-auto">
+            <Offers
+              availableOffers={availableOffers}
+              selectedRange={selectedRange}
             />
-            <div className="flex w-11/12 md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
-              <div className="flex items-center  px-1 ">
-                <div className="history-calendar bg-lightgreen"></div>
-                <span className="ml-1"> Check In</span>
-              </div>
-              <div className="flex items-center  px-1 ">
-                <div className="history-calendar bg-lightcoral"></div>
-                <span className="ml-1"> Check Out</span>
-              </div>
-              <div className="flex items-center px-1 ">
-                <div className="history-calendar bg-selected"></div>
-                <span className="ml-1">Between</span>
-              </div>
-              <div className="flex items-center  px-1 ">
-                <div className="history-calendar bg-disabled"></div>
-                <span className="ml-1"> Booked Out</span>
-              </div>
-              <div className="flex items-center  px-1 ">
-                <div className="history-calendar bg-currentDay"></div>
-                <span className="ml-1"> Today</span>
-              </div>
-            </div>
-
-            <div className="w-11/12 mx-auto">
-              <Offers
-                availableOffers={availableOffers}
-                selectedRange={selectedRange}
-              />
-            </div>
-          </motion.div>
-          <motion.div
-            // variants={slideFromRightVariantWithOpacity}
-            // initial="hidden"
-            // animate="visible"
-            exit="exit"
-            className="md:basis-1/4 sm:basis-3/4 w-full  h-full bg-gray-100"
-          >
-            <TotalPrice selectedRange={selectedRange} />
-          </motion.div>
-        </section>
-        <Footer />
-
-      </div>
+          </div>
+        </motion.div>
+        <motion.div
+          // variants={slideFromRightVariantWithOpacity}
+          // initial="hidden"
+          // animate="visible"
+          exit="exit"
+          className="md:basis-1/4 sm:basis-3/4 w-full  h-full bg-gray-100"
+        >
+          <TotalPrice selectedRange={selectedRange} />
+        </motion.div>
+      </section>
+      <Footer />
+    </div>
   );
 };
 

@@ -42,7 +42,6 @@ import product5 from "./product5.jpg";
 import product6 from "./product6.jpg";
 import product7 from "./product7.jpg";
 import product8 from "./product8.jpg";
-import { ValueType, LabelIntersectAction } from "@syncfusion/ej2-react-charts";
 
 export const gridOrderImage = (props) => (
   <div>
@@ -379,7 +378,7 @@ export const FinancialPrimaryYAxis = {
 export const LinePrimaryXAxis = {
   valueType: "DateTime",
   labelFormat: "y",
-  intervalType: "Years",
+  intervalType: "Months",
   edgeLabelPlacement: "Shift",
   majorGridLines: { width: 0 },
   background: "white",
@@ -446,44 +445,6 @@ export const links = [
       {
         name: "calendar",
         icon: <AiOutlineCalendar />,
-      },
-    ],
-  },
-  {
-    title: "Charts",
-    links: [
-      {
-        name: "line",
-        icon: <AiOutlineStock />,
-      },
-      {
-        name: "area",
-        icon: <AiOutlineAreaChart />,
-      },
-
-      {
-        name: "bar",
-        icon: <AiOutlineBarChart />,
-      },
-      {
-        name: "pie",
-        icon: <FiPieChart />,
-      },
-      {
-        name: "financial",
-        icon: <RiStockLine />,
-      },
-      {
-        name: "color-mapping",
-        icon: <BsBarChart />,
-      },
-      {
-        name: "pyramid",
-        icon: <GiLouvrePyramid />,
-      },
-      {
-        name: "stacked",
-        icon: <AiOutlineBarChart />,
       },
     ],
   },
@@ -840,6 +801,12 @@ export const ordersGrid = [
   {
     field: "Status",
     headerText: "Status",
+    width: "100",
+    textAlign: "Center",
+  },
+  {
+    field: "Cancelled",
+    headerText: "Cancelled",
     width: "100",
     textAlign: "Center",
   },
@@ -2246,32 +2213,35 @@ export const scheduleData = [
 
 export const lineChartData = [
   [
-    { x: new Date(2005, 0, 1), y: 21 },
-    { x: new Date(2006, 0, 1), y: 24 },
-    { x: new Date(2007, 0, 1), y: 36 },
-    { x: new Date(2008, 0, 1), y: 38 },
-    { x: new Date(2009, 0, 1), y: 54 },
-    { x: new Date(2010, 0, 1), y: 57 },
-    { x: new Date(2011, 0, 1), y: 70 },
+    { x: new Date(2015, 0, 1), y: 21 },
+    { x: new Date(2016, 0, 1), y: 24 },
+    { x: new Date(2017, 0, 1), y: 36 },
+    { x: new Date(2018, 0, 1), y: 38 },
+    { x: new Date(2019, 0, 1), y: 54 },
+    { x: new Date(2020, 0, 1), y: 57 },
+    { x: new Date(2021, 0, 1), y: 70 },
+    { x: new Date(2022, 0, 1), y: 75 },
   ],
   [
-    { x: new Date(2005, 0, 1), y: 28 },
-    { x: new Date(2006, 0, 1), y: 44 },
-    { x: new Date(2007, 0, 1), y: 48 },
-    { x: new Date(2008, 0, 1), y: 50 },
-    { x: new Date(2009, 0, 1), y: 66 },
-    { x: new Date(2010, 0, 1), y: 78 },
-    { x: new Date(2011, 0, 1), y: 84 },
+    { x: new Date(2015, 0, 1), y: 28 },
+    { x: new Date(2016, 0, 1), y: 44 },
+    { x: new Date(2017, 0, 1), y: 48 },
+    { x: new Date(2018, 0, 1), y: 50 },
+    { x: new Date(2019, 0, 1), y: 66 },
+    { x: new Date(2020, 0, 1), y: 78 },
+    { x: new Date(2021, 0, 1), y: 84 },
+    { x: new Date(2022, 0, 1), y: 90 },
   ],
 
   [
-    { x: new Date(2005, 0, 1), y: 10 },
-    { x: new Date(2006, 0, 1), y: 20 },
-    { x: new Date(2007, 0, 1), y: 30 },
-    { x: new Date(2008, 0, 1), y: 39 },
-    { x: new Date(2009, 0, 1), y: 50 },
-    { x: new Date(2010, 0, 1), y: 70 },
-    { x: new Date(2011, 0, 1), y: 100 },
+    { x: new Date(2015, 0, 1), y: 10 },
+    { x: new Date(2016, 0, 1), y: 10 },
+    { x: new Date(2017, 0, 1), y: 11 },
+    { x: new Date(2018, 0, 1), y: 12 },
+    { x: new Date(2019, 0, 1), y: 13 },
+    { x: new Date(2020, 0, 1), y: 14 },
+    { x: new Date(2021, 0, 1), y: 15 },
+    { x: new Date(2022, 0, 1), y: 16 },
   ],
 ];
 export const dropdownData = [
@@ -2289,11 +2259,11 @@ export const dropdownData = [
   },
 ];
 export const SparklineAreaData = [
-  { x: 1, yval: 2 },
-  { x: 2, yval: 6 },
-  { x: 3, yval: 8 },
-  { x: 4, yval: 5 },
-  { x: 5, yval: 10 },
+  { x: 1, yval: 0 },
+  { x: 2, yval: 0 },
+  { x: 3, yval: 0 },
+  { x: 4, yval: 500 },
+  { x: 5, yval: 701 },
 ];
 
 export const lineCustomSeries = [
@@ -2301,7 +2271,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[0],
     xName: "x",
     yName: "y",
-    name: "Germany",
+    name: "Reservations",
     width: "2",
     marker: { visible: true, width: 10, height: 10 },
     type: "Line",
@@ -2311,7 +2281,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[1],
     xName: "x",
     yName: "y",
-    name: "England",
+    name: "Users",
     width: "2",
     marker: { visible: true, width: 10, height: 10 },
     type: "Line",
@@ -2321,7 +2291,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[2],
     xName: "x",
     yName: "y",
-    name: "India",
+    name: "Refunds",
     width: "2",
     marker: { visible: true, width: 10, height: 10 },
     type: "Line",
@@ -2366,22 +2336,22 @@ export const ecomPieChartData = [
 
 export const stackedChartData = [
   [
-    { x: "Jan", y: 111.1 },
-    { x: "Feb", y: 127.3 },
-    { x: "Mar", y: 143.4 },
-    { x: "Apr", y: 159.9 },
-    { x: "May", y: 159.9 },
-    { x: "Jun", y: 159.9 },
-    { x: "July", y: 159.9 },
+    { x: "1", y: 111.1 },
+    { x: "2", y: 127.3 },
+    { x: "3", y: 143.4 },
+    { x: "4", y: 159.9 },
+    { x: "5", y: 159.9 },
+    { x: "6", y: 159.9 },
+    { x: "7", y: 159.9 },
   ],
   [
-    { x: "Jan", y: 111.1 },
-    { x: "Feb", y: 127.3 },
-    { x: "Mar", y: 143.4 },
-    { x: "Apr", y: 159.9 },
-    { x: "May", y: 159.9 },
-    { x: "Jun", y: 159.9 },
-    { x: "July", y: 159.9 },
+    { x: "1", y: 111.1 },
+    { x: "2", y: 127.3 },
+    { x: "3", y: 143.4 },
+    { x: "4", y: 159.9 },
+    { x: "5", y: 159.9 },
+    { x: "6", y: 159.9 },
+    { x: "7", y: 159.9 },
   ],
 ];
 
@@ -2390,31 +2360,20 @@ export const stackedCustomSeries = [
     dataSource: stackedChartData[0],
     xName: "x",
     yName: "y",
-    name: "Budget",
+    name: "Reservations",
     type: "StackingColumn",
-    background: "blue",
+    background: "black",
   },
 
   {
     dataSource: stackedChartData[1],
     xName: "x",
     yName: "y",
-    name: "Expense",
+    name: "Users",
     type: "StackingColumn",
-    background: "red",
+    background: "green",
   },
 ];
-
-// export const stackedPrimaryXAxis = {
-//   valueType: ValueType.Category, // it should match one of the enum members of ValueType
-//   majorGridLines: { width: 0 },
-//   minorGridLines: { width: 0 },
-//   majorTickLines: { width: 0 },
-//   minorTickLines: { width: 0 },
-//   interval: 1,
-//   lineStyle: { width: 0 },
-//   labelIntersectAction: LabelIntersectAction.Rotate45, // Use appropriate Enum
-// };
 
 export const stackedPrimaryYAxis = {
   lineStyle: { width: 0 },
@@ -2426,6 +2385,16 @@ export const stackedPrimaryYAxis = {
   minorGridLines: { width: 1 },
   minorTickLines: { width: 0 },
   labelFormat: "{value}",
+};
+export const stackedPrimaryXAxis = {
+  valueType: "Category",
+  majorGridLines: { width: 0 },
+  minorGridLines: { width: 0 },
+  majorTickLines: { width: 0 },
+  minorTickLines: { width: 0 },
+  interval: 1,
+  lineStyle: { width: 0 },
+  labelIntersectAction: "Rotate45",
 };
 
 export const kanbanData = [

@@ -1,6 +1,6 @@
 export interface ReservationContent {
-  checkin: string;
-  checkout: string;
+  checkin: Date;
+  checkout: Date;
 }
 
 export interface Reservation {

@@ -14,11 +14,10 @@ import {
   Inject,
 } from "@syncfusion/ej2-react-grids";
 
-import { ordersData, ordersGrid } from "../data/adminData";
+import { ordersGrid } from "../data/adminData";
 import AdminHeader from "../AdminHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllInfoReservations } from "../data/adminFetching";
-import { ReservationSave } from "../../../types and interfaces/index";
 import axios from "axios";
 
 export const contextMenuItems: string[] = [
@@ -75,6 +74,7 @@ const AdminSectionReservation = () => {
           checkIn: reservation.content?.checkin || "Default Checkin",
           checkOut: reservation.content?.checkout || "Default Checkout",
           Status: status,
+          Canceled: reservation.content?.cancelled ? "Yes" : "No",
         };
       });
       setGridData(mappedData);
@@ -125,13 +125,51 @@ const AdminSectionReservation = () => {
 
   const handleSave = async (args: any) => {
     console.log(args, args.data);
+    const updatedReservation: any = {
+      content: {},
+    };
 
-    const updatedReservation = args.data;
+    if (args.data?.TotalAmount !== undefined) {
+      updatedReservation.content.cost = args.data?.TotalAmount;
+    }
+
+    if (args.data?.Paid !== undefined) {
+      updatedReservation.content.paid =
+        args.data?.Paid === "Yes" ? true : false;
+    }
+
+    if (args.data?.checkIn !== undefined) {
+      updatedReservation.content.checkin = args.data?.checkIn;
+    }
+
+    if (args.data?.checkOut !== undefined) {
+      updatedReservation.content.checkout = args.data?.checkOut;
+    }
+
+    if (args.data?.CustomerName !== undefined) {
+      updatedReservation.content.name = args.data?.CustomerName;
+    }
+
+    if (args.data?.Cancelled !== undefined) {
+      updatedReservation.content.canceled =
+        args.data?.Cancelled === "Yes" ? true : false;
+    }
+
+    if (args.data?.OrderID !== undefined) {
+      updatedReservation.content._id = args.data?.OrderID;
+    }
+
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BE_URL}/reservations/${updatedReservation.OrderID}`,
-        updatedReservation
+        `${process.env.REACT_APP_BE_URL}/reservations/${updatedReservation.content._id}`,
+        updatedReservation,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
       );
+
       console.log(response.data);
     } catch (error) {
       console.error(error);

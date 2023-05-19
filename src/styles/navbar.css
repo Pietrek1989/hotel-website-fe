@@ -1,7 +1,6 @@
-.swiper-pagination,
-.swiper-pagination-clickable,
-.swiper-pagination-bullets,
-.swiper-pagination-horizontal span {
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets
+  .swiper-pagination-bullet {
   background-color: var(--color-now) !important;
 }
 .nav-modal {

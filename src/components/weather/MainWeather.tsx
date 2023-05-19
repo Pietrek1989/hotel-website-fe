@@ -4,7 +4,7 @@ import "../../styles/weather.css";
 
 const WeatherMain = () => {
   return (
-    <div className="flex justify-evenly flex-col lg:flex-row ">
+    <div className="flex justify-evenly flex-col lg:flex-row mx-2 md:mx-0">
       <WeatherSection />
       <SkiSection />
     </div>

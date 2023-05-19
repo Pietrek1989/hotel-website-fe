@@ -10,8 +10,10 @@ import ContactPage from "./components/Contact/ContactPage";
 import WeatherMain from "./components/weather/MainWeather";
 import AdminMainLayout from "./components/Admin/AdminMainLayout";
 import AccountDashboard from "./components/Account/AccountDashboard";
+// import { setLicenseKey } from "@syncfusion/ej2-base";
 
 function App() {
+  // setLicenseKey(`${process.env.REACT_APP_SYNCFUSION_KEY}`);
   return (
     <div className="App">
       <BrowserRouter>

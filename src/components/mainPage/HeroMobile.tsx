@@ -119,7 +119,7 @@ const HeroMobile = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleBooking}
-            className="book-button text-white font-bold  rounded pointer-events-auto sm:ml-0 md:ml-24 "
+            className="book-button text-white font-bold  rounded pointer-events-auto sm:ml-0 md:ml-24 book-button-mobile"
           >
             Book now
           </motion.button>

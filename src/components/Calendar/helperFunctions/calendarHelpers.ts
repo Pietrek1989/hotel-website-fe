@@ -17,41 +17,61 @@ export const isDateInRange = (date: Date, startDate: Date, endDate: Date) => {
   return date >= startDate && date <= endDate;
 };
 
+export const rangesOverlap = (
+  start1: Date,
+  end1: Date,
+  start2: Date,
+  end2: Date
+): boolean => {
+  const start1Str = start1.toISOString();
+  const end1Str = end1.toISOString();
+  const start2Str = start2.toISOString();
+  const end2Str = end2.toISOString();
+
+  return (
+    (start1Str >= start2Str && start1Str < end2Str) ||
+    (end1Str > start2Str && end1Str <= end2Str) ||
+    (start1Str <= start2Str && end1Str >= end2Str)
+  );
+};
+
 export const isDateSelectable = (
   date: Date,
-  selectingEnd: boolean,
-  selectedRange: any,
+  isEndDate: boolean,
+  selectedRange: { start: Date; end: Date } | null,
   offers: Offer[]
-) => {
-  const start = new Date(date);
-  const end = new Date(date);
-  start.setHours(0, 0, 0, 0);
-  end.setHours(0, 0, 0, 0);
-  end.setDate(end.getDate() + 1);
-
-  const availableOffersForDate = offers.filter((offer) =>
-    isOfferAvailable(offer, start, end)
-  );
-
-  if (availableOffersForDate.length > 0) {
-    return true;
+): boolean => {
+  // Check whether the date is before the start date
+  if (isEndDate && selectedRange?.start && date < selectedRange.start) {
+    return false;
   }
 
-  if (selectingEnd && selectedRange.start) {
-    const prevDay = new Date(date);
-    prevDay.setHours(0, 0, 0, 0);
-    prevDay.setDate(prevDay.getDate() - 1);
-    const prevDayEnd = new Date(date);
-    prevDayEnd.setHours(0, 0, 0, 0);
-
-    const availableOffersForPrevDay = offers.filter((offer) =>
-      isOfferAvailable(offer, prevDay, prevDayEnd)
+  // If the date is a start date or there is no selected range, check if there is at least one offer available on that date
+  if (!isEndDate || !selectedRange) {
+    return offers.some(
+      (offer) =>
+        !offer.reservations.some((reservation) =>
+          isDateInRange(
+            date,
+            new Date(reservation.content.checkin),
+            new Date(reservation.content.checkout)
+          )
+        )
     );
-
-    if (availableOffersForPrevDay.length > 0) {
-      return true;
-    }
   }
 
-  return false;
+  // If the date is an end date and there is a selected range, check if there is at least one offer available for the whole range
+  const rangeStart = selectedRange.start;
+  const rangeEnd = date;
+  return offers.some(
+    (offer) =>
+      !offer.reservations.some((reservation) =>
+        rangesOverlap(
+          rangeStart,
+          rangeEnd,
+          new Date(reservation.content.checkin),
+          new Date(reservation.content.checkout)
+        )
+      )
+  );
 };

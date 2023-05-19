@@ -10,6 +10,7 @@ const DayCards: React.FC<DayCardsProps> = ({ item }) => {
       <p className="font-semibold ">{format(new Date(item.dt_txt), "HH:mm")}</p>
       <p className="font-semibold text-sm">{item.weather[0].description}</p>
       <img
+        className=" bg-currentDay rounded-md my-1"
         src={`https://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
         alt="weather icon"
       />

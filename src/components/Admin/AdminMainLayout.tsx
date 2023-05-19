@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import AdminSectionEcommerce from "./sections/AdminSectionEcommerce";
 import AdminSectionReservation from "./sections/AdminSectionReservation";
 import AdminSectionCustomer from "./sections/AdminSectionCustomer";
 import AdminSectionKanban from "./sections/AdminSectionKanban";
 import AdminSectionCalendar from "./sections/AdminSectionCalendar";
-import AdminSectionLine from "./sections/Charts/AdminSectionLine";
-import AdminSectionArea from "./sections/Charts/AdminSectionArea";
-import AdminSectionBar from "./sections/Charts/AdminSectionBar";
-import AdminSectionPie from "./sections/Charts/AdminSectionPie";
-import AdminSectionFinancial from "./sections/Charts/AdminSectionFinancial";
-import AdminSectionPyramid from "./sections/Charts/AdminSectionPyramid";
-import AdminSectionStacked from "./sections/Charts/AdminSectionStacked";
 import { AiOutlineMenu } from "react-icons/ai";
-import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import "../../styles/admin.css";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { FiSettings } from "react-icons/fi";
 import DarkMode from "./DarkMode";
+import { RootState } from "../../redux/hooks";
+import { useSelector } from "react-redux";
 
 const AdminMainLayout = () => {
+  const navigate = useNavigate();
+  const { role } = useSelector((state: RootState) => state.user.userData);
   const [isMobile, setIsMobile] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [themeSettings, setThemeSettings] = useState(false);
   const [currentMode, setCurrentMode] = useState("Light");
 
   useEffect(() => {
+    console.log(role);
+    if (role !== "Admin") {
+      return navigate("/");
+    }
+
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -46,6 +47,7 @@ const AdminMainLayout = () => {
       setCurrentMode(currentThemeMode);
     }
   }, []);
+
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
       <div className="flex relative dark:bg-main-dark-bg">
@@ -108,15 +110,6 @@ const AdminMainLayout = () => {
               {/* apps  */}
               <Route path="/kanban" element={<AdminSectionKanban />} />
               <Route path="/calendar" element={<AdminSectionCalendar />} />
-
-              {/* charts  */}
-              <Route path="/line" element={<AdminSectionLine />} />
-              <Route path="/area" element={<AdminSectionArea />} />
-              <Route path="/bar" element={<AdminSectionBar />} />
-              <Route path="/pie" element={<AdminSectionPie />} />
-              <Route path="/financial" element={<AdminSectionFinancial />} />
-              <Route path="/pyramid" element={<AdminSectionPyramid />} />
-              <Route path="/stacked" element={<AdminSectionStacked />} />
             </Routes>
           </div>
         </div>

@@ -1,10 +1,4 @@
-import {
-  Offer,
-  Reservation,
-  ReservationSave,
-} from "../../../types and interfaces";
-// Check if an offer is available for the given date range
-// Check if any reservations overlap with the given date range
+import { Offer } from "../../../types and interfaces";
 
 export const isOfferAvailable = (
   offer: Offer,
@@ -16,9 +10,11 @@ export const isOfferAvailable = (
 
   return !offer.reservations.some((reservation) => {
     const reservationStart = new Date(
-      reservation.content.checkin
+      reservation.content?.checkin
     ).toISOString();
-    const reservationEnd = new Date(reservation.content.checkout).toISOString();
+    const reservationEnd = new Date(
+      reservation.content?.checkout
+    ).toISOString();
 
     return (
       (startDate >= reservationStart && startDate < reservationEnd) ||

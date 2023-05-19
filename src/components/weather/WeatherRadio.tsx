@@ -27,10 +27,13 @@ const FiveDayRadio: React.FC<FiveDayRadioProps> = ({
   const handleDay4 = () => {
     setCurrentIndex(3);
   };
+  const handleDay5 = () => {
+    setCurrentIndex(4);
+  };
 
   return (
     <div
-      className="flex justify-around rounded-xl bg-bgTra p-2 w-full text-md md:text-sm  lg:text-base"
+      className="flex justify-around rounded-xl bg-bgTra p-2 w-full text-md md:text-sm  lg:text-base font-bold"
       x-data="app"
     >
       <div>
@@ -105,6 +108,25 @@ const FiveDayRadio: React.FC<FiveDayRadioProps> = ({
           {" "}
           {weatherChunks[3] &&
             format(new Date(weatherChunks[3][0].dt_txt), "dd-MM")}
+        </label>
+      </div>
+      <div>
+        <input
+          type="radio"
+          name="option"
+          id="5"
+          className="peer hidden"
+          checked={selectedDay === "5"}
+          onChange={() => setSelectedDay("5")}
+        />{" "}
+        <label
+          htmlFor="5"
+          className="block cursor-pointer select-none rounded-xl px-5 text-center peer-checked:bg-selected peer-checked:font-bold peer-checked:text-black"
+          onClick={handleDay4}
+        >
+          {" "}
+          {weatherChunks[4] &&
+            format(new Date(weatherChunks[4][0].dt_txt), "dd-MM")}
         </label>
       </div>
     </div>
