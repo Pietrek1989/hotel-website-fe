@@ -14,6 +14,7 @@ import { FiSettings } from "react-icons/fi";
 import DarkMode from "./DarkMode";
 import { RootState } from "../../redux/hooks";
 import { useSelector } from "react-redux";
+import AdminSectionImages from "./sections/AdminSectionImages";
 
 const AdminMainLayout = () => {
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ const AdminMainLayout = () => {
               {/* apps  */}
               <Route path="/kanban" element={<AdminSectionKanban />} />
               <Route path="/calendar" element={<AdminSectionCalendar />} />
+              <Route path="/images" element={<AdminSectionImages />} />
             </Routes>
           </div>
         </div>

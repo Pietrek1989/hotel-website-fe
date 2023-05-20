@@ -18,13 +18,13 @@
   background-color: var(--color-now) !important;
 }
 .selected {
-  background-color: var(--color-selected) !important;
+  background-color: var(--color-checkin) !important;
   color: white;
   font-weight: bold;
   border-color: black !important;
 }
 .selected.check-in {
-  background-color: var(--color-checkin) !important;
+  background-color: var(--color-selected) !important;
 }
 
 .selected.check-out {

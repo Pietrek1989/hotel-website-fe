@@ -22,10 +22,10 @@ export interface Offer {
 }
 export interface ReservationSave {
   _id: string;
-  user: {
-    name: string;
-    surname: string;
-    email: string;
+  user?: {
+    name?: string;
+    surname?: string;
+    email?: string;
   };
   content: {
     cost: number;
@@ -37,6 +37,25 @@ export interface ReservationSave {
   };
   createdAt: Date;
   updatedAt: Date;
+}
+export interface ReservationWhole {
+  _id: string;
+  user?: {
+    name?: string;
+    surname?: string;
+  };
+  content?: {
+    offer?: {
+      image?: string;
+      name?: string;
+    };
+    cost?: number;
+    paid?: boolean;
+    receiptUrl?: string;
+    checkin?: string;
+    checkout?: string;
+    cancelled?: boolean;
+  };
 }
 
 export interface ImageState {

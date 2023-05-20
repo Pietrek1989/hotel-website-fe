@@ -1,5 +1,5 @@
 .weather-hero {
-  background-image: url("../assets/clouds-gc327510b7_1280.jpg");
+  background-image: url("https://res.cloudinary.com/dvagn6szo/image/upload/v1684590908/hotel-Rheingold/ski-https://res.cloudinary.com/dvagn6szo/image/upload/v1684590952/hotel-Rheingold/clouds-gc327510b7_1280_lfk2gz.jpg-g8a566839f_1280_okbjab.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -7,7 +7,7 @@
 }
 
 .hero-ski {
-  background-image: url("../assets//ski-slope-g8a566839f_1280.jpg");
+  background-image: url("https://res.cloudinary.com/dvagn6szo/image/upload/v1684590908/hotel-Rheingold/ski-slope-g8a566839f_1280_okbjab.jpg");
   background-position: left;
   alt: "Image by Photo Mix from Pixabay ";
 }

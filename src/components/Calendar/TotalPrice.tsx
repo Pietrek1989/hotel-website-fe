@@ -4,8 +4,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { saveReservation } from "./helperFunctions/reservationHelpers";
 import StripeCheckout from "react-stripe-checkout";
 import React, { useState, useEffect } from "react";
-import { updatePaymentResult } from "../../redux/actions";
-import { BsExclamationCircle } from "react-icons/bs";
+import { updatePaymentResult, updateSelectedOffer } from "../../redux/actions";
 import PaymentResult from "./PaymentResult";
 import { slideFromRightVariantWithOpacity } from "../../utils/motion";
 
@@ -16,6 +15,17 @@ interface OffersProps {
   };
 }
 const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
+  const initialOfferState = {
+    _id: "",
+    name: "",
+    priceSeason: 0,
+    priceOffSeason: 0,
+    image: "",
+    reservations: [],
+    details: [],
+    calculatePrice: () => 0,
+    selected: false,
+  };
   const dispatch = useDispatch();
 
   const totalPrice = useSelector((state: any) => state.totalPrice.totalPrice);
@@ -24,6 +34,7 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
   );
 
   useEffect(() => {
+    dispatch(updateSelectedOffer(initialOfferState));
     dispatch(updatePaymentResult(""));
   }, []);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,12 +82,14 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
           <br />
         </div>
       )}
-      <p className=" mb-2 text-gray-500">Selected: {selectedOffer.name}</p>
-      <img
-        src={selectedOffer.image}
-        alt="small room"
-        className=" w-24 mx-auto"
-      />
+      <p className=" mb-2 text-gray-500">Selected: {selectedOffer?.name}</p>
+      {selectedOffer?.image && (
+        <img
+          src={selectedOffer?.image}
+          alt={selectedOffer?.name}
+          className=" w-24 mx-auto"
+        />
+      )}
       <br />
 
       <p className="text-gray-500">
@@ -90,8 +103,8 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
           whileTap={{ scale: 0.9 }}
           className="bg-selected p-2 rounded-md text-white hover:bg-green mb-5"
           onClick={handleOpenModal}
+          disabled={totalPrice === 0}
         >
-          {" "}
           Reserve
         </motion.button>
       </div>

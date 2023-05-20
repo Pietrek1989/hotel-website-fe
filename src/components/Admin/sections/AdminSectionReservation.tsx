@@ -19,6 +19,7 @@ import AdminHeader from "../AdminHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllInfoReservations } from "../data/adminFetching";
 import axios from "axios";
+import { format } from "date-fns";
 
 export const contextMenuItems: string[] = [
   "AutoFit",
@@ -45,6 +46,9 @@ const AdminSectionReservation = () => {
   const allInfoReservations = useSelector(
     (state: any) => state.allInfoReservations.allInfoReservations
   );
+  const formatDate = (dateStr: string) => {
+    return format(new Date(dateStr), "MMMM dd, yyyy");
+  };
   useEffect(() => {
     fetchAllInfoReservations(dispatch);
     console.log("info", allInfoReservations);
@@ -71,10 +75,13 @@ const AdminSectionReservation = () => {
           Paid: reservation.content?.paid ? "Yes" : "No",
           ReceiptUrl: reservation.content?.receiptUrl || "No Receipt",
           OrderID: reservation._id,
-          checkIn: reservation.content?.checkin || "Default Checkin",
-          checkOut: reservation.content?.checkout || "Default Checkout",
+          checkIn:
+            formatDate(reservation.content?.checkin) || "Default Checkin",
+          checkOut:
+            formatDate(reservation.content?.checkout) || "Default Checkout",
           Status: status,
           Canceled: reservation.content?.cancelled ? "Yes" : "No",
+          originalReservation: reservation,
         };
       });
       setGridData(mappedData);
@@ -176,6 +183,32 @@ const AdminSectionReservation = () => {
     }
   };
 
+  const handleRefund = async (reservation: any) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BE_URL}/payments/refund`,
+        {
+          _id: reservation._id,
+          chargeId: reservation.content.chargeId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log(response.data.message);
+        // refresh data or handle UI updates here
+      } else {
+        console.error(response.data.error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <AdminHeader category="Page" title="Reservations" />
@@ -213,6 +246,17 @@ const AdminSectionReservation = () => {
           {ordersGrid.map((item, index) => (
             <ColumnDirective key={index} {...item} />
           ))}
+          <ColumnDirective
+            headerText="Refund"
+            template={(rowData: any) => (
+              <button
+                onClick={() => handleRefund(rowData.originalReservation)}
+                className="refund-button"
+              >
+                Refund
+              </button>
+            )}
+          />
         </ColumnsDirective>
         <Inject
           services={[

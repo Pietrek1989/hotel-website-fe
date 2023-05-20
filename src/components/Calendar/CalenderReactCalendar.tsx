@@ -172,7 +172,7 @@ const CalendarComponent: React.FC = () => {
           />
           <div className="flex w-11/12 md:text-sm sm:text-xs  bg-white history-calendar-container self-center mt-0 h-20  max-w flex-wrap justify-center  md:justify-between">
             <div className="flex items-center  px-1 ">
-              <div className="history-calendar bg-lightgreen"></div>
+              <div className="history-calendar bg-selected"></div>
               <span className="ml-1"> Check In</span>
             </div>
             <div className="flex items-center  px-1 ">
@@ -180,7 +180,7 @@ const CalendarComponent: React.FC = () => {
               <span className="ml-1"> Check Out</span>
             </div>
             <div className="flex items-center px-1 ">
-              <div className="history-calendar bg-selected"></div>
+              <div className="history-calendar bg-lightgreen"></div>
               <span className="ml-1">Between</span>
             </div>
             <div className="flex items-center  px-1 ">
