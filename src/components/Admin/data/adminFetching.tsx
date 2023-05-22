@@ -11,7 +11,7 @@ const apiUrl = process.env.REACT_APP_BE_URL;
 
 export const fetchThisMonthEarnings = async (dispatch: any) => {
   const { data } = await axios.get(`${apiUrl}/reservations/earningsNow`);
-
+  console.log("this month", data.earnings);
   dispatch(getThisMonthEearnings(data.earnings));
 };
 

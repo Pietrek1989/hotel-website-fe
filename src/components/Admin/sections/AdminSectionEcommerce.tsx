@@ -104,7 +104,7 @@ const AdminSectionEcommerce = () => {
             </button>
             <p className="mt-3">
               <span className="text-lg font-semibold">{users}</span>
-              <span className={`text-sm text-red-600 ml-2`}>10%</span>
+              {/* <span className={`text-sm text-red-600 ml-2`}>10%</span> */}
             </p>
             <p className="text-sm text-gray-400  mt-1">All Customers</p>
           </div>
@@ -123,7 +123,7 @@ const AdminSectionEcommerce = () => {
               <span className="text-lg font-semibold">
                 {allReservations ? allReservations : 231}
               </span>
-              <span className={`text-sm text-green-600 ml-2`}>10%</span>
+              {/* <span className={`text-sm text-green-600 ml-2`}>10%</span> */}
             </p>
             <p className="text-sm text-gray-400  mt-1">All reservations</p>
           </div>
@@ -142,7 +142,7 @@ const AdminSectionEcommerce = () => {
               <span className="text-lg font-semibold">
                 {allEarnings ? allEarnings : 12300}
               </span>
-              <span className={`text-sm text-green-600 ml-2`}>10%</span>
+              {/* <span className={`text-sm text-green-600 ml-2`}>10%</span> */}
             </p>
             <p className="text-sm text-gray-400  mt-1">All earnings</p>
           </div>
@@ -158,8 +158,8 @@ const AdminSectionEcommerce = () => {
               <HiOutlineRefresh />{" "}
             </button>
             <p className="mt-3">
-              <span className="text-lg font-semibold">0</span>
-              <span className={`text-sm text-red-600 ml-2`}>10%</span>
+              <span className="text-lg font-semibold">1</span>
+              {/* <span className={`text-sm text-red-600 ml-2`}>10%</span> */}
             </p>
             <p className="text-sm text-gray-400  mt-1">Refunds</p>
           </div>

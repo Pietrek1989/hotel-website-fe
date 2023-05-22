@@ -45,7 +45,7 @@ const AdminSectionImages: FC = () => {
         }
       );
       const image = await response.json();
-      setImages((prevImages) => [...prevImages, image.gallery]);
+      setImages(image.gallery);
     } catch (error) {
       console.error(`Failed to upload image: ${error}`);
     }
@@ -75,7 +75,7 @@ const AdminSectionImages: FC = () => {
         ))}
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="transition-all duration-500 ease-in-out hover:text-white text-2xl hover:text-5xl  py-2 px-4 bg-blue text-white"
+          className="transition-all duration-500 ease-in-out hover:text-white text-2xl hover:text-5xl  py-2 px-4 bg-blue-500 text-white"
         >
           <span>+</span>
         </button>
@@ -86,10 +86,11 @@ const AdminSectionImages: FC = () => {
           style={{ display: "none" }}
         />
       </div>
+
       <DeleteConfirmationModal
-        isOpen={isDeleteModalOpen}
-        onRequestClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={deleteImageConfirmed}
+        setIsModalOpen={setIsDeleteModalOpen}
+        handleFunction={deleteImageConfirmed}
+        isModalOpen={isDeleteModalOpen}
       />
     </>
   );

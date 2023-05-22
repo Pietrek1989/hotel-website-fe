@@ -15,6 +15,7 @@ import DarkMode from "./DarkMode";
 import { RootState } from "../../redux/hooks";
 import { useSelector } from "react-redux";
 import AdminSectionImages from "./sections/AdminSectionImages";
+import RefundSection from "./sections/RefundSection";
 
 const AdminMainLayout = () => {
   const navigate = useNavigate();
@@ -107,6 +108,8 @@ const AdminMainLayout = () => {
                 element={<AdminSectionReservation />}
               />
               <Route path="/customers" element={<AdminSectionCustomer />} />
+
+              <Route path="/refunds" element={<RefundSection />} />
 
               {/* apps  */}
               <Route path="/kanban" element={<AdminSectionKanban />} />

@@ -22,6 +22,7 @@ import {
   BsShield,
   BsChatLeft,
   BsCalendar2Check,
+  BsCreditCard2BackFill,
 } from "react-icons/bs";
 
 import { RiContactsLine, RiStockLine } from "react-icons/ri";
@@ -275,12 +276,13 @@ export const LinePrimaryYAxis = {
 export const customersGrid = [
   { field: "fullName", headerText: "Name", width: "150", textAlign: "Center" },
 
-  {
-    headerText: `Country`,
-    width: "120",
-    textAlign: "Center",
-    template: gridEmployeeCountry,
-  },
+  // {
+  //   field: "address.country",
+  //   headerText: `Country`,
+  //   width: "120",
+  //   textAlign: "Center",
+  //   template: gridEmployeeCountry,
+  // },
 
   { field: "email", headerText: "Email", width: "120", textAlign: "Center" },
   {
@@ -314,14 +316,9 @@ export const links = [
         name: "customers",
         icon: <RiContactsLine />,
       },
-    ],
-  },
-  {
-    title: "Apps",
-    links: [
       {
-        name: "calendar",
-        icon: <AiOutlineCalendar />,
+        name: "refunds",
+        icon: <BsCreditCard2BackFill />,
       },
       {
         name: "images",
@@ -329,6 +326,16 @@ export const links = [
       },
     ],
   },
+  // {
+  //   title: "Apps",
+  //   links: [
+  //     {
+  //       name: "calendar",
+  //       icon: <AiOutlineCalendar />,
+  //     },
+
+  //   ],
+  // },
 ];
 
 // export const chatData = [

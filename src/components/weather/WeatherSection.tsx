@@ -33,13 +33,13 @@ const WeatherSection = () => {
               high {Math.round(weatherNow.main.temp_max)}°
             </span>
           </div>
-          <div className=" bg-bgTra rounded-lg max-h-36 max-w-44 flex flex-col items-center max">
+          <div className=" bg-currentDay rounded-lg max-h-36 max-w-44 flex flex-col items-center max">
             <img
-              className=" h-24 w-24 fill-current"
+              className=" h-20 w-20 fill-current"
               src={`https://openweathermap.org/img/wn/${weatherNow.weather[0].icon}.png`}
               alt="weather icon"
             />
-            <p className="font-bold text-sm px-2">
+            <p className="font-bold text-sm px-2 text-white">
               {weatherNow.weather[0].description.toUpperCase()}
             </p>
           </div>
