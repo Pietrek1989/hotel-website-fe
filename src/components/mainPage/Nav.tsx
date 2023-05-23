@@ -118,14 +118,20 @@ const Nav = () => {
               className="  text-mainText font-bold flex items-center"
             >
               ALPBACH{" "}
-              <img
-                src={`https://openweathermap.org/img/wn/${
-                  weatherNow.weather[0].icon && weatherNow.weather[0].icon
-                }.png`}
-                alt="weather icon"
-              />{" "}
-              {parseInt(weatherNow.main.temp && weatherNow.main.temp)}°
+              {weatherNow.weather &&
+                weatherNow.weather[0] &&
+                weatherNow.weather[0].icon && (
+                  <img
+                    src={`https://openweathermap.org/img/wn/${weatherNow.weather[0].icon}.png`}
+                    alt="weather icon"
+                  />
+                )}
+              {weatherNow.main &&
+                weatherNow.main.temp &&
+                parseInt(weatherNow.main.temp)}
+              °
             </Link>
+
             <Link
               to="/book"
               className="hidden md:block text-mainText font-bold"
