@@ -98,15 +98,19 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
       </p>
       <br />
       <div className="text-center">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="bg-selected p-2 rounded-md text-white hover:bg-green mb-5"
-          onClick={handleOpenModal}
-          disabled={totalPrice === 0}
-        >
-          Reserve
-        </motion.button>
+        {localStorage.getItem("accessToken") ? (
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="bg-selected p-2 rounded-md text-white hover:bg-green mb-5"
+            onClick={handleOpenModal}
+            disabled={totalPrice === 0}
+          >
+            Reserve
+          </motion.button>
+        ) : (
+          <p>Plese Log In to book</p>
+        )}
       </div>
       {/* <img
         src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background.png")}

@@ -59,23 +59,23 @@ const CalendarComponent: React.FC = () => {
     updateAvailableOffers();
   }, [selectedRange, offers]);
 
-  const getFirstBookedOutDate = (startDate: Date) => {
-    const firstBookedOutDate = offers
-      .map((offer) => {
-        const unavailableDates = offer.reservations
-          .map((reservation) => ({
-            start: new Date(reservation.content.checkin),
-            end: new Date(reservation.content.checkout),
-          }))
-          .filter((range) => range.start > startDate && range.end > startDate)
-          .map((range) => range.start);
+  // const getFirstBookedOutDate = (startDate: Date) => {
+  //   const firstBookedOutDate = offers
+  //     .map((offer) => {
+  //       const unavailableDates = offer.reservations
+  //         .map((reservation) => ({
+  //           start: new Date(reservation.content.checkin),
+  //           end: new Date(reservation.content.checkout),
+  //         }))
+  //         .filter((range) => range.start > startDate && range.end > startDate)
+  //         .map((range) => range.start);
 
-        return Math.min(...unavailableDates.map((date) => date.getTime()));
-      })
-      .reduce((min, date) => Math.min(min, date), Infinity);
+  //       return Math.min(...unavailableDates.map((date) => date.getTime()));
+  //     })
+  //     .reduce((min, date) => Math.min(min, date), Infinity);
 
-    return isNaN(firstBookedOutDate) ? null : new Date(firstBookedOutDate);
-  };
+  //   return isNaN(firstBookedOutDate) ? null : new Date(firstBookedOutDate);
+  // };
   // Check if a tile should be disabled
   // Check if the tile should be disabled based on various conditions
   const tileDisabled = ({ date, view }: any) => {
