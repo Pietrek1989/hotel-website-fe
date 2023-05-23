@@ -87,14 +87,14 @@ const Nav = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("accessToken")) {
-  //     fetchData();
-  //   }
-  //   fetchWeather(dispatch);
-  //   fetchWeather5(dispatch);
-  //   fetchSkiConditions(dispatch);
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      fetchData();
+    }
+    fetchWeather(dispatch);
+    fetchWeather5(dispatch);
+    fetchSkiConditions(dispatch);
+  }, []);
   const variants = {
     openLarge: { opacity: 1, width: "20%", borderRadius: "0%", x: 0 },
     openSmall: { opacity: 1, width: "100%", borderRadius: "0%", x: 0 },
