@@ -13,7 +13,7 @@ const NavWeatherComponent2 = () => {
   return (
     <>
       <div className="items-center flex  md:justify-center max-w-full  ">
-        {weatherNow && (
+        {weatherNow && weatherNow.weather && weatherNow.weather[0] && (
           <div className="w-full  mb-2 transition duration-500 ease-in-out transform bg-white rounded-lg hover:scale-105 cursor-pointer border flex flex-col justify-center items-center text-center px-4 h-52">
             <div className="text-md font-bold flex flex-col text-gray-900">
               <span className="uppercase">Alpbach</span>{" "}
@@ -35,7 +35,7 @@ const NavWeatherComponent2 = () => {
             </div>
           </div>
         )}
-        {SkiConditions && (
+        {SkiConditions && SkiConditions.items && SkiConditions.items[0] && (
           <div className="w-full  mb-2 transition duration-500 ease-in-out transform bg-white rounded-lg hover:scale-105 cursor-pointer border flex flex-col justify-center items-center text-center px-4 h-52">
             <p className="mb-3 uppercase text-gray-900 font-bold ext-md">
               Ski resort:
