@@ -60,7 +60,7 @@ export const fetchWeather5 = async (dispatch: any) => {
 export const fetchSkiConditions = async (dispatch: any) => {
   try {
     let response = await fetch(
-      `http://feeds.snocountry.net/getSnowReport.php?apiKey=SnoCountry.example&ids=8000211`
+      `https://feeds.snocountry.net/getSnowReport.php?apiKey=SnoCountry.example&ids=8000211`
     );
     if (response.ok) {
       let data = await response.json();
