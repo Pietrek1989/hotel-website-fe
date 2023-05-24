@@ -101,11 +101,25 @@ const Nav = () => {
     closed: { opacity: 0, width: "100%", borderRadius: "50%", x: "100%" },
   };
 
+  const handleLogoClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    if (location.pathname === "/") {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
   return (
     <header className="fixed top-0 w-full z-50 bg-bgTra">
       <nav className=" container mx-auto px-6 pt-4 pb-1">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-gray-800 text-xl font-bold">
+          <Link
+            to="/"
+            onClick={handleLogoClick}
+            className="text-gray-800 text-xl font-bold"
+          >
             <img
               src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background.png")}
               alt="Logo"

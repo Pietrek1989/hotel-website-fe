@@ -102,7 +102,7 @@ export const getUserData = () => async (dispatch: any) => {
   }
 };
 
-export const refreshAccessToken = () => async () => {
+export const refreshAccessToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
   console.log("refresh in func", refreshToken);
   const response = await fetch("http://localhost:3001/users/session/refresh", {
