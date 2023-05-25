@@ -153,7 +153,7 @@ const Nav = () => {
               BOOK
             </Link>
             <Link
-              to="/book"
+              to="/admin"
               className="hidden md:block text-mainText font-bold"
               id={location.pathname === "/admin" ? "active" : " "}
             >
