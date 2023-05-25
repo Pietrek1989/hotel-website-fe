@@ -1,46 +1,16 @@
-# Getting Started with Create React App
+# Haus Rheingold hotel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Our project is an innovative hotel booking platform that marries convenience, functionality, and style. It offers a seamless user interface featuring a custom-made calendar that smartly displays only the available rooms on any chosen date, eliminating the often frustrating process of navigating through fully booked options.
 
-## Available Scripts
+Our website streamlines the booking process, making it as straightforward and efficient as possible. The integrated Stripe payment solution allows for secure and hassle-free transactions, ensuring peace of mind for all users.
 
-In the project directory, you can run:
+But that's not all; we've developed an intuitive back-office system for admins, enabling them to keep a pulse on business operations. This includes tracking earnings, examining reservation details, issuing refunds, updating room images, and making necessary edits.
 
-### `npm start`
+In line with the latest digital trends, our platform offers a dark mode option for enhanced usability, especially during nighttime browsing. To experience our platform's full suite of capabilities, feel free to contact me to get an admin account and access backoffice.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### FE LINK
+https://hotel-website-rheingold-fe.vercel.app/
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## BE repo
+https://github.com/Pietrek1989/hotel-website-rheingold-be/
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
