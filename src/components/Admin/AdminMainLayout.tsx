@@ -18,18 +18,20 @@ import AdminSectionImages from "./sections/AdminSectionImages";
 import RefundSection from "./sections/RefundSection";
 
 const AdminMainLayout = () => {
-  const navigate = useNavigate();
-  const { role } = useSelector((state: RootState) => state.user.userData);
+  // const navigate = useNavigate();
+  // const { role } = useSelector(
+  //   (state: any) => state.user?.userData || { role: "User" }
+  // );
   const [isMobile, setIsMobile] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [themeSettings, setThemeSettings] = useState(false);
   const [currentMode, setCurrentMode] = useState("Light");
 
   useEffect(() => {
-    console.log(role);
-    if (role !== "Admin") {
-      return navigate("/");
-    }
+    // console.log(role);
+    // if (role !== "Admin") {
+    //   return navigate("/");
+    // }
 
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);

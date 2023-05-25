@@ -127,6 +127,38 @@ const Nav = () => {
             />
           </Link>
           <div className="flex items-center space-x-4">
+            {isLogged ? (
+              <Link
+                to="/account"
+                className="hidden md:block text-mainText font-bold"
+                id={location.pathname === "/account" ? "active" : " "}
+              >
+                ACCOUNT
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="hidden md:block text-mainText font-bold"
+                id={location.pathname === "/login" ? "active" : " "}
+              >
+                LOGIN
+              </Link>
+            )}
+
+            <Link
+              to="/book"
+              className="hidden md:block text-mainText font-bold"
+              id={location.pathname === "/book" ? "active" : " "}
+            >
+              BOOK
+            </Link>
+            <Link
+              to="/book"
+              className="hidden md:block text-mainText font-bold"
+              id={location.pathname === "/admin" ? "active" : " "}
+            >
+              ADMIN
+            </Link>
             <Link
               to="/weather"
               className="  text-mainText font-bold flex items-center"
@@ -145,31 +177,6 @@ const Nav = () => {
                 parseInt(weatherNow.main.temp)}
               °
             </Link>
-
-            <Link
-              to="/book"
-              className="hidden md:block text-mainText font-bold"
-              id={location.pathname === "/book" ? "active" : " "}
-            >
-              BOOK
-            </Link>
-            {isLogged ? (
-              <Link
-                to="/account"
-                className="hidden md:block text-mainText font-bold"
-                id={location.pathname === "/account" ? "active" : " "}
-              >
-                ACCOUNT
-              </Link>
-            ) : (
-              <Link
-                to="/login"
-                className="hidden md:block text-mainText font-bold"
-                id={location.pathname === "/login" ? "active" : " "}
-              >
-                LOGIN
-              </Link>
-            )}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-mainText font-bold focus:outline-none"
