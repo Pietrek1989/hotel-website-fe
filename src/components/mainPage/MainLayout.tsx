@@ -6,40 +6,31 @@ import HeroMobile from "./HeroMobile";
 import HeroSection from "./HeroSection";
 import Testimonials from "./testimonials";
 
-
-
-
 const MainLAyout = () => {
-
-
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    handleResize(); 
-    window.addEventListener('resize', handleResize);
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-
-
-
   return (
     <>
-          {isMobile ? <HeroMobile /> : <HeroSection />}
+      {/* {isMobile ? <HeroMobile /> : <HeroSection />} */}
 
-      {/* <HeroSection /> */}
+      <HeroSection />
       {/* <HeroMobile /> */}
       <Discover />
       <Gallery />
       <Testimonials />
       <Footer />
-
     </>
   );
 };
