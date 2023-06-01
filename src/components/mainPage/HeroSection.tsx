@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { gsap, TweenMax } from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { motion, useAnimation } from "framer-motion";
@@ -17,18 +17,14 @@ const HeroSection: React.FC = () => {
 
   const navigate = useNavigate();
   const handleBooking = () => {
-    // Get the current scroll position of the window
     const scrollPosition = window.scrollY;
 
-    // Check if the scroll position is less than a specific value (e.g., 100)
-    if (scrollPosition < 100) {
-      // If the scroll position is less than the specified value, scroll down
+    if (scrollPosition < 50) {
       gsap.to(window, {
         duration: 0.5,
         scrollTo: { y: window.innerHeight / 3 },
       });
     } else {
-      // If the scroll position is greater than the specified value, navigate
       navigate("/book");
     }
   };
@@ -41,7 +37,6 @@ const HeroSection: React.FC = () => {
     );
   };
 
-  const arrowRef = React.useRef(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
 
@@ -74,30 +69,22 @@ const HeroSection: React.FC = () => {
           immediateRender: false,
         },
       })
-      .fromTo(".sky", { y: 0 }, { y: -200 }, 0)
-      .fromTo(".logo", { y: 0 }, { y: -100, duration: 0.5 }, 0)
+      .fromTo(".sky", { y: "0vh" }, { y: "-25vh" }, 0)
+      .fromTo(".logo", { y: "0vh" }, { y: "-12.5vh", duration: 0.5 }, 0)
 
-      .fromTo(".cloud1", { y: 100 }, { y: -800 }, 0)
-      .fromTo(".cloud2", { y: -150 }, { y: -500 }, 0)
-      .fromTo(".cloud3", { y: -50 }, { y: -650 }, 0)
-      .fromTo(".mountBg", { y: -10 }, { y: -100 }, 0)
-      .fromTo(".mountMg", { y: -30 }, { y: -250 }, 0)
-      .fromTo(".mountFg", { y: -50 }, { y: -600 }, 0)
+      .fromTo(".cloud1", { y: "10vh" }, { y: "-80vh" }, 0)
+      .fromTo(".cloud2", { y: "-18.75vh" }, { y: "-62.5vh" }, 0)
+      .fromTo(".cloud3", { y: "-6.25vh" }, { y: "-81.25vh" }, 0)
+      .fromTo(".mountBg", { y: "-1.25vh" }, { y: "-12.5vh" }, 0)
+      .fromTo(".mountMg", { y: "-3.75vh" }, { y: "-31.25vh" }, 0)
+      .fromTo(".mountFg", { y: "-6.25vh" }, { y: "-75vh" }, 0)
       .fromTo(".welcome", { opacity: 1 }, { opacity: 0, duration: 0.5 }, 0.75);
 
-    TweenMax.to(arrowRef.current, 1, {
-      y: -20,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
     return () => {
-      // Reset the styles and animations when the component is unmounted
       gsap.set(".main", { clearProps: "all" });
       gsap.set(".scrollDist", { clearProps: "all" });
       gsap.set(".logo", { clearProps: "all" });
 
-      // Remove any existing scroll triggers
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);

@@ -5,6 +5,7 @@ import {
   WeatherHourly,
   WeatherNow,
   SkiConditions,
+  ImageState,
 } from "../../types and interfaces";
 
 export const UPDATE_TOTAL_PRICE = "UPDATE_TOTAL_PRICE";
@@ -24,6 +25,7 @@ export const GET_THIS_MONTH_RESERVATIONS = "GET_THIS_MONTH_RESERVATIONS";
 export const GET_THIS_MONTH_EARNINGS = "GET_THIS_MONTH_EARNINGS";
 export const GET_ALL_EARNINGS = "GET_ALL_EARNINGS";
 export const GET_ALL_INFO_RESERVATIONS = "GET_ALL_INFO_RESERVATIONS";
+export const GET_ALL_GALLERY = "GET_ALL_GALLERY ";
 
 export const updateTotalPrice = (price: number) => {
   return {
@@ -198,3 +200,8 @@ export const getAllInfoReservations = (reservations: ReservationSave[]) => {
     payload: reservations,
   };
 };
+
+export const getAllGallery = (gallery: any) => ({
+  type: GET_ALL_GALLERY,
+  payload: gallery,
+});

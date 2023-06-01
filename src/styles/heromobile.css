@@ -1,0 +1,78 @@
+.section {
+  font-size: 2rem;
+  padding: 2rem;
+  background-color: transparent;
+  /* background-image: url("../assets/cloud2.png");
+  background-position: top;
+  background-size: 100vw;
+  background-repeat: no-repeat; */
+  object-fit: cover;
+  color: var(--color-gold-text);
+  height: 43vh;
+  text-align: center;
+  position: relative;
+}
+.wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+  perspective: 10px;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  background-attachment: fixed;
+}
+
+/* .wrapper::-webkit-scrollbar {
+  background-color: transparent;
+} */
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: col;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transform-style: preserve-3d;
+  z-index: -1;
+}
+.background,
+.foreground {
+  position: absolute;
+  height: 100%;
+  width: 100vw;
+  object-fit: cover;
+  z-index: -1;
+}
+.background {
+  transform: translateZ(-6px) scale(1.8);
+  background-color: white;
+  height: 120%;
+}
+
+.foreground {
+  transform: translateZ(-5px) scale(1.5);
+  bottom: -70%;
+  object-position: 60%;
+}
+.foreground2 {
+  position: absolute;
+  height: 100%;
+  width: 100vw;
+  object-fit: cover;
+  z-index: -1;
+  bottom: -60%;
+  object-position: 60%;
+}
+.foreground {
+  /* transform: translateZ(-5px) scale(1.5); */
+  /* bottom: -50%;
+    object-position: 60%; */
+}
+.village {
+  position: absolute;
+  height: 100%;
+  width: 100vw;
+  object-fit: contain;
+  object-position: 20% 50%;
+  z-index: -2;
+  top: 120%;
+}

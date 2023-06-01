@@ -17,6 +17,7 @@ import {
   BsFillEnvelopeOpenFill,
 } from "react-icons/bs";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { RiAdminFill } from "react-icons/ri";
 
 const Nav = () => {
   const [isLogged, setIsLogged] = useState(false);
@@ -232,6 +233,16 @@ const Nav = () => {
               <BsJournalText />
             </span>
             <span>BLOG</span>
+          </Link>
+          <Link
+            to="/blog"
+            className="flex nav-link-flex-container gap-2  text-mainText font-bold"
+            id={location.pathname === "/admin" ? "active" : " "}
+          >
+            <span>
+              <RiAdminFill />
+            </span>
+            <span>ADMIN</span>
           </Link>
           <Link
             to="/contact"

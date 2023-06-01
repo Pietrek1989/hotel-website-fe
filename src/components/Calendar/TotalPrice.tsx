@@ -67,7 +67,6 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
       <p className="font-bold text-lg text-cennter mb-5">
         Booking information:
       </p>
-
       {selectedRange && (
         <div className="text-charcoal">
           <p>Check In: {selectedRange.start?.toDateString()}</p>
@@ -91,11 +90,8 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
         />
       )}
       <br />
-
-      <p className="text-gray-500">
-        Price including taxes:
-        <hr className="bg-black mb-2" /> €{totalPrice}
-      </p>
+      <p className="text-gray-500">Price including taxes:</p>
+      <hr className="bg-black mb-2" />€{totalPrice}
       <br />
       <div className="text-center">
         {localStorage.getItem("accessToken") ? (
@@ -112,11 +108,6 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
           <p>Plese Log In to book</p>
         )}
       </div>
-      {/* <img
-        src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background.png")}
-        alt="logo"
-        className=" bg-blue"
-      /> */}
       <div className="mx-auto">
         <img
           src={require("../../assets/8eeead46-0f0b-41be-8244-10fe9feeb56e.png")}
@@ -124,11 +115,6 @@ const TotalPrice: React.FC<OffersProps> = ({ selectedRange }) => {
           className=" w-40 md:w-20"
         />
       </div>
-      {/* <img
-        src={require("../../assets/logo-no-background(1).png")}
-        alt="logo"
-        className=" bg-blue"
-      /> */}
       <div
         className={`fixed z-10 inset-0 overflow-y-auto ${
           isModalOpen ? "" : "hidden"

@@ -12,8 +12,6 @@ interface OffersProps {
 }
 
 const Offers: React.FC<OffersProps> = ({ availableOffers, selectedRange }) => {
-  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
-
   const { start, end } = selectedRange ?? {};
   const offerCards = availableOffers.map((offer, index) => {
     let price = 0;
@@ -30,9 +28,6 @@ const Offers: React.FC<OffersProps> = ({ availableOffers, selectedRange }) => {
         price={price}
         selectedRange={selectedRange}
         index={index}
-
-        // selectedOffer={selectedOffer}
-        // setSelectedOffer={setSelectedOffer}
       />
     );
   });

@@ -16,6 +16,7 @@ import allReservationsReducer from "../reducers/allReservationsReducer";
 import thisMonthReservationsReducer from "../reducers/thisMonthReservationsReducer";
 import allEarningsReducer from "../reducers/allEarningsReducer";
 import allInfoReservationsReducer from "../reducers/allInfoReservationsReducer";
+import allGalleryReducer from "../reducers/allGalleryReducer";
 
 const persistConfig = {
   storage: localStorage,
@@ -41,6 +42,7 @@ const combinedReducer = combineReducers({
   thisMonthReservations: thisMonthReservationsReducer,
   allEarnings: allEarningsReducer,
   allInfoReservations: allInfoReservationsReducer,
+  allGallery: allGalleryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);

@@ -1,3 +1,7 @@
 .discover-container h2 {
   font-family: "Pacifico", cursive;
 }
+
+#discovery {
+  background-color: transparent;
+}

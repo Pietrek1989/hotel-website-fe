@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePaymentResult } from "../../redux/actions";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { BsExclamationCircle, BsX } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 
 const PaymentResult = () => {
   const paymentResult = useSelector(

@@ -20,7 +20,6 @@ const UserReservations = () => {
         }
       );
       const data = await res.json();
-      console.log(data); // add this line
       setReservations(data);
       setLoading(false);
     } catch (err: any) {

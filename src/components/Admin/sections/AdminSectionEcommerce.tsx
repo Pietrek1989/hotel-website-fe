@@ -4,19 +4,13 @@ import {
   BsCurrencyDollar,
   BsListColumnsReverse,
 } from "react-icons/bs";
-import { IoIosMore } from "react-icons/io";
 
-import {
-  recentTransactions,
-  weeklyStats,
-  SparklineAreaData,
-} from "../data/adminData.js";
+import { recentTransactions, SparklineAreaData } from "../data/adminData.js";
 import SparkLine from "../Charts/SparkLine";
 import Stacked from "../Charts/Stacked.jsx";
 import { MdOutlineSupervisorAccount } from "react-icons/md";
 import { FiBarChart } from "react-icons/fi";
 import { HiOutlineRefresh } from "react-icons/hi";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllEarnings,

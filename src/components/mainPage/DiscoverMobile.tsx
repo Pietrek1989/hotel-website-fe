@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import "../../styles/discover.css";
 import { SectionWrapperLeft } from "../sectionAnimation";
 
-const Discover = () => {
+const DiscoverMobile = () => {
   const imageVariants = {
     hover: {
       scale: 1.1,
@@ -14,16 +14,16 @@ const Discover = () => {
 
   return (
     <>
-      <div className="container max-w-7xl mx-auto relative z-0 mt-[300px] ">
+      <div className="container max-w-7xl mx-auto relative z-0 mt-[300px] md:mt-[500px] lg:mt-[100px] mb-[300px] ">
         <div
-          className="container max-w-7xl  flex sm:mt-10 md:mt-40 mb-10 discover-container text-center md:text-start   "
+          className="container max-w-7xl   sm:mt-10 md:mt-40 mb-10 discover-container text-center md:text-start flex flex-col   "
           id="discovery"
         >
           <div className="basis-3/3 md:basis-1/3 mr-8">
-            <h2 className="text-white  md:text-charcoal text-4xl mb-20">
+            <h2 className="text-white  md:text-charcoal text-3xl md:text-4xl mb-10 text-center">
               <em>Discover Alpbach</em>
             </h2>
-            <p className="  md:pr-10">
+            <p className="  md:pr-10 absolute right-8 sm:right-12 md:right-0 w-2/4 sm:w-2/4 top-24 sm:top-40 md:top-60 ">
               Located in the hear of Pristine Alps.
               <br /> Staying with us you can Immerse yourself in the
               breathtaking beauty of the alpine mountains, where adventure,
@@ -38,20 +38,20 @@ const Discover = () => {
               destination that promises memories to last a lifetime.
             </p>
           </div>
-          <div className="basis-2/3 relative  hidden md:block">
+          <div className="basis-2/3 relative  mt-[600px] ">
             <motion.img
               variants={imageVariants}
               whileHover="hover"
               src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683360095/hotel-Rheingold/gallery/20200826_140506_lboyai.jpg"
               alt="Summer galtenberg peak"
-              className=" absolute -top-20  md:left-20 lg:left-50 xl:left-60 w-50 md:h-3/6 lg:h-3/5 xl:h-2/3 object-cover"
+              className=" absolute -top-10 sm:-top-20  md:left-20 lg:left-50 xl:left-60 w-50 lg:h-3/5 xl:h-2/3 object-cover"
             />
             <motion.img
               variants={imageVariants}
               whileHover="hover"
               src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683366475/hotel-Rheingold/tinified/cropped_hz5gus.png"
               alt="Winter ski "
-              className="absolute bottom-0 left-0 w-2/5 md:h-3/4 lg:h-full object-cover"
+              className="absolute bottom-40 sm:bottom-0 -left-[60px] sm:left-0 w-3/5 sm:w-2/5  lg:h-full object-cover"
             />
           </div>
         </div>
@@ -59,5 +59,4 @@ const Discover = () => {
     </>
   );
 };
-
-export default SectionWrapperLeft(Discover, "");
+export default SectionWrapperLeft(DiscoverMobile, "");

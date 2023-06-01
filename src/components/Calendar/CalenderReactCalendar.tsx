@@ -16,7 +16,10 @@ import TotalPrice from "./TotalPrice";
 import { updateTotalPrice } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-import { slideFromTopVariantWithOpacity } from "../../utils/motion";
+import {
+  slideFromRightVariantWithOpacity,
+  slideFromTopVariantWithOpacity,
+} from "../../utils/motion";
 import Footer from "../mainPage/Footer";
 
 const CalendarComponent: React.FC = () => {
@@ -59,23 +62,6 @@ const CalendarComponent: React.FC = () => {
     updateAvailableOffers();
   }, [selectedRange, offers]);
 
-  // const getFirstBookedOutDate = (startDate: Date) => {
-  //   const firstBookedOutDate = offers
-  //     .map((offer) => {
-  //       const unavailableDates = offer.reservations
-  //         .map((reservation) => ({
-  //           start: new Date(reservation.content.checkin),
-  //           end: new Date(reservation.content.checkout),
-  //         }))
-  //         .filter((range) => range.start > startDate && range.end > startDate)
-  //         .map((range) => range.start);
-
-  //       return Math.min(...unavailableDates.map((date) => date.getTime()));
-  //     })
-  //     .reduce((min, date) => Math.min(min, date), Infinity);
-
-  //   return isNaN(firstBookedOutDate) ? null : new Date(firstBookedOutDate);
-  // };
   // Check if a tile should be disabled
   // Check if the tile should be disabled based on various conditions
   const tileDisabled = ({ date, view }: any) => {
@@ -201,9 +187,9 @@ const CalendarComponent: React.FC = () => {
           </div>
         </motion.div>
         <motion.div
-          // variants={slideFromRightVariantWithOpacity}
-          // initial="hidden"
-          // animate="visible"
+          variants={slideFromRightVariantWithOpacity}
+          initial="hidden"
+          animate="visible"
           exit="exit"
           className="md:basis-1/4 sm:basis-3/4 w-full  h-full bg-gray-100"
         >

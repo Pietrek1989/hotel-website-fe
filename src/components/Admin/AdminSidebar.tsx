@@ -65,7 +65,7 @@ const AdminSidebar: React.FC<SidebarProps> = ({ isActive, setIsActive }) => {
                       : " "
                   }
                   className={normalLink}
-                  onClick={closeSidebar} // close sidebar when link is clicked
+                  onClick={closeSidebar}
                 >
                   {link.icon}
                   <span className="capitalize ">{link.name}</span>

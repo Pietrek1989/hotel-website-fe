@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { ImageState } from "../../../types and interfaces";
 import {
   getSkiConditions,
@@ -31,6 +30,7 @@ export const fetchWeather = async (dispatch: any) => {
       let data = await response.json();
       dispatch(getWeatherNow(data));
     } else {
+      // eslint-disable-next-line no-throw-literal
       throw response.status + " " + response.statusText;
     }
   } catch (error) {
@@ -50,6 +50,7 @@ export const fetchWeather5 = async (dispatch: any) => {
       console.log(arrayOf5);
       dispatch(getWeather5Days(arrayOf5));
     } else {
+      // eslint-disable-next-line no-throw-literal
       throw response.status + " " + response.statusText;
     }
   } catch (error) {
@@ -66,6 +67,7 @@ export const fetchSkiConditions = async (dispatch: any) => {
       let data = await response.json();
       dispatch(getSkiConditions(data));
     } else {
+      // eslint-disable-next-line no-throw-literal
       throw response.status + " " + response.statusText;
     }
   } catch (error) {

@@ -56,7 +56,7 @@ const Login: React.FC = () => {
       <div className="bg-white hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
         <img
           src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683630521/hotel-Rheingold/tinified/logan-mayer-tFc9kSPbMDg-unsplash_cam6v7.jpg"
-          alt="Photo by Logan Mayer on Unsplash"
+          alt=" by Logan Mayer on Unsplash"
           className="w-full h-full object-cover "
         />
       </div>
@@ -110,7 +110,7 @@ const Login: React.FC = () => {
 
             <div className="text-right mt-2">
               <a
-                href="#"
+                href="/login"
                 className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700"
               >
                 Forgot Password?

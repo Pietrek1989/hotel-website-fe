@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import Swiper, { Navigation } from 'swiper';
-import 'swiper/swiper-bundle.min.css';
-import "../../styles/testimonials.css"
-import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
-import { SectionWrapperLeft } from '../sectionAnimation';
+import React, { useEffect } from "react";
+import Swiper, { Navigation } from "swiper";
+import "swiper/swiper-bundle.min.css";
+import "../../styles/testimonials.css";
+import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
+import { SectionWrapperLeft } from "../sectionAnimation";
 
-// Add the Swiper modules you want to use
 Swiper.use([Navigation]);
 
 type Testimonial = {
@@ -17,46 +16,46 @@ type Testimonial = {
 const Testimonials: React.FC = () => {
   const testimonials: Testimonial[] = [
     {
-      title: 'Lorem ipsum dolor sit amet.',
+      title: "Lorem ipsum dolor sit amet.",
       content:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.',
-      author: 'Eddie Murphy',
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.",
+      author: "Eddie Murphy",
     },
     {
-        title: 'Lorem ipsum dolor sit amet.',
-        content:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.',
-        author: 'Johan Johanson',
-      },
-      {
-        title: 'Lorem ipsum dolor sit amet.',
-        content:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.',
-        author: 'John Doe',
-      },
-      {
-        title: 'Lorem ipsum dolor sit amet.',
-        content:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.',
-        author: 'Piotr Rodzen',
-      },
-      {
-        title: 'Lorem ipsum dolor sit amet.',
-        content:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.',
-        author: 'You Yourself',
-      },
-      {
-        title: 'Lorem ipsum dolor sit amet.',
-        content:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.',
-        author: 'Me Meself',
-      },
+      title: "Lorem ipsum dolor sit amet.",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.",
+      author: "Johan Johanson",
+    },
+    {
+      title: "Lorem ipsum dolor sit amet.",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.",
+      author: "John Doe",
+    },
+    {
+      title: "Lorem ipsum dolor sit amet.",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.",
+      author: "Piotr Rodzen",
+    },
+    {
+      title: "Lorem ipsum dolor sit amet.",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.",
+      author: "You Yourself",
+    },
+    {
+      title: "Lorem ipsum dolor sit amet.",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam cumque recusandae dolorum porro, quasi sunt necessitatibus dolorem ab laudantium vel.",
+      author: "Me Meself",
+    },
     // Add more testimonials as needed
   ];
 
   useEffect(() => {
-    const swiper = new Swiper('.swiper-container', {
+    const swiper = new Swiper(".swiper-container", {
       loop: true,
       slidesPerView: 1,
       spaceBetween: 32,
@@ -64,8 +63,8 @@ const Testimonials: React.FC = () => {
         delay: 8000,
       },
       navigation: {
-        nextEl: '.next-button',
-        prevEl: '.prev-button',
+        nextEl: ".next-button",
+        prevEl: ".prev-button",
       },
       breakpoints: {
         640: {
@@ -102,7 +101,9 @@ const Testimonials: React.FC = () => {
             {testimonials.map((testimonial, index) => (
               <div key={index} className="swiper-slide p-6">
                 <div className="bg-white shadow-md p-8 rounded-lg">
-                  <h3 className="text-xl font-semibold mb-4">{testimonial.title}</h3>
+                  <h3 className="text-xl font-semibold mb-4">
+                    {testimonial.title}
+                  </h3>
                   <p className="text-gray-600 mb-6">{testimonial.content}</p>
                   <p className="text-lg font-semibold">{testimonial.author}</p>
                 </div>
@@ -113,6 +114,6 @@ const Testimonials: React.FC = () => {
       </div>
     </section>
   );
-            }  
+};
 
 export default SectionWrapperLeft(Testimonials, "");
