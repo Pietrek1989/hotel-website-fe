@@ -5,11 +5,7 @@ import Gallery from "./Gallery";
 import HeroSection from "./HeroSection";
 import Testimonials from "./testimonials";
 import { motion, useAnimation } from "framer-motion";
-import {
-  heroHausvariants,
-  logoVariants,
-  welcomeVariants,
-} from "../../utils/motion";
+import { heroHausvariants, welcomeVariants } from "../../utils/motion";
 import "../../styles/heromobile.css";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +34,8 @@ const MainLAyout = () => {
       y: [-10, 10, -10],
       transition: { delay: i * 0.2, repeat: Infinity, duration: 1 },
     }));
-  }, [controls]);
+  }, []);
+
   const scrollToBookNow = () => {
     if (sectionRef.current) {
       sectionRef.current.scrollIntoView({ behavior: "smooth" });
@@ -47,7 +44,12 @@ const MainLAyout = () => {
   const handleBook = () => {
     navigate("/book");
   };
-
+  const arrowAnimation = {
+    animate: {
+      y: [-10, 10, -10],
+      transition: { yoyo: Infinity, duration: 1 },
+    },
+  };
   return (
     <>
       {isMobile ? (
@@ -81,10 +83,14 @@ const MainLAyout = () => {
                       {char}
                     </motion.span>
                   ))}
-                  <motion.div animate={controls} onClick={scrollToBookNow}>
-                    <AiOutlineArrowDown className="w-24 h-24 mx-auto" />
-                  </motion.div>
                 </h1>
+                <motion.div
+                  animate={controls}
+                  onClick={scrollToBookNow}
+                  className="mt-3"
+                >
+                  <AiOutlineArrowDown className="w-24 h-24 mx-auto" />
+                </motion.div>
               </div>
               <img
                 className="background"
@@ -95,14 +101,18 @@ const MainLAyout = () => {
                 className="foreground2"
                 src={require("../../assets/cloud4.png")}
                 alt="cloud foreground"
+                loading="lazy"
               />
               <img
                 className="foreground"
+                rel="preload"
+                loading="lazy"
                 src={require("../../assets/cloud6.png")}
                 alt="cloud foreground 2"
               />
               <img
                 className=" village"
+                loading="lazy"
                 src={require("../../assets/20210113_105757-removebg-preview.png")}
                 alt="hotel house"
               />
@@ -115,10 +125,9 @@ const MainLAyout = () => {
                 <motion.img
                   initial="hidden"
                   animate="visible"
-                  variants={logoVariants}
                   src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background.png")}
                   alt="Logo"
-                  className="mx-auto mt-4 pointer-events-auto h-40 w-40 md:h-60 md:w-60 text-shadow-lg logo-shadow justify-center hero-logo"
+                  className="mx-auto mt-4 pointer-events-auto h-40 w-40 md:h-60 md:w-60 text-shadow-lg logo-shadow justify-center hero-logo logo-animation"
                 />
               </div>
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useTransition } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "../../styles/calendar.css";
@@ -25,6 +25,7 @@ import Footer from "../mainPage/Footer";
 const CalendarComponent: React.FC = () => {
   const hotelTimeZone = "Europe/Berlin";
   const dispatch = useDispatch();
+  const [isPending, startTransition] = useTransition();
 
   const [selectedRange, setSelectedRange] = React.useState<any>(null);
   const [selectStep, setSelectStep] = React.useState(0);
@@ -93,17 +94,19 @@ const CalendarComponent: React.FC = () => {
 
     const dateInHotelTimeZone = utcToZonedTime(date, hotelTimeZone);
 
-    if (selectStep === 0) {
-      setSelectedRange({ start: dateInHotelTimeZone, end: null });
-      setSelectStep(1);
-    } else {
-      if (dateInHotelTimeZone < selectedRange.start) {
+    startTransition(() => {
+      if (selectStep === 0) {
         setSelectedRange({ start: dateInHotelTimeZone, end: null });
+        setSelectStep(1);
       } else {
-        setSelectedRange({ ...selectedRange, end: dateInHotelTimeZone });
-        setSelectStep(0);
+        if (dateInHotelTimeZone < selectedRange.start) {
+          setSelectedRange({ start: dateInHotelTimeZone, end: null });
+        } else {
+          setSelectedRange({ ...selectedRange, end: dateInHotelTimeZone });
+          setSelectStep(0);
+        }
       }
-    }
+    });
   };
 
   // Get the tile class name based on whether it's selected or not

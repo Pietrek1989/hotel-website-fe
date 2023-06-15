@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import "../../styles/discover.css";
 import { SectionWrapperLeft } from "../sectionAnimation";
+import { slideFromLeftVariantWithOpacity } from "../../utils/motion";
 
 const Discover = () => {
   const imageVariants = {
@@ -14,7 +15,13 @@ const Discover = () => {
 
   return (
     <>
-      <div className="container max-w-7xl mx-auto relative z-0 mt-[300px] ">
+      <motion.div
+        variants={slideFromLeftVariantWithOpacity}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.25 }}
+        className="container max-w-7xl mx-auto relative -z-1 mt-[300px] lg:mt-[500px] xl:mt-[800px] "
+      >
         <div
           className="container max-w-7xl  flex sm:mt-10 md:mt-40 mb-10 discover-container text-center md:text-start   "
           id="discovery"
@@ -42,6 +49,7 @@ const Discover = () => {
             <motion.img
               variants={imageVariants}
               whileHover="hover"
+              loading="lazy"
               src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683360095/hotel-Rheingold/gallery/20200826_140506_lboyai.jpg"
               alt="Summer galtenberg peak"
               className=" absolute -top-20  md:left-20 lg:left-50 xl:left-60 w-50 md:h-3/6 lg:h-3/5 xl:h-2/3 object-cover"
@@ -49,15 +57,16 @@ const Discover = () => {
             <motion.img
               variants={imageVariants}
               whileHover="hover"
+              loading="lazy"
               src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683366475/hotel-Rheingold/tinified/cropped_hz5gus.png"
               alt="Winter ski "
               className="absolute bottom-0 left-0 w-2/5 md:h-3/4 lg:h-full object-cover"
             />
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
 
-export default SectionWrapperLeft(Discover, "");
+export default Discover;

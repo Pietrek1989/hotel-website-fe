@@ -35,14 +35,12 @@
 }
 
 .ReactModal__Content img {
-  /* width: 100%; */
   height: 90%;
   width: 90%;
   object-fit: contain;
   aspect-ratio: 2 / 1;
 }
 .no-scroll {
-  /* overflow: hidden; */
   height: 100%;
 }
 

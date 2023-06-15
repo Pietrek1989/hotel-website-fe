@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllInfoReservations } from "../data/adminFetching";
 import axios from "axios";
 import { format } from "date-fns";
+import { createSelector } from "@reduxjs/toolkit";
 
 export const contextMenuItems: string[] = [
   "AutoFit",
@@ -43,9 +44,15 @@ export const contextMenuItems: string[] = [
 const AdminSectionReservation = () => {
   const [gridData, setGridData] = useState([]);
   const dispatch = useDispatch();
-  const allInfoReservations = useSelector(
-    (state: any) => state.allInfoReservations.allInfoReservations
+  const selectReservations = (state: any) =>
+    state.allInfoReservations.allInfoReservations;
+
+  const selectMemoizedReservations = createSelector(
+    selectReservations,
+    (reservations) => reservations
   );
+  const allInfoReservations = useSelector(selectMemoizedReservations);
+
   const formatDate = (dateStr: string) => {
     return format(new Date(dateStr), "MMMM dd, yyyy");
   };
@@ -130,7 +137,9 @@ const AdminSectionReservation = () => {
   };
 
   const handleSave = async (args: any) => {
-    console.log(args, args.data);
+    if (args.requestType !== "save") {
+      return;
+    }
     const updatedReservation: any = {
       content: {},
     };
@@ -185,6 +194,7 @@ const AdminSectionReservation = () => {
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <AdminHeader category="Page" title="Reservations" />
+
       <div className="date-filter mb-2 flex justify-end">
         <label>Start Date: </label>
         <input

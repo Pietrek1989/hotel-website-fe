@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getUserData } from "../../redux/actions";
@@ -18,6 +18,7 @@ import {
 } from "react-icons/bs";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { RiAdminFill } from "react-icons/ri";
+import logo from "../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background.png";
 
 const Nav = () => {
   const [isLogged, setIsLogged] = useState(false);
@@ -102,16 +103,18 @@ const Nav = () => {
     closed: { opacity: 0, width: "100%", borderRadius: "50%", x: "100%" },
   };
 
-  const handleLogoClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    if (location.pathname === "/") {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      navigate("/");
-    }
-  };
+  const handleLogoClick = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      if (location.pathname === "/") {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/");
+      }
+    },
+    [location.pathname, navigate]
+  );
+
   return (
     <header className="fixed top-0 w-full z-50 bg-bgTra">
       <nav className=" container mx-auto px-6 pt-4 pb-1">
@@ -121,11 +124,7 @@ const Nav = () => {
             onClick={handleLogoClick}
             className="text-gray-800 text-xl font-bold"
           >
-            <img
-              src={require("../../assets/haus-rheingold-high-resolution-logo-color-on-transparent-background.png")}
-              alt="Logo"
-              className="h-8 hover:scale-110"
-            />
+            <img src={logo} alt="Logo" className="h-8 hover:scale-110" />
           </Link>
           <div className="flex items-center space-x-4">
             {isLogged ? (

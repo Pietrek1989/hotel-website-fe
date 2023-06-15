@@ -30,7 +30,7 @@
   font-size: 20px;
   z-index: 1;
   color: black !important;
-  border: 2px solid #ffe677;
+  border: 2px solid #e8cf8a;
   border-radius: 6px;
   position: relative;
 }
@@ -38,7 +38,7 @@
 .book-button::before {
   position: absolute;
   content: "";
-  background: #ffe677;
+  background: #e8cf8a;
   width: 260px;
   height: 170px;
   z-index: -1;
@@ -63,12 +63,6 @@ button:hover::before {
 @media screen and (max-width: 650px) {
   .book-button {
     font-size: 15px;
-
-    /* width: 260px;
-    height: 190px;
-    z-index: -1;
-    border-radius: 40%;
-  } */
   }
 }
 
@@ -97,30 +91,50 @@ button:hover::before {
   }
 }
 
-.hero-logo:hover {
+.logo-lg-animation:hover {
   animation: rotate 1.5s linear infinite;
 }
+.logo-animation:hover {
+  transform: scale(1.1) rotate(-5deg);
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo-animation {
+  transition: transform 0.2s ease-in-out;
+}
+
 .arrow-icon {
   pointer-events: all;
 }
-.welcome {
-  /* Other styles */
+/* .welcome {
   pointer-events: none;
-}
+} */
 
 @media (max-width: 768px) {
   .logo {
     width: 200px !important;
     height: 200px !important;
   }
-
-  /* Add more styles to adjust other elements for smaller screens */
 }
 
 .book-button-mobile {
   margin-top: 4em;
-  color: var(--color-logo);
+  color: #e8cf8a;
   width: 6em;
   height: 2.6em;
   font-size: 24px;
+}
+.custom-height {
+  height: 60vh;
+}
+
+@media (min-width: 1200px) {
+  .custom-height {
+    height: 60vh;
+  }
+}
+@media (min-width: 1600px) {
+  .custom-height {
+    height: 100vh;
+  }
 }

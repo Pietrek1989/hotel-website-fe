@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import CustomModal from "./CustomModal";
 import Loader from "../other/Loader";
 import ModalPortal from "../other/ModalPortal";
+import { SectionWrapperLeft } from "../sectionAnimation";
 
 const Gallery = () => {
   SwiperCore.use([Navigation]);
@@ -65,12 +66,17 @@ const Gallery = () => {
         >
           {images.gallery.map((image, index) => (
             <SwiperSlide key={index}>
-              <img
-                className="small-icon z-1 cursor-pointer "
-                src={image}
-                alt={`gallery number ${index}`}
-                onClick={() => openModal(index)}
-              />
+              <picture>
+                <source srcSet={images.hero[index]} type="image/webp" />
+                <source srcSet={image} type="image/jpeg" />
+                <img
+                  className="small-icon z-1 cursor-pointer"
+                  src={image}
+                  alt={`gallery number ${index}`}
+                  loading="lazy"
+                  onClick={() => openModal(index)}
+                />
+              </picture>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -116,4 +122,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default SectionWrapperLeft(Gallery, "");

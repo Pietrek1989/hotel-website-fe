@@ -54,11 +54,21 @@ const Login: React.FC = () => {
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
       <div className="bg-white hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-        <img
-          src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683630521/hotel-Rheingold/tinified/logan-mayer-tFc9kSPbMDg-unsplash_cam6v7.jpg"
-          alt=" by Logan Mayer on Unsplash"
-          className="w-full h-full object-cover "
-        />
+        <picture>
+          <source
+            srcSet="https://res.cloudinary.com/dvagn6szo/image/upload/v1686070674/hotel-Rheingold/tinified/webp/logan-mayer-tFc9kSPbMDg-unsplash_hw0j36.webp"
+            type="image/webp"
+          />
+          <source
+            srcSet="https://res.cloudinary.com/dvagn6szo/image/upload/v1683630521/hotel-Rheingold/tinified/logan-mayer-tFc9kSPbMDg-unsplash_cam6v7.jpg"
+            type="image/jpeg"
+          />
+          <img
+            src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683630521/hotel-Rheingold/tinified/logan-mayer-tFc9kSPbMDg-unsplash_cam6v7.jpg"
+            alt="by Logan Mayer on Unsplash"
+            className="w-full h-full object-cover "
+          />
+        </picture>
       </div>
 
       <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">

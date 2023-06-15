@@ -44,7 +44,7 @@ const DiscoverMobile = () => {
               whileHover="hover"
               src="https://res.cloudinary.com/dvagn6szo/image/upload/v1683360095/hotel-Rheingold/gallery/20200826_140506_lboyai.jpg"
               alt="Summer galtenberg peak"
-              className=" absolute -top-10 sm:-top-20  md:left-20 lg:left-50 xl:left-60 w-50 lg:h-3/5 xl:h-2/3 object-cover"
+              className=" absolute -top-10 sm:-top-20  md:left-20 lg:left-50 xl:left-60 md:w-3/4 lg:h-3/5 xl:h-2/3 object-cover"
             />
             <motion.img
               variants={imageVariants}

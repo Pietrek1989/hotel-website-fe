@@ -14,12 +14,13 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const HeroSection: React.FC = () => {
   const controls = useAnimation();
+  const logoRef = useRef(null);
 
   const navigate = useNavigate();
   const handleBooking = () => {
     const scrollPosition = window.scrollY;
 
-    if (scrollPosition < 50) {
+    if (scrollPosition < 100) {
       gsap.to(window, {
         duration: 0.5,
         scrollTo: { y: window.innerHeight / 3 },
@@ -130,10 +131,26 @@ const HeroSection: React.FC = () => {
     }));
   }, [controls]);
 
+  let rotateAnimation: gsap.core.Tween | null = null;
+
+  const handleMouseEnter = () => {
+    rotateAnimation = gsap.to(logoRef.current, {
+      rotation: 360,
+      repeat: 0,
+      duration: 2,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (rotateAnimation) {
+      rotateAnimation.pause();
+      gsap.to(logoRef.current, { rotation: 0, duration: 2 });
+    }
+  };
   return (
     <div
       ref={heroSectionRef}
-      className=" h-screen md:h-screen w-full transition-opacity duration-300"
+      className=" custom-height w-full transition-opacity duration-300"
     >
       <div className="scrollDist absolute"></div>
 
@@ -160,6 +177,7 @@ const HeroSection: React.FC = () => {
             className="logo"
             xlinkHref="https://res.cloudinary.com/dvagn6szo/image/upload/v1683539328/8eeead46-0f0b-41be-8244-10fe9feeb56e_nirbop.png"
             x="50%"
+            ref={logoRef}
             y="120"
             width="300"
             height="300"
@@ -214,7 +232,7 @@ const HeroSection: React.FC = () => {
           <g mask="url(#m)">
             <rect fill="#fff" width="100%" height="100%" />
             <foreignObject x="290" y="300" width="600" height="500">
-              <div className="space-x-1  poiter-events-auto flex flex-col items-center welcome mt-52 md:mt-0">
+              <div className="space-x-1 pointer-events-auto flex flex-col items-center welcome mt-52 md:mt-0">
                 <div>
                   {Array.from("Welcome to").map((char, i) => (
                     <motion.span
@@ -247,10 +265,12 @@ const HeroSection: React.FC = () => {
                 </div>
                 <div className="mt-10">
                   <motion.button
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={handleBooking}
-                    className="	book-button text-black font-bold rounded pointer-events-auto"
+                    className="	book-button text-black font-bold rounded pointer-events-auto z-10"
                   >
                     Book now
                   </motion.button>

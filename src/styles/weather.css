@@ -24,7 +24,6 @@
 }
 .weather-5 {
   scrollbar-width: thin;
-  /* scrollbar-color: black; */
 }
 
 .weather-5::-webkit-scrollbar-thumb {

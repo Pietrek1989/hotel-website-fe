@@ -3,13 +3,7 @@
   background-image: url("../assets/layered-peaks-haikei.png");
   background-size: contain;
 }
-/* .calendar-container {
-  background-image: url("/public/bg/gold-83754.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
-  height: 100%;
-} */
+
 .react-calendar {
   width: 91.666667%;
 }
@@ -46,8 +40,6 @@
   border: 0;
   outline: none;
   font-size: 1.3em;
-  /* padding-block: 1em; */
-  /* border: solid 1px rgba(0, 0, 0, 0.285) !important; */
 }
 
 .price-container {
@@ -98,13 +90,6 @@
   background: var(--color-selected) !important;
 }
 
-/* .shadow-md {
-  border: solid;
-} */
 .confirmation-window {
   margin-top: 5em !important;
 }
-
-/* .totalPrice-container {
-  background-color: var(--color-bg) !important;
-} */

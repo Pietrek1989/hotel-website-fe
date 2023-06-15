@@ -12,7 +12,6 @@ import "../../styles/admin.css";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { FiSettings } from "react-icons/fi";
 import DarkMode from "./DarkMode";
-import { RootState } from "../../redux/hooks";
 import { useSelector } from "react-redux";
 import AdminSectionImages from "./sections/AdminSectionImages";
 import RefundSection from "./sections/RefundSection";

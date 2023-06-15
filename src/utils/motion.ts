@@ -42,19 +42,6 @@ export const heroHausvariants = {
   }),
 };
 
-export const logoVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    rotate: 360,
-    transition: { delay: 0.5, duration: 1 },
-  },
-  hover: {
-    rotate: [0, 360],
-    transition: { duration: 1 },
-  },
-};
-
 export const staggerContainer = (staggerChildren: any, delayChildren: any) => {
   return {
     hidden: {},
@@ -65,4 +52,11 @@ export const staggerContainer = (staggerChildren: any, delayChildren: any) => {
       },
     },
   };
+};
+
+export const arrowAnimation = {
+  animate: {
+    y: [-10, 10, -10],
+    transition: { yoyo: Infinity, duration: 1 },
+  },
 };
