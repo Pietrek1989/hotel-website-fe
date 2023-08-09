@@ -9,6 +9,7 @@ import ContactPage from "./components/Contact/ContactPage";
 import WeatherMain from "./components/weather/MainWeather";
 import AccountDashboard from "./components/Account/AccountDashboard";
 import LoaderFull from "./components/other/LoaderFull";
+import FaqAi from "./components/other/FaqAi";
 const CalendarReactComponent = React.lazy(
   () => import("./components/Calendar/CalenderReactCalendar")
 );
@@ -17,15 +18,14 @@ const AdminMainLayout = React.lazy(
 );
 
 // import { setLicenseKey } from "@syncfusion/ej2-base";
-  // setLicenseKey(`${process.env.REACT_APP_SYNCFUSION_KEY}`);
-
+// setLicenseKey(`${process.env.REACT_APP_SYNCFUSION_KEY}`);
 
 function App() {
-  useEffect(() => {
-    if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-      navigator.serviceWorker.register("/service-worker.js");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
+  //     navigator.serviceWorker.register("/service-worker.js");
+  //   }
+  // }, []);
   return (
     <div className="App">
       <BrowserRouter>
@@ -45,6 +45,7 @@ function App() {
           <Route path="/account/*" element={<AccountDashboard />} />
           <Route path="/weather" element={<WeatherMain />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faq" element={<FaqAi />} />
           <Route
             path="/admin/*"
             element={

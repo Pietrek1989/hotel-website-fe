@@ -13,6 +13,7 @@ import DiscoverMobile from "./DiscoverMobile";
 
 const MainLAyout = () => {
   const [isMobile, setIsMobile] = useState(false);
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const controls = useAnimation();
@@ -44,12 +45,7 @@ const MainLAyout = () => {
   const handleBook = () => {
     navigate("/book");
   };
-  const arrowAnimation = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: { yoyo: Infinity, duration: 1 },
-    },
-  };
+
   return (
     <>
       {isMobile ? (
@@ -143,7 +139,9 @@ const MainLAyout = () => {
             <DiscoverMobile />
 
             <Gallery />
+
             <Testimonials />
+
             <Footer />
           </div>
         </>
@@ -153,6 +151,7 @@ const MainLAyout = () => {
           <Discover />
           <Gallery />
           <Testimonials />
+
           <Footer />
         </>
       )}
