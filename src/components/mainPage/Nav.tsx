@@ -153,6 +153,13 @@ const Nav = () => {
               BOOK
             </Link>
             <Link
+              to="/faq"
+              className="hidden md:block text-mainText font-bold"
+              id={location.pathname === "/faq" ? "active" : " "}
+            >
+              AI BOT
+            </Link>
+            <Link
               to="/admin"
               className="hidden md:block text-mainText font-bold"
               id={location.pathname === "/admin" ? "active" : " "}
@@ -224,17 +231,17 @@ const Nav = () => {
           </Link>
 
           <Link
-            to="/blog"
+            to="/faq"
             className="flex nav-link-flex-container gap-2  text-mainText font-bold"
-            id={location.pathname === "/blog" ? "active" : " "}
+            id={location.pathname === "/faq" ? "active" : " "}
           >
             <span>
               <BsJournalText />
             </span>
-            <span>BLOG</span>
+            <span>AI BOT</span>
           </Link>
           <Link
-            to="/blog"
+            to="/admin"
             className="flex nav-link-flex-container gap-2  text-mainText font-bold"
             id={location.pathname === "/admin" ? "active" : " "}
           >
