@@ -1,6 +1,6 @@
 # 🏨 Haus Rheingold Hotel - Hotel Booking Platform
 
-Welcome to Haus Rheingold Hotel's booking platform, where we blend cutting-edge technology, user-friendly interfaces, and unique features to create the ultimate hotel booking experience.
+
 ![rheingoldsmaller](https://github.com/Pietrek1989/hotel-website-rheingold-fe/assets/68666992/57ba2cd9-5f0b-46db-8710-a5fce764b212)
 
 
