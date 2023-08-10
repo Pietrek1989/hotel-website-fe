@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../styles/bot.css";
 
 const FaqAi = () => {
   const [faqQuestion, setFaqQuestion] = useState("");
@@ -32,36 +33,67 @@ const FaqAi = () => {
     setFaqQuestion("");
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      askQuery();
+    }
+  };
+
   return (
-    <div className="w-full h-full flex flex-col p-4 mt-20">
-      <div className="flex-grow overflow-auto">
+    <div className="w-screen h-screen flex flex-col px-20 justify-between items-center overflow-hidden">
+      <div className="flex-grow overflow-auto pt-20">
+        <div className="p-2 my-1 text-right">
+          <span className="bg-blue-200 px-3 py-2 rounded inline-block text-black">
+            Hello I'm an ai bot assistant🤖. I'm here to answer any questions
+            you would have. So how can I help you?
+          </span>
+        </div>
         {chatHistory.map((message, index) => (
           <div
             key={index}
             className={`p-2 my-1 ${
-              message.type === "user"
-                ? "text-left bg-blue-200"
-                : "text-right bg-green-200"
+              message.type === "user" ? "text-left" : "text-right"
             }`}
           >
-            {message.text}
+            <span
+              className={`px-3 py-2 rounded inline-block ${
+                message.type === "user"
+                  ? "bg-light-gray"
+                  : "bg-blue-200 text-black"
+              }`}
+            >
+              {message.text}
+            </span>
           </div>
         ))}
       </div>
-      <div className="flex">
+      <div className="input-container">
         <input
           type="text"
           value={faqQuestion}
           onChange={(e) => setFaqQuestion(e.target.value)}
+          onKeyPress={handleKeyPress}
           placeholder="Ask your question..."
           className="flex-grow p-2 border rounded-l"
         />
-        <button
-          onClick={askQuery}
-          className="px-4 bg-blue-500 text-white rounded-r"
-        >
-          Ask
-        </button>
+        <div id="submit" onClick={askQuery}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="none"
+            className="h-4 w-4 m-1 md:m-0"
+            strokeWidth="2"
+          >
+            <path
+              d="M.5 1.163A1 1 0 0 1 1.97.28l12.868 6.837a1 1 0 0 1 0 1.766L1.969 15.72A1 1 0 0 1 .5 14.836V10.33a1 1 0 0 1 .816-.983L8.5 8 1.316 6.653A1 1 0 0 1 .5 5.67V1.163Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </div>
+        <p className="info py-3">
+          If anything is unclear please contact{" "}
+          <strong>techpietrek@gmail.com</strong>
+        </p>
       </div>
     </div>
   );

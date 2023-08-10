@@ -21,11 +21,11 @@ const AdminMainLayout = React.lazy(
 // setLicenseKey(`${process.env.REACT_APP_SYNCFUSION_KEY}`);
 
 function App() {
-  // useEffect(() => {
-  //   if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-  //     navigator.serviceWorker.register("/service-worker.js");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
+      navigator.serviceWorker.register("/service-worker.js");
+    }
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
