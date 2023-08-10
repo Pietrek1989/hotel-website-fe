@@ -1,16 +1,33 @@
-# Haus Rheingold hotel
+# 🏨 Haus Rheingold Hotel - Hotel Booking Platform
 
-Our project is an innovative hotel booking platform that marries convenience, functionality, and style. It offers a seamless user interface featuring a custom-made calendar that smartly displays only the available rooms on any chosen date, eliminating the often frustrating process of navigating through fully booked options.
+Welcome to Haus Rheingold Hotel's booking platform, where we blend cutting-edge technology, user-friendly interfaces, and unique features to create the ultimate hotel booking experience.
+![haus-rheingold-high-resolution-logo-color-on-transparent-background (1)](https://github.com/Pietrek1989/hotel-website-rheingold-fe/assets/68666992/504d310c-9022-40c5-8ed3-5b3a2245336c)
 
-Our website streamlines the booking process, making it as straightforward and efficient as possible. The integrated Stripe payment solution allows for secure and hassle-free transactions, ensuring peace of mind for all users.
+## 🎨 Features
 
-But that's not all; we've developed an intuitive back-office system for admins, enabling them to keep a pulse on business operations. This includes tracking earnings, examining reservation details, issuing refunds, updating room images, and making necessary edits.
+### 📅 Smart Booking Calendar
+Effortlessly choose your dates with our custom-made calendar that displays only available rooms, eliminating the need to sift through fully booked options.
 
-In line with the latest digital trends, our platform offers a dark mode option for enhanced usability, especially during nighttime browsing. To experience our platform's full suite of capabilities, feel free to contact me to get an admin account and access backoffice.
+### 💳 Stripe Integration
+Enjoy secure and hassle-free transactions with our integrated Stripe payment solution.
 
-### FE LINK
-https://hotel-website-rheingold-fe.vercel.app/
+### 🏢 Back-Office System
+Admins gain insights into business operations, including tracking earnings, examining reservation details, issuing refunds, and more. Surf throught it in light or Dark mode!
+
+## 🤖 Introducing Our Dynamic Intelligent FAQ - AI Chatbot Powered by Stack.ai
+ Real-time answers to all your questions. Accurate information on everything related to our hotel. Answers more than the usual FAQs, engaging with guests like never befor
+
+## 📞 Contact
+Feel the need to ask something more specific? Reach out at **techpietrek@gmail.com**.
+
+## 🖱️ Try It Now
+Experience our platform's full suite of capabilities by [visiting my website]([your-website-link-her](https://hotel-website-rheingold-fe.vercel.app/)e).
+
+For admin access and a complete overview, please [contact me](mailto:techpietrek@gmail.com).
+
+---
 
 ## BE repo
 https://github.com/Pietrek1989/hotel-website-rheingold-be/
+
 
