@@ -62,7 +62,7 @@ const Gallery = () => {
           navigation
           slidesPerView={10}
           spaceBetween={5}
-          className="swiper-gallery"
+          className="swiper-gallery flex"
         >
           {images.gallery.map((image, index) => (
             <SwiperSlide key={index}>
